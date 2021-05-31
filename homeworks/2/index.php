@@ -18,6 +18,7 @@ $float2=3.1;
 $float3=4.5;
 $float4=5.9;
 
+echo '<a href="/" class="active" title="нажмите чтобы перейти">главная страница</a> <br>';
 echo 'to integer: ';
 $textInt=(int)$text;
 	echo $textInt, '; ';

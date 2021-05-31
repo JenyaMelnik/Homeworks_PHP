@@ -26,14 +26,15 @@ if (isset($_POST['login']) && isset($_POST['text'])) {
     <title>Заголовок страницы</title>
     <meta name="description" content="Описание страницы">
     <meta name="keywords" content="Ключевые слова через запятую">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/normalize.css" rel="stylesheet">
+    <link href="/css/normalize.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div>
-        <?= $result ?>
-    </div>
+<div>
+    <a href="/" class="active" title="нажмите чтобы перейти">главная страница</a>
+    <br>
+    <?= $result ?>
+</div>
 <form action="" method="post">
     <input name="login" placeholder="Введите логин"><br>
     <textarea name="text" placeholder="Введите текст"></textarea><br>

@@ -28,5 +28,6 @@ function calc(float $num1, float $num2, string $action = 'плюс'): string {
 
     return 'Неизвестный метод!';
 }
+echo '<a href="/" class="active" title="нажмите чтобы перейти">главная страница</a> <br>';
 
 echo calc(24, 4, 'поделить');
