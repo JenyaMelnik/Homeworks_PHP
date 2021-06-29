@@ -4,15 +4,22 @@
     content: " ";
     display: table;
 }
+
 .clearfix:after {
     clear:both;
 }
+
 .container {
     width: 275px;
     height: 183px;
-    background-image: url("/homeworks.ua/img/hw.jpg");
+    background-image: url("/img/hw.jpg");
     float:left;
     margin:30px 15px 0 0;
+}
+
+.container:hover {
+    margin-top: 27px;
+    margin-bottom: 3px;
 }
 
 .number {
@@ -20,19 +27,13 @@
     font-size: 36px;
 }
 
-a {
-
-}
 .wrapper {
     width: 1450px;
     margin-right: auto;
     margin-left: auto;
-
 }
 
 .homeworks {
     margin: 50px auto 30px auto;
     text-align: center;
-
-
 }
