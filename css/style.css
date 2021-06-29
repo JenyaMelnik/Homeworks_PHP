@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear:both;
+}
+.container {
+    width: 275px;
+    height: 183px;
+    background-image: url("/homeworks.ua/img/hw.jpg");
+    float:left;
+    margin:30px 15px 0 0;
+}
+
+.number {
+    margin: 135px 0 0 15px;
+    font-size: 36px;
+}
+
+a {
+
+}
+.wrapper {
+    width: 1450px;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.homeworks {
+    margin: 50px auto 30px auto;
+    text-align: center;
+
+
+}
