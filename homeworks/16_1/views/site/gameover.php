@@ -6,16 +6,17 @@ session_start();
 
 //header("Location: index.php?page=game1over&action=win"); - зачем здесь action=win
 
-if ($_SESSION['client'] > $_SESSION['server']) {
+if ($_SESSION['client_health'] > $_SESSION['server_health']) {
     $win = 'Клиент';
 } else {
     $win = 'Сервер';
 }
 
 if (isset($_GET['newGame'])) {
-    $_SESSION['client'] = 10;
-    $_SESSION['server'] = 10;
-    header("Location: https://homeworks.ua/homeworks/16_1/views/site/game.php");
+    $_SESSION['client_health'] = 10;
+    $_SESSION['server_health'] = 10;
+    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
+    header("Location: $protocol://" . $_SERVER["SERVER_NAME"] . '/homeworks/16_1/views/site/game.php');
     exit();
 }
 ?>
@@ -38,7 +39,7 @@ if (isset($_GET['newGame'])) {
 <main>
     <a href="https://homeworks.ua/homeworks/16_1/"> Вернуться на сайт </a>
     <br> <br>
-    <?php echo ' Победил: ' . $win; ?>
+    <span> Победил: </span> <?= $win; ?>
     <br> <br>
     <form action="" method="get">
         <input type="submit" name="newGame" value="Начать новую игру">

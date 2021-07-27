@@ -3,24 +3,39 @@ error_reporting(-1);
 ini_set('display_errors', 'on');
 header('Content-Type: text/html; charset=utf-8');
 
-$login = 'login';
-$pass = 'password';
-$email = 'jenyamelnik1986@gmail.com';
-$_notice = '';
+$loginAdmin = 'login';
+$passAdmin = 'password';
+
+$notice = '';
+
+$login = $_POST['login'] ?? null;
+$pass = $_POST['pass'] ?? null;
+$email = $_POST['email'] ?? null;
 
 if (isset($_POST['submit'])) {
-    if (isset ($_POST['login'], $_POST['pass'], $_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $_notice = 'Вы успешно авторизировались';
-        if ($_POST['login'] === $login && $_POST['pass'] === $pass && $_POST['email'] === $email) {
-            setcookie('access', '1', time() + 3600 * 24, '/');
-            $_COOKIE['access'] = 1;
+    if ($login && $pass && $email
+        && filter_var($email, FILTER_VALIDATE_EMAIL)
+    ) {
+        $notice = 'Вы успешно авторизировались';
+        setcookie('auth_user', 1, time() + 3600 * 24, '/');
+        $_COOKIE['auth_user'] = 1;
+        if ($login === $loginAdmin && $pass === $passAdmin) {
+            setcookie('auth_admin', 1, time() + 3600 * 24, '/');
+            $_COOKIE['auth_admin'] = 1;
         }
-    } else $_notice = 'Не корректно заполнена форма';
+    } else $notice = 'Не корректно заполнена форма';
 }
 
-if (isset($_GET['exit'])) {
-    setcookie('access', '1', time() - 3600, '/');
+$isAuthAdmin = $_COOKIE['auth_admin'] ?? null;
+$isAuthUser = $_COOKIE['auth_user'] ?? null;
+
+if (isset($_POST['exit'])) {
+    setcookie('auth_admin', '1', time() - 3600, '/');
+    setcookie('auth_user', '1', time() - 3600, '/');
+    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+    header("Location: $protocol://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
 }
+// echo '<pre>'; var_dump($_SERVER); echo '</pre>';
 
 const CREATED = '2021';
 $copyright = CREATED === date('Y')
@@ -29,7 +44,7 @@ $copyright = CREATED === date('Y')
 
 $page = $_GET['page'] ?? 'main';
 
-$isAdmin = $_SERVER['REMOTE_ADDR'] === '127.0.0.1';
+$isAdminIP = $_SERVER['REMOTE_ADDR'] === '127.0.0.3';
 
 $adminRoutes = [
     'admin',
@@ -39,7 +54,7 @@ $isAdminRoute = in_array($page, $adminRoutes);
 
 $pageDir = $isAdminRoute ? 'admin' : 'site';
 
-if ($isAdminRoute && !$isAdmin) {
+if ($isAdminRoute && !$isAdminIP) {
     $page = '403';
     $pageDir = 'site';
 }
@@ -59,14 +74,18 @@ if ($isAdminRoute && !$isAdmin) {
 
 <body>
 <header>
-    <div class="notice"> <?php echo $_notice ?></div>
+    <?php if ($notice): ?>
+        <div class="notice"> <?= $notice ?> </div>
+    <?php endif ?>
     <div class="logPass">
-        <form action="" method="post">
-            <div> введите email &nbsp; <label> <input type="text" name="email" value=""> </label></div>
-            <div> введите логин &nbsp; <label> <input type="text" name="login" value=""> </label></div>
-            <div> введите пароль <label> <input type="password" name="pass" value=""> </label></div>
-            <div class="enter"><input type="submit" name="submit" value="ВОЙТИ "></div>
-        </form>
+        <?php if (!$isAuthUser && !$isAuthAdmin): ?>
+            <form action="" method="post">
+                <div> введите email &nbsp; <label> <input type="text" name="email" value=""> </label></div>
+                <div> введите логин &nbsp; <label> <input type="text" name="login" value=""> </label></div>
+                <div> введите пароль <label> <input type="password" name="pass" value=""> </label></div>
+                <div class="enter"><input type="submit" name="submit" value="ВОЙТИ "></div>
+            </form>
+        <?php endif ?>
     </div>
     <div class="registration">
         <div class="container clearfix">
@@ -95,17 +114,18 @@ if ($isAdminRoute && !$isAdmin) {
                 <div class="wishlist">
                     <a href="#">&#9825; &nbsp; MY WISHLIST o</a>
                     &nbsp; &nbsp; &nbsp;
-                    <a href="#" class="sprite sprite-zz-sign-in"></a>
-                    <a href="#">SIGN IN </a>
-                    /
-                    <a href="#">REGISTER</a>
-                    &nbsp;
-                    <?php if ($isAdmin || (isset($_COOKIE['access']) && $_COOKIE['access'] === 1))
-                        echo '<a href="index.php?page=admin">ADMIN</a>
-                             <form action="" method="get"> 
-                                <div class="exit"> <input type="submit" name="exit" value="ВЫХОД"> </div>
-                             </form>  ';
-                    ?>
+                    <?php if (!$isAuthUser && !$isAuthAdmin): ?>
+                        <a href="#" class="sprite sprite-zz-sign-in"></a>
+                        <a href="#">SIGN IN </a> /
+                        <a href="#">REGISTER</a> &nbsp;
+                    <?php else: ?>
+                        <form action="" method="post">
+                            <div class="exit"><input type="submit" name="exit" value="ВЫХОД"></div>
+                        </form>
+                    <?php endif ?>
+                    <?php if ($isAdminIP || $isAuthAdmin): ?>
+                        <a href="index.php?page=admin">ADMIN</a>
+                    <?php endif ?>
                 </div>
                 <div class="game">
                     <a href="views/site/game.php"> Играть в игру (ДЗ 16_2)</a>

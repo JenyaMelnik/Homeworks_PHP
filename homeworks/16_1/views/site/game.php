@@ -4,37 +4,43 @@ ini_set('display_errors', 'on');
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-if (!isset($_SESSION['client'])) {
-    $_SESSION['client'] = 10;
-    $_SESSION['server'] = 10;
+$number = null;
+$rand = null;
+
+if (!isset($_SESSION['client_health'])) {
+    $_SESSION['client_health'] = 10;
+    $_SESSION['server_health'] = 10;
 }
+$clientHealth = $_SESSION['client_health'] ?? null;
+$serverHealth = $_SESSION['server_health'] ?? null;
 
 if (isset($_GET['number'])) {
     $number = $_GET['number'];
     $rand = rand(1, 3);
-} else {
-    $number = '';
-    $rand = '';
 }
 
 if (isset($_GET['submit'])) {
-    if ($number == 1 || $number == 2 || $number == 3) {
-        if ($_GET['number'] == $rand) {
-            $_SESSION['client'] -= rand(1, 4);
+    if ($number >= 1 && $number <= 3) {
+        if ($number == $rand) {
+            $clientHealth -= rand(1, 4);
         } else {
-            $_SESSION['server'] -= rand(1, 4);
+            $serverHealth -= rand(1, 4);
         }
     }
 }
 
 if (isset($_GET['reset'])) {
-    $_SESSION['client'] = 10;
-    $_SESSION['server'] = 10;
-    $number = '';
-    $rand = '';
+    $clientHealth = 10;
+    $serverHealth = 10;
+    $number = 0;
+    $rand = 0;
 }
 
-if ($_SESSION['client'] <= 0 || $_SESSION['server'] <= 0) {
+$_SESSION['client_health'] = $clientHealth;
+$_SESSION['server_health'] = $serverHealth;
+
+
+if ($clientHealth <= 0 || $serverHealth <= 0) {
     header("Location: https://homeworks.ua/homeworks/16_1/views/site/gameover.php");
     exit();
 }
@@ -71,10 +77,8 @@ if ($_SESSION['client'] <= 0 || $_SESSION['server'] <= 0) {
         <p> Случайное число: <?= $rand ?> </p>
     </div>
     <div class="health">
-        <?php
-        echo 'Здоровье клиента: ' . $_SESSION['client'] . '<br>';
-        echo 'Здоровье сервера: ' . $_SESSION['server'];
-        ?>
+        <span> Здоровье клиента: </span> <?= $clientHealth ?> <br>
+        <span> Здоровье сервера: </span> <?= $serverHealth ?>
     </div>
 </main>
 

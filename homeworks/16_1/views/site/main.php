@@ -1,5 +1,3 @@
-<?php
-?>
 <div class="clearfix">
     <div class="pouring-wine"><img src="/homeworks/15/img/foto1.jpg" alt="foto1"></div>
     <div class="first-line">
