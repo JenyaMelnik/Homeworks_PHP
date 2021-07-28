@@ -4,21 +4,22 @@ ini_set('display_errors', 'on');
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-//header("Location: index.php?page=game1over&action=win"); - зачем здесь action=win
+$winner = $_GET['winner'] ?? null;
 
-if ($_SESSION['client_health'] > $_SESSION['server_health']) {
-    $win = 'Клиент';
-} else {
-    $win = 'Сервер';
+if ($winner != 'client' && $winner != 'server') {
+    $winner = null;
 }
 
-if (isset($_GET['newGame'])) {
-    $_SESSION['client_health'] = 10;
-    $_SESSION['server_health'] = 10;
-    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
-    header("Location: $protocol://" . $_SERVER["SERVER_NAME"] . '/homeworks/16_1/views/site/game.php');
-    exit();
-}
+$translations = [
+    'client' => 'клиент',
+    'server' => 'сервер',
+];
+
+$winnerRu = $translations[$winner] ?? null;
+
+$protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
+$hrefNewGame = $protocol . '://' . $_SERVER["SERVER_NAME"] . '/homeworks/16_1/views/site/game.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +40,13 @@ if (isset($_GET['newGame'])) {
 <main>
     <a href="https://homeworks.ua/homeworks/16_1/"> Вернуться на сайт </a>
     <br> <br>
-    <span> Победил: </span> <?= $win; ?>
+    <?php if ($winnerRu): ?>
+        <span> Победил: </span> <?= $winnerRu; ?>
+    <?php else: ?>
+        <span> Неизвестный метод </span>
+    <?php endif ?>
     <br> <br>
-    <form action="" method="get">
-        <input type="submit" name="newGame" value="Начать новую игру">
-    </form>
+    <a href="<?= $hrefNewGame ?>">New Game</a>
 </main>
 
 <footer>

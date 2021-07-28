@@ -4,15 +4,24 @@ ini_set('display_errors', 'on');
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-$number = null;
-$rand = null;
-
-if (!isset($_SESSION['client_health'])) {
-    $_SESSION['client_health'] = 10;
-    $_SESSION['server_health'] = 10;
-}
 $clientHealth = $_SESSION['client_health'] ?? null;
 $serverHealth = $_SESSION['server_health'] ?? null;
+
+if (isset($_GET['reset'])) {
+    $clientHealth = 10;
+    $serverHealth = 10;
+
+    $number = 0;
+    $rand = 0;
+}
+
+if (is_null($clientHealth) || is_null($serverHealth)) {
+    $clientHealth = 10;
+    $serverHealth = 10;
+}
+
+$number = null;
+$rand = null;
 
 if (isset($_GET['number'])) {
     $number = $_GET['number'];
@@ -29,19 +38,16 @@ if (isset($_GET['submit'])) {
     }
 }
 
-if (isset($_GET['reset'])) {
-    $clientHealth = 10;
-    $serverHealth = 10;
-    $number = 0;
-    $rand = 0;
-}
-
 $_SESSION['client_health'] = $clientHealth;
 $_SESSION['server_health'] = $serverHealth;
 
-
 if ($clientHealth <= 0 || $serverHealth <= 0) {
-    header("Location: https://homeworks.ua/homeworks/16_1/views/site/gameover.php");
+    $winner = $_SESSION['client_health'] > $_SESSION['server_health']
+        ? 'client'
+        : 'server';
+    unset($_SESSION['client_health']);
+    unset($_SESSION['server_health']);
+    header("Location: https://homeworks.ua/homeworks/16_1/views/site/gameover.php?winner=" . $winner);
     exit();
 }
 ?>

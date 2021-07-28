@@ -62,7 +62,11 @@ foreach ($scanDir as $element) {
     }
 }
 
-$elements = array_merge($toUp, $dirs, $files)
+sort($toUp);
+sort($dirs);
+sort($files);
+
+$elements = array_merge($toUp, $dirs, $files);
 
 ?>
 
@@ -87,11 +91,11 @@ $elements = array_merge($toUp, $dirs, $files)
     <?php elseif ($element['type'] == TYPE_DIR): ?>
         <div>
             <img src="../../img/folder.jpg" width="20" height="28" alt="folder"> &nbsp
-            <a href="/homeworks/16_1/views/site/manager2.php?link=<?= $element['link'] ?>"><?= $element['name'] ?></a>
+            <a href="/homeworks/16_1/views/site/manager.php?link=<?= $element['link'] ?>"><?= $element['name'] ?></a>
         </div>
     <?php elseif ($element['type'] == TYPE_TO_UP): ?>
         <div>
-            <a href="https://homeworks.ua/homeworks/16_1/views/site/manager2.php?link=<?= $element['link'] ?>">..</a>
+            <a href="https://homeworks.ua/homeworks/16_1/views/site/manager.php?link=<?= $element['link'] ?>">..</a>
         </div>
     <?php endif ?>
 <?php endforeach; ?>

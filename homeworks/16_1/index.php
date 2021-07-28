@@ -35,7 +35,6 @@ if (isset($_POST['exit'])) {
     $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
     header("Location: $protocol://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
 }
-// echo '<pre>'; var_dump($_SERVER); echo '</pre>';
 
 const CREATED = '2021';
 $copyright = CREATED === date('Y')
