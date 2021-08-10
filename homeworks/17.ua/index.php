@@ -17,5 +17,6 @@ include_once './components/auth.php';
 include_once './components/notice.php';
 
 // Роутер
+include_once './route.php';
 include $modulePath;
 include './skins/'.SKIN.'/index.tpl';
