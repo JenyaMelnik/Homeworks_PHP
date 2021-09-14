@@ -56,4 +56,3 @@ $float3Int=(int)$float3;
 $float4Int=(int)$float4;
 	echo $float4Int, '; ';
 	echo '99 уже integer.';
-

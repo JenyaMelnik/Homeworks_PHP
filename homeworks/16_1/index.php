@@ -32,7 +32,7 @@ $isAuthUser = $_COOKIE['auth_user'] ?? null;
 if (isset($_POST['exit'])) {
     setcookie('auth_admin', '1', time() - 3600, '/');
     setcookie('auth_user', '1', time() - 3600, '/');
-    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+    $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
     header("Location: $protocol://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
 }
 
@@ -43,7 +43,7 @@ $copyright = CREATED === date('Y')
 
 $page = $_GET['page'] ?? 'main';
 
-$isAdminIP = $_SERVER['REMOTE_ADDR'] === '127.0.0.3';
+$isAdminIP = $_SERVER['REMOTE_ADDR'] === '127.0.0.1';
 
 $adminRoutes = [
     'admin',
@@ -58,7 +58,6 @@ if ($isAdminRoute && !$isAdminIP) {
     $pageDir = 'site';
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -70,7 +69,6 @@ if ($isAdminRoute && !$isAdminIP) {
     <link href="css/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <body>
 <header>
     <?php if ($notice): ?>
@@ -259,4 +257,3 @@ if ($isAdminRoute && !$isAdminIP) {
 </footer>
 </body>
 </html>
-

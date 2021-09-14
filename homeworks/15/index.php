@@ -37,7 +37,6 @@ if ($isAdminRoute && !$isAdmin) {
     <link href="css/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <body>
 <header>
     <div class="registration">
@@ -101,7 +100,6 @@ if ($isAdminRoute && !$isAdmin) {
     </div>
 </header>
 <main>
-
     <nav>
         <div class="language">
             <a href="index.php?page=redWines">RED WINES</a>
@@ -206,4 +204,3 @@ if ($isAdminRoute && !$isAdmin) {
 </footer>
 </body>
 </html>
-

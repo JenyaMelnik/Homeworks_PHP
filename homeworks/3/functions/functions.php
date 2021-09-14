@@ -6,7 +6,8 @@
  * @param string $text
  * @return string|null
  */
-function validateData(string $login, string $text): ?string {
+function validateData(string $login, string $text): ?string
+{
     if ($login == '' && $text == '')
         return 'Вы не заполнили форму';
 
@@ -23,7 +24,8 @@ function validateData(string $login, string $text): ?string {
  * @param string $text
  * @param string $filename
  */
-function saveToFile(string $login, string $text, string $filename = '2.txt') {
+function saveToFile(string $login, string $text, string $filename = '2.txt')
+{
     $loginText = $login . ': ' . $text . PHP_EOL;
     file_put_contents($filename, $loginText, FILE_APPEND);
 }

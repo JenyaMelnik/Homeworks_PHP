@@ -11,7 +11,7 @@ header('Content-Type: text/html; charset=utf-8');
 	<meta name="description" content="Описание страницы">
 	<meta name="keywords" content="Ключевые слова через запятую">
 	<link href="css/style.css" rel="stylesheet">
-    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>

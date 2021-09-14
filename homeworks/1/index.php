@@ -22,7 +22,7 @@ $paragraph = ' — алкогольный напиток (крепость: на
     <meta <?= $description; ?>>
     <meta name="keywords" content="<?php echo $keywords; ?>">
     <link href="css/style.css" rel="stylesheet">
-    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
