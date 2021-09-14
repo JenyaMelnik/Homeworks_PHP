@@ -6,7 +6,7 @@
 $isAuthAdmin = $_COOKIE['auth_admin'] ?? null;
 $isAuthUser = $_COOKIE['auth_user'] ?? null;
 
-$isAdminIP = $_SERVER['REMOTE_ADDR'] === '127.0.0.3';
+$isAdminIP = $_SERVER['REMOTE_ADDR'] === '127.0.0.1';
 
 $adminModules = ['admin',];
 

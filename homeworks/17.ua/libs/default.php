@@ -31,3 +31,13 @@ function createAbsoluteUrl(array $params):string {
 function createUrl(array $params):string {
 	return 'index.php?'.http_build_query($params);
 }
+
+/**
+ * Redirect
+ *
+ * @param array $params
+ */
+function redirectTo(array $params):void {
+    header("Location: " . createUrl($params));
+    exit();
+}
