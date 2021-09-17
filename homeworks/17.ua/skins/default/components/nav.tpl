@@ -52,4 +52,6 @@
 <a href="<?=createUrl(['module' => 'food', 'page' => 'snack-cheese'])?>">SNACK AND CHEESE</a>
 <a href="<?=createUrl(['module' => 'game', 'page' => 'index'])?>">GAME</a>
 <a href="<?=createUrl(['module' => 'manager', 'page' => 'index'])?>">MANAGER</a>
+<a href="<?=createUrl(['module' => 'manager2', 'page' => 'index'])?>">MANAGER_2</a>
 <a href="<?=createUrl(['module' => 'comments', 'page' => 'index'])?>">COMMENTS</a>
+<a href="<?=createUrl(['module' => 'comments2', 'page' => 'index'])?>">COMMENTS_2</a>
