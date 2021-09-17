@@ -1,6 +1,6 @@
 <?php
 
-$allowed = ['comments', 'comments2', 'components', 'static', 'contacts', 'aboutus', 'game', 'manager', 'manager2',
+$allowed = ['comments', 'comments2', 'components', 'static', 'contacts', 'aboutus', 'game', 'game2', 'manager', 'manager2',
             'errors', 'auth', 'admin', 'food', 'wines', 'gifts',];
 
 $module = $_GET['module'] ?? 'static';
