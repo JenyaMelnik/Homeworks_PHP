@@ -6,5 +6,5 @@
 
 <div>
     <p> Победил: <?= $winner ?> </p>
-    <a href="/index.php?module=game2&page=index"> Новая игра </a>
+    <a href="/index.php?module=game2&page=main"> Новая игра </a>
 </div>

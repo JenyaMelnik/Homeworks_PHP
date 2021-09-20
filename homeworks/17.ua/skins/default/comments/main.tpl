@@ -31,9 +31,9 @@
             <br>
         <?php endif ?>
         <p> Напишите свой комментарий:</p>
-        <form action="https://17.ua/index.php?module=comments&page=index" method="get">
+        <form action="https://17.ua/index.php?module=comments&page=main" method="get">
             <input type="hidden" name="module" value="comments">
-            <input type="hidden" name="page" value="index">
+            <input type="hidden" name="page" value="main">
             <table>
                 <tr>
                     <td><label for="name">Имя</label></td>

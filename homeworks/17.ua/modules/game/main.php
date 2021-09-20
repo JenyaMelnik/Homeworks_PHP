@@ -47,5 +47,3 @@ if($clientHealth <= 0 || $serverHealth <= 0) {
 	header("Location: " . createAbsoluteUrl(['module' => $module, 'page' => 'gameover', 'winner' => $winner,]));
 	exit();
 }
-
-

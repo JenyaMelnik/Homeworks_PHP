@@ -8,9 +8,9 @@
 ?>
 <div>
     <div class="form">
-        <form action="/index.php?module=game2&page=index" method="get">
+        <form action="/index.php?module=game2&page=main" method="get">
             <input type="hidden" name="module" value="game2">
-            <input type="hidden" name="page" value="index">
+            <input type="hidden" name="page" value="main">
             <label> введите число от 1 до 3 <input type="text" name="number"></label>
             <input type="submit" name="submit" value="ввести">
             <input type="submit" name="reset" value="сбросить результат">

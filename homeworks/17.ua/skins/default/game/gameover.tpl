@@ -10,4 +10,4 @@ if($winnerRu): ?>
 	<span> Неизвестный метод </span>
 <?php endif ?>
 <br> <br>
-<a href="<?=createUrl(['module' => $module, 'page' => 'index',])?>">New Game</a>
+<a href="<?=createUrl(['module' => $module, 'page' => 'main',])?>">New Game</a>

@@ -24,7 +24,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['comment'])) {
 
         mysqli_query($dbc, $query) or exit(mysqli_error($dbc));
         $_SESSION['addedComment'] = true;
-        header("Location: /index.php?module=comments2&page=index");
+        header("Location: /index.php?module=comments2&page=main");
         exit();
     }
 }

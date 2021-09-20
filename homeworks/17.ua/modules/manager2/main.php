@@ -15,10 +15,10 @@ foreach ($dir as $element) {
     }
     $fullPath = $currentDir . '/' . $element;
     if (is_dir($fullPath) && $element == '..') {
-        $toUp[] = '<a href="/index.php?module=manager2&page=index&link=' . $link . '/' . $element . '">' . $element . '</a><br>';
+        $toUp[] = '<a href="/index.php?module=manager2&page=main&link=' . $link . '/' . $element . '">' . $element . '</a><br>';
     }
     if (is_dir($fullPath) && $element != '..') {
-        $dirs[] = '<img src="/img/folder.jpg" width=15px> <a href="/index.php?module=manager2&page=index&link=' . $link . '/' . $element . '">' . $element . '</a> <br>';
+        $dirs[] = '<img src="/img/folder.jpg" width=15px> <a href="/index.php?module=manager2&page=main&link=' . $link . '/' . $element . '">' . $element . '</a> <br>';
     }
     if (is_file($fullPath)) {
         $files[] = '<img src="/img/file.jpg" width=15px> ' . $element . '<br>';

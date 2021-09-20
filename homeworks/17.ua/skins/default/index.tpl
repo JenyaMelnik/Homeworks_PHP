@@ -61,7 +61,7 @@
 						   class="sprite sprite-zz-sign-in"></a>
 					<?php endif ?>
 					<?php if($isAdminIP || $isAuthAdmin): ?>
-						<a href="<?=createUrl(['module' => 'admin', 'page' => 'index'])?>" class="admin">ADMIN</a>
+						<a href="<?=createUrl(['module' => 'admin', 'page' => 'main'])?>" class="admin">ADMIN</a>
 					<?php endif ?>
 				</div>
 			</div>
