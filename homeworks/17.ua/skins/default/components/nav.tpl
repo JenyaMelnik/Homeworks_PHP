@@ -56,3 +56,5 @@
 <a href="<?=createUrl(['module' => 'manager2', 'page' => 'main'])?>">MANAGER_2</a>
 <a href="<?=createUrl(['module' => 'comments', 'page' => 'main'])?>">COMMENTS</a>
 <a href="<?=createUrl(['module' => 'comments2', 'page' => 'main'])?>">COMMENTS_2</a>
+<a href="<?=createUrl(['module' => 'news', 'page' => 'main'])?>">NEWS</a>
+<a href="<?=createUrl(['module' => 'goods', 'page' => 'main'])?>">GOODS</a>
