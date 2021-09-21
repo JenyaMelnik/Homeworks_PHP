@@ -201,6 +201,23 @@
 .clearfix:after {
 	clear:both;
 }
+/*
+Блок: GOODS --Начало--
+ */
+
+.item {
+	border: 2px solid;
+	padding: 10px;
+}
+
+.category{
+	font-size: 16px;
+}
+
+/*
+Блок: GOODS --Конец--
+ */
+
 
 .enter {
 	padding-bottom: 20px;
