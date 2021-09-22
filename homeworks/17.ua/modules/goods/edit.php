@@ -45,7 +45,7 @@ LIMIT 1
 
 if (!mysqli_num_rows($wines)) {
     $_SESSION['notice'] = 'Данного товара не существует';
-    header("Location:index.php?module=goods");
+    header("Location:/index.php?module=goods");
     exit();
 }
 
