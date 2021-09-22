@@ -30,7 +30,7 @@ WHERE `id` = " . $_GET['id'] . "
     exit();
 }
 
-$news = q("SELECT * FROM `newss` ORDER BY `id` DESC ");
+$news = q("SELECT * FROM `news` ORDER BY `id` DESC ");
 
 if (isset($_SESSION['info'])) {
     $info = $_SESSION['info'];
