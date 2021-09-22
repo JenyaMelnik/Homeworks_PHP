@@ -22,7 +22,7 @@
                             <input type="checkbox" name="ids[]" value="<?= (int)$row['id'] ?>">
                             <strong><?= htmlspecialchars($row['title']) ?></strong>
                         </h2>
-                        <span><?= htmlspecialchars($row['description']) ?></span><br><br>
+                        <span><?= nl2br(htmlspecialchars($row['description'])) ?></span><br><br>
                         <span>Крепость: <b><?= (float)$row['strength'] ?>%</b></span><br>
                         <span>Цена: <b><?= (float)$row['price'] ?></b> грн.</span><br><br>
                         <span>Наличие товара: </span>

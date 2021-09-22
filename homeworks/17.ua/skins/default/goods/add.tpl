@@ -28,7 +28,7 @@
         <div>
             <span>Введите описание вина: </span>
             <textarea rows="5" cols="25"
-                      name="description"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+                      name="description"><?= nl2br(htmlspecialchars($_POST['description'] ?? '')) ?></textarea>
             <span><?= $errors['description'] ?? '' ?></span>
         </div>
         <br>

@@ -23,7 +23,7 @@ if (isset($_POST['edit'], $_POST['category'], $_POST['title'], $_POST['descripti
 UPDATE `goods` SET 
 `category` = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
 `title` = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
-`description` = '" . nl2br(mysqli_real_escape_string($dbc, trim($_POST['description']))) . "',
+`description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "',
 `strength` = " . (float)trim($_POST['strength']) . ",
 `price` = " . (float)trim($_POST['price']) . ",
 `availability` = " . (int)trim($_POST['availability']) . "
@@ -51,15 +51,7 @@ if (!mysqli_num_rows($wines)) {
 
 $row = mysqli_fetch_assoc($wines);
 
-if (isset($_POST['title'])) {
-    $row['title'] = $_POST['title'];
-}
-if (isset($_POST['description'])) {
-    $row['description'] = $_POST['description'];
-}
-if (isset($_POST['strength'])) {
-    $row['strength'] = $_POST['strength'];
-}
-if (isset($_POST['price'])) {
-    $row['price'] = $_POST['price'];
-}
+$row['title'] = $_POST['title'] ?? $row['title'];
+$row['description'] = $_POST['description'] ?? $row['description'];
+$row['strength'] = $_POST['strength'] ?? $row['strength'];
+$row['price'] = $_POST['price'] ?? $row['price'];

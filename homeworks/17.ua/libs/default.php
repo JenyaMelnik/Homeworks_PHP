@@ -1,15 +1,20 @@
 <?php
 
-function dump($array, $stop = false) {
-	echo '<pre>'.print_r($array, 1).'</pre>';
-	if(!$stop) {
-		exit();
-	}
+function dump($array, $stop = false)
+{
+    echo '<pre>' . print_r($array, 1) . '</pre>';
+    if (!$stop) {
+        exit();
+    }
 }
 
-function dd($var) {
-	echo '<pre>'.print_r($var, 1).'</pre>';
-	exit();
+/**
+ * @param $var
+ */
+function dd($var)
+{
+    echo '<pre>' . print_r($var, 1) . '</pre>';
+    exit();
 }
 
 /**
@@ -18,8 +23,9 @@ function dd($var) {
  * @param array $params
  * @return string
  */
-function createAbsoluteUrl(array $params):string {
-	return URI.createUrl($params);
+function createAbsoluteUrl(array $params): string
+{
+    return URI . createUrl($params);
 }
 
 /**
@@ -28,8 +34,9 @@ function createAbsoluteUrl(array $params):string {
  * @param array $params
  * @return string
  */
-function createUrl(array $params):string {
-	return 'index.php?'.http_build_query($params);
+function createUrl(array $params): string
+{
+    return 'index.php?' . http_build_query($params);
 }
 
 /**
@@ -37,7 +44,46 @@ function createUrl(array $params):string {
  *
  * @param array $params
  */
-function redirectTo(array $params):void {
+function redirectTo(array $params): void
+{
     header("Location: " . createUrl($params));
     exit();
+}
+
+/**
+ *mysqli_query
+ *
+ * @param $query string
+ * @return bool|mysqli_result
+ */
+function q(string $query) {
+    global $dbc;
+    $res = mysqli_query($dbc, $query);
+    if (!$res) {
+        $info = debug_backtrace();
+        echo $info[1]['file'];
+        exit();
+        $error = "QUERY: " . $query . "<br>\n" . mysqli_error($dbc);
+//        Отправка уведомления на почту
+        file_put_contents('./logs/mysql.log', strip_tags($error) . "\n\n", FILE_APPEND);
+        echo $error;
+        exit();
+    } else {
+        return $res;
+    }
+}
+
+/**
+ * trim all array's elements
+ *
+ * @param $el
+ * @return array|string
+ */
+function trimAll($el) {
+    if (!is_array($el)) {
+        $el = trim($el);
+    } else {
+        $el = array_map('trimAll', $el);
+    }
+    return $el;
 }

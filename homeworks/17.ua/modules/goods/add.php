@@ -23,7 +23,7 @@ if (isset($_POST['add'], $_POST['category'], $_POST['title'], $_POST['descriptio
 INSERT INTO `goods` SET 
 `category` = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
 `title` = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
-`description` = '" . nl2br(mysqli_real_escape_string($dbc, trim($_POST['description']))) . "',
+`description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "',
 `strength` = " . (float)trim($_POST['strength']) . ",
 `price` = " . (float)trim($_POST['price']) . ",
 `availability` = " . (int)trim($_POST['availability']) . "
