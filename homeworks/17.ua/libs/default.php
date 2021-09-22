@@ -56,14 +56,14 @@ function redirectTo(array $params): void
  * @param $query string
  * @return bool|mysqli_result
  */
-function q(string $query) {
+function q(string $query)
+{
     global $dbc;
     $res = mysqli_query($dbc, $query);
     if (!$res) {
         $info = debug_backtrace();
-        echo $info[1]['file'];
-        exit();
-        $error = "QUERY: " . $query . "<br>\n" . mysqli_error($dbc);
+        $error = "QUERY: " . $query . "<br>\n" . mysqli_error($dbc) . "<br>\n file: " . $info[0]['file'] .
+            "<br>\n line: " . $info[0]['line'] . "<br>\n" . date("Y-m-d H:i:s");
 //        Отправка уведомления на почту
         file_put_contents('./logs/mysql.log', strip_tags($error) . "\n\n", FILE_APPEND);
         echo $error;
@@ -79,7 +79,8 @@ function q(string $query) {
  * @param $el
  * @return array|string
  */
-function trimAll($el) {
+function trimAll($el)
+{
     if (!is_array($el)) {
         $el = trim($el);
     } else {
