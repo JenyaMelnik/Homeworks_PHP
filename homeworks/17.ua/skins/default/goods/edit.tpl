@@ -22,26 +22,26 @@
         <br>
         <div>
             <span>Введите название вина: </span>
-            <input type="text" name="title" value="<?= htmlspecialchars($row['title']) ?? '' ?>">
+            <input type="text" name="title" value="<?= htmlspecialchars($row['title']) ?>">
             <span><?= $errors['title'] ?? '' ?></span>
         </div>
         <br>
         <div>
             <span>Введите описание вина: </span>
             <textarea rows="5" cols="25"
-                      name="description"><?= htmlspecialchars($row['description']) ?? '' ?></textarea>
+                      name="description"><?= htmlspecialchars($row['description']) ?></textarea>
             <span><?= $errors['description'] ?? '' ?></span>
         </div>
         <br>
         <div>
             <span>Введите крепость вина: </span>
-            <input type="text" name="strength" value="<?= (float)$row['strength'] ?? '' ?>"> <span> %</span>
+            <input type="text" name="strength" value="<?= (float)$row['strength'] ?>"> <span> %</span>
             <?= $errors['strength'] ?? '' ?>
         </div>
         <br>
         <div>
             <span>Введите цену вина: </span>
-            <input type="text" name="price" value="<?= (float)$row['price'] ?? '' ?>"><span> грн.</span>
+            <input type="text" name="price" value="<?= (float)$row['price'] ?>"><span> грн.</span>
             <?= $errors['price'] ?? '' ?>
         </div>
         <br>

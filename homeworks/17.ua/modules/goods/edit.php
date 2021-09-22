@@ -51,15 +51,7 @@ if (!mysqli_num_rows($wines)) {
 
 $row = mysqli_fetch_assoc($wines);
 
-if (isset($_POST['title'])) {
-    $row['title'] = $_POST['title'];
-}
-if (isset($_POST['description'])) {
-    $row['description'] = $_POST['description'];
-}
-if (isset($_POST['strength'])) {
-    $row['strength'] = $_POST['strength'];
-}
-if (isset($_POST['price'])) {
-    $row['price'] = $_POST['price'];
-}
+$row['title'] = $_POST['title'] ?? $row['title'];
+$row['description'] = $_POST['description'] ?? $row['description'];
+$row['strength'] = $_POST['strength'] ?? $row['strength'];
+$row['price'] = $_POST['price'] ?? $row['price'];

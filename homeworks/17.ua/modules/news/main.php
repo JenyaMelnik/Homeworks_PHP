@@ -30,8 +30,7 @@ WHERE `id` = " . $_GET['id'] . "
     exit();
 }
 
-$news = mysqli_query($dbc, "SELECT * FROM `news` ORDER BY `id` DESC ")
-or exit(mysqli_error($dbc));
+$news = q("SELECT * FROM `news` ORDER BY `id` DESC ");
 
 if (isset($_SESSION['info'])) {
     $info = $_SESSION['info'];
