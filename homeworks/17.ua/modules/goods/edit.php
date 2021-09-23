@@ -39,7 +39,7 @@ WHERE `id` = " . (int)$_GET['id'] . "
 $wines = mysqli_query($dbc, "
 SELECT *
 FROM `goods`
-WHERE `id` = " . $_GET['id'] . "
+WHERE `id` = " . (int)$_GET['id'] . "
 LIMIT 1
 ") or exit(mysqli_error($dbc));
 

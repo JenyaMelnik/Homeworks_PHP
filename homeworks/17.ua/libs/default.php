@@ -62,10 +62,12 @@ function q(string $query)
     $res = mysqli_query($dbc, $query);
     if (!$res) {
         $info = debug_backtrace();
-        $error = "QUERY: " . $query . "<br>\n" . mysqli_error($dbc) . "<br>\n file: " . $info[0]['file'] .
+        $error = "QUERY: " . htmlspecialchars($query) . "<br>\n" . mysqli_error($dbc) . "<br>\n file: " . $info[0]['file'] .
             "<br>\n line: " . $info[0]['line'] . "<br>\n" . date("Y-m-d H:i:s");
+        $errorPut = "QUERY: " . $query . "\n" . mysqli_error($dbc) . "\n file: " . $info[0]['file'] .
+            "\n line: " . $info[0]['line'] . "\n" . date("Y-m-d H:i:s");
 //        Отправка уведомления на почту
-        file_put_contents('./logs/mysql.log', strip_tags($error) . "\n\n", FILE_APPEND);
+        file_put_contents('./logs/mysql.log', $errorPut . "\n\n", FILE_APPEND);
         echo $error;
         exit();
     } else {
