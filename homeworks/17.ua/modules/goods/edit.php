@@ -31,7 +31,7 @@ WHERE `id` = " . (int)$_GET['id'] . "
     ") or exit(mysqli_error($dbc));
 
         $_SESSION['notice'] = 'Товар отредактирован';
-        header("Location:/index.php?module=goods");
+        header("Location:index.php?module=goods");
         exit();
     }
 }
@@ -45,7 +45,7 @@ LIMIT 1
 
 if (!mysqli_num_rows($wines)) {
     $_SESSION['notice'] = 'Данного товара не существует';
-    header("Location:/index.php?module=goods");
+    header("Location:index.php?module=goods");
     exit();
 }
 
