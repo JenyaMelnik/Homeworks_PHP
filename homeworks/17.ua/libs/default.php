@@ -90,3 +90,56 @@ function trimAll($el)
     }
     return $el;
 }
+
+
+/**
+ * to int all array's elements
+ *
+ * @param $el
+ * @return array|int
+ */
+function intAll($el)
+{
+    if (!is_array($el)) {
+        $el = (int)($el);
+    } else {
+        $el = array_map('intAll', $el);
+    }
+    return $el;
+}
+
+
+/**
+ * htmlspecialchars all array's elements
+ *
+ * @param $el
+ * @return array
+ */
+function htmlspecialcharsAll($el)
+{
+    if (!is_array($el)) {
+        $el = htmlspecialcharsAll($el);
+    } else {
+        $el = array_map('htmlspecialcharsAll', $el);
+    }
+    return $el;
+}
+
+
+/**
+ * mysqli_real_escape_string all array's elements
+ *
+ * @param $el
+ * @return array|string
+ */
+function mres($el)
+{
+    global $dbc;
+    if (!is_array($el)) {
+        $el = mysqli_real_escape_string($dbc, $el);
+    } else {
+        $el = array_map('mres', $el);
+    }
+    return $el;
+}
+
