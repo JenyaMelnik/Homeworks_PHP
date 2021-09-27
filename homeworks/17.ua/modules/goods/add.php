@@ -3,8 +3,14 @@
  * @var $dbc mysqli
  */
 
-if (isset($_POST['add'], $_POST['category'], $_POST['title'], $_POST['description'],
-    $_POST['strength'], $_POST['price'], $_POST['availability'])) {
+if (isset($_POST['add'],
+    $_POST['category'],
+    $_POST['title'],
+    $_POST['description'],
+    $_POST['strength'],
+    $_POST['price'],
+    $_POST['availability'])) {
+
     $errors = [];
     if (empty($_POST['title'])) {
         $errors['title'] = 'Вы не ввели название';
@@ -19,13 +25,13 @@ if (isset($_POST['add'], $_POST['category'], $_POST['title'], $_POST['descriptio
         $errors['price'] = 'Вы не ввели цену';
     }
     if (!count($errors)) {
-        mysqli_query($dbc, "
+        q("
 INSERT INTO `goods` SET 
-`category` = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
-`title` = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
-`description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "',
-`strength` = " . (float)trim($_POST['strength']) . ",
-`price` = " . (float)trim($_POST['price']) . ",
+`category`     = '" . mres(trim($_POST['category'])) . "',
+`title`        = '" . mres(trim($_POST['title'])) . "',
+`description`  = '" . mres(trim($_POST['description'])) . "',
+`strength`     = " . (float)trim($_POST['strength']) . ",
+`price`        = " . (float)trim($_POST['price']) . ",
 `availability` = " . (int)trim($_POST['availability']) . "
     ") or exit(mysqli_error($dbc));
 

@@ -1,5 +1,9 @@
 <?php
 
+spl_autoload_register(function ($class) {
+    include './libs/class_' . $class . '.php';
+});
+
 function dump($array, $stop = false)
 {
     echo '<pre>' . print_r($array, 1) . '</pre>';
@@ -62,10 +66,14 @@ function q(string $query)
     $res = mysqli_query($dbc, $query);
     if (!$res) {
         $info = debug_backtrace();
-        $error = "QUERY: " . htmlspecialchars($query) . "<br>\n" . mysqli_error($dbc) . "<br>\n file: " . $info[0]['file'] .
-            "<br>\n line: " . $info[0]['line'] . "<br>\n" . date("Y-m-d H:i:s");
-        $errorPut = "QUERY: " . $query . "\n" . mysqli_error($dbc) . "\n file: " . $info[0]['file'] .
-            "\n line: " . $info[0]['line'] . "\n" . date("Y-m-d H:i:s");
+        $error = "QUERY: " . htmlspecialchars($query) . "<br>\n" . mysqli_error($dbc) . "<br>\n" .
+            "file: " . $info[0]['file'] . "<br>\n" .
+            "line: " . $info[0]['line'] . "<br>\n" .
+            "date:" . date("Y-m-d H:i:s") . "<br>\n";
+        $errorPut = "QUERY: " . $query . "\n" . mysqli_error($dbc) . "\n" .
+            "file: " . $info[0]['file'] . "\n" .
+            "line: " . $info[0]['line'] . "\n" .
+            "date" . date("Y-m-d H:i:s");
 //        Отправка уведомления на почту
         file_put_contents('./logs/mysql.log', $errorPut . "\n\n", FILE_APPEND);
         echo $error;
@@ -108,7 +116,6 @@ function intAll($el)
     return $el;
 }
 
-
 /**
  * htmlspecialchars all array's elements
  *
@@ -125,7 +132,6 @@ function htmlspecialcharsAll($el)
     return $el;
 }
 
-
 /**
  * mysqli_real_escape_string all array's elements
  *
@@ -134,8 +140,8 @@ function htmlspecialcharsAll($el)
  */
 function mres($el)
 {
-    global $dbc;
     if (!is_array($el)) {
+        global $dbc;
         $el = mysqli_real_escape_string($dbc, $el);
     } else {
         $el = array_map('mres', $el);

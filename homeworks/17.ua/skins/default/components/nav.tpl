@@ -45,16 +45,17 @@
 		</div>
 	</div>
 </div>
+<a href="<?=createUrl(['module' => 'draft'])?>">DRAFT</a>
 <a href="<?=createUrl(['module' => 'wines', 'page' => 'rose'])?>">ROSÉ WINES</a>
 <a href="<?=createUrl(['module' => 'wines', 'page' => 'white'])?>">WHITE WINES</a>
 <a href="<?=createUrl(['module' => 'gifts', 'page' => 'packs'])?>">GIFT PACKS</a>
 <a href="<?=createUrl(['module' => 'food', 'page' => 'sea'])?>">SEAFOOD</a>
 <a href="<?=createUrl(['module' => 'food', 'page' => 'snack-cheese'])?>">SNACK AND CHEESE</a>
-<a href="<?=createUrl(['module' => 'game', 'page' => 'main'])?>">GAME</a>
-<a href="<?=createUrl(['module' => 'game2', 'page' => 'main'])?>">GAME_2</a>
-<a href="<?=createUrl(['module' => 'manager', 'page' => 'main'])?>">MANAGER</a>
-<a href="<?=createUrl(['module' => 'manager2', 'page' => 'main'])?>">MANAGER_2</a>
-<a href="<?=createUrl(['module' => 'comments', 'page' => 'main'])?>">COMMENTS</a>
-<a href="<?=createUrl(['module' => 'comments2', 'page' => 'main'])?>">COMMENTS_2</a>
-<a href="<?=createUrl(['module' => 'news', 'page' => 'main'])?>">NEWS</a>
-<a href="<?=createUrl(['module' => 'goods', 'page' => 'main'])?>">GOODS</a>
+<a href="<?=createUrl(['module' => 'game'])?>">GAME</a>
+<a href="<?=createUrl(['module' => 'game2'])?>">GAME_2</a>
+<a href="<?=createUrl(['module' => 'manager'])?>">MANAGER</a>
+<a href="<?=createUrl(['module' => 'manager2'])?>">MANAGER_2</a>
+<a href="<?=createUrl(['module' => 'comments'])?>">COMMENTS</a>
+<a href="<?=createUrl(['module' => 'comments2'])?>">COMMENTS_2</a>
+<a href="<?=createUrl(['module' => 'news'])?>">NEWS</a>
+<a href="<?=createUrl(['module' => 'goods'])?>">GOODS</a>

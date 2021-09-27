@@ -4,7 +4,7 @@
  * @var $page string
  */
 
-$dbc = mysqli_connect(DB_LOCAL, DB_LOGIN, DB_PASS, DB_NAME);
+$dbc = mysqli_connect(Core::$DB_LOCAL, Core::$DB_LOGIN, Core::$DB_PASS, Core::$DB_NAME);
 mysqli_set_charset($dbc, 'utf8');
 
 $name = $_GET['name'] ?? null;

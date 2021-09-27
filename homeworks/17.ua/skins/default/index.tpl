@@ -55,7 +55,7 @@
 					<?php endif ?>
 					<?php if(!$isAuthUser && !$isAuthAdmin): ?>
 						<a href="<?=createUrl(['module' => 'auth', 'page' => 'sign-in'])?>">SIGN IN </a> /
-						<a href="#">REGISTER</a> &nbsp;
+						<a href="<?=createUrl(['module' => 'auth', 'page' => 'registration'])?>">REGISTER </a>
 					<?php else: ?>
 						<a href="<?=createUrl(['module' => 'auth', 'page' => 'sign-out'])?>"
 						   class="sprite sprite-zz-sign-in"></a>
