@@ -2,12 +2,33 @@
 /**
  * @var $dbc mysqli
  */
-if (isset($_POST['edit'], $_POST['title'], $_POST['category'], $_POST['text'], $_POST['description'])) {
-    foreach ($_POST as $k => $v) {
-        $_POST['k'] = trim($v);
+if (isset($_POST['edit'],
+    $_POST['title'],
+    $_POST['category'],
+    $_POST['text'],
+    $_POST['description'])) {
+
+    $errors = [];
+
+    if (empty($_POST['title'])) {
+        $errors['title'] = 'Вы не ввели заголовок';
+    }
+    if (empty($_POST['category'])) {
+        $errors['category'] = 'Вы не ввели категорию';
+    }
+    if (empty($_POST['description'])) {
+        $errors['description'] = 'Вы не ввели описание';
+    }
+    if (empty($_POST['text'])) {
+        $errors['text'] = 'Вы не ввели текс новости';
     }
 
-    mysqli_query($dbc, "
+    if (!$errors) {
+        foreach ($_POST as $k => $v) {
+            $_POST['k'] = trim($v);
+        }
+
+        query("
     UPDATE `news` SET 
 `date`        = NOW(),
 `title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
@@ -15,19 +36,20 @@ if (isset($_POST['edit'], $_POST['title'], $_POST['category'], $_POST['text'], $
 `text`        = '" . mysqli_real_escape_string($dbc, trim($_POST['text'])) . "',
 `description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
 WHERE `id` = " . (int)$_GET['id'] . "
-") or exit(mysqli_error($dbc));
+");
 
-    $_SESSION['info'] = 'Запись была изменена';
-    header("Location: /index.php?module=news");
-    exit();
+        $_SESSION['info'] = 'Запись была изменена';
+        header("Location: /index.php?module=news");
+        exit();
+    }
 }
 
-$news = mysqli_query($dbc, "
+$news = query("
 SELECT *
 FROM `news`
 WHERE `id` = " . (int)$_GET['id'] . "
 LIMIT 1
-") or exit(mysqli_error($dbc));
+");
 if (!mysqli_num_rows($news)) {
     $_SESSION['info'] = 'Данной новости не существует!';
     header("Location: /index.php?module=news");
@@ -35,6 +57,7 @@ if (!mysqli_num_rows($news)) {
 }
 $row = mysqli_fetch_assoc($news);
 
-if (isset($_POST['title'])) {
-    $row['title'] = $_POST['title'];
-}
+$row['title'] = $_POST['title'] ?? $row['title'];
+$row['category'] = $_POST['category'] ?? $row['category'];
+$row['description'] = $_POST['description'] ?? $row['description'];
+$row['text'] = $_POST['text'] ?? $row['text'];

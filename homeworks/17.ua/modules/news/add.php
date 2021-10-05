@@ -3,8 +3,29 @@
  * @var $dbc mysqli
  */
 
-if (isset($_POST['add'], $_POST['title'], $_POST['category'], $_POST['text'], $_POST['description'])) {
-    mysqli_query($dbc, "
+if (isset($_POST['add'],
+    $_POST['title'],
+    $_POST['category'],
+    $_POST['text'],
+    $_POST['description'])) {
+
+    $errors = [];
+
+    if (empty($_POST['title'])) {
+        $errors['title'] = 'Вы не ввели заголовок';
+    }
+    if (empty($_POST['category'])) {
+        $errors['category'] = 'Вы не ввели категорию';
+    }
+    if (empty($_POST['description'])) {
+        $errors['description'] = 'Вы не ввели описание';
+    }
+    if (empty($_POST['text'])) {
+        $errors['text'] = 'Вы не ввели текс новости';
+    }
+
+    if (!$errors) {
+        query("
     INSERT INTO `news` SET 
 `date`        = NOW(),
 `title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
@@ -13,7 +34,8 @@ if (isset($_POST['add'], $_POST['title'], $_POST['category'], $_POST['text'], $_
 `description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
 ") or exit(mysqli_error($dbc));
 
-    $_SESSION['info'] = 'Запись добавлена';
-    header("Location: /index.php?module=news");
-    exit();
+        $_SESSION['info'] = 'Запись добавлена';
+        header("Location: /index.php?module=news");
+        exit();
+    }
 }
