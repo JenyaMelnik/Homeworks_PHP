@@ -4,7 +4,7 @@
  * @var $page string
  */
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && !isset($_SESSION['ban'])) {
     $res = query("
 SELECT * 
 FROM `users`
@@ -13,11 +13,12 @@ LIMIT 1
     ");
     $_SESSION['user'] = mysqli_fetch_assoc($res);
     if ($_SESSION['user']['active'] != 1) {
+        $_SESSION['ban'] = 1;
         header("Location: /index.php?module=cab&page=exit");
         exit();
     }
 } elseif (isset($_COOKIE['autoAuthHash'], $_COOKIE['autoAuthId'])) {
-    $res = query( "
+    $res = query("
 SELECT *
 FROM `users`
 WHERE `id`      = " . (int)($_COOKIE['autoAuthId']) . "
@@ -31,7 +32,7 @@ LIMIT 1
     } else {
         setcookie('autoAuthHash', escapeString(myHash($_SESSION['user']['id'] . $_SESSION['user']['login'] . $_SESSION['user']['email'])), time() - 360, '/');
         setcookie('autoAuthId', (int)$_SESSION['user']['id'], time() - 360, '/');
-        header("Location: /");
+        header("Location: /index.php?module=cab&page=exit");
         exit();
     }
 }

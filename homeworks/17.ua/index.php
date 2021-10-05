@@ -21,3 +21,4 @@ include_once './route.php';
 include './modules/allPages.php';
 include $modulePath;
 include './skins/'.Core::$SKIN.'/index.tpl';
+
