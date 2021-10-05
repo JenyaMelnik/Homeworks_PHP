@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 25 2021 г., 22:54
+-- Время создания: Окт 01 2021 г., 11:04
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.4.5
 
@@ -109,7 +109,8 @@ INSERT INTO `goods` (`id`, `category`, `title`, `description`, `strength`, `pric
 (5, 'Крепленые вина', 'Fonseca Tawny', 'Аромат раскрывается оттенками абрикос, спелых слив, пряностей и сливочного масла. Во вкусе ощущаются нюансы джема и прекрасный баланс. Послевкусие затяжное, уравновешенное хорошо интегрированной кислотностью.', 20, 385, 1),
 (6, 'Крепленые вина', 'Taylor\'s Fine Ruby', 'Яркий фруктовый аромат наполнен оттенками черной смородины, вишни и спелой сливы. Вкус переполнен фруктовым характером. Послевкусие долгое, оставляющее приятную сладость.', 20, 350, 0),
 (8, 'Белые вина', 'Каберне', 'фтаиофвтжипофтвпжиофтвпи', 20, 100, 1),
-(13, 'Крепленые вина', 'Мускат', 'gfsfgnsf', 12, 15, 1);
+(13, 'Крепленые вина', 'Мускат', 'йцукйцукйцук', 12, 25, 1),
+(32, 'Белые вина', 'уерцкер', 'итартырь', 10, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -148,46 +149,40 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `login` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'login',
   `age` tinyint(4) NOT NULL DEFAULT '18',
-  `sex (male/female)` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'male',
-  `comments` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Коментарии',
   `email` text COLLATE utf8_unicode_ci NOT NULL,
-  `password` text COLLATE utf8_unicode_ci NOT NULL
+  `password` text COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `access` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `age`, `sex (male/female)`, `comments`, `email`, `password`) VALUES
-(1, 'Jenya', 35, 'male', 'My name is Jenya', '', ''),
-(2, 'Sasha', 34, 'male', 'I like foofball', '', ''),
-(4, 'Marharita', 31, 'female', 'I have a daughter', '', ''),
-(5, 'Olya', 31, 'female', 'i am angry', '', ''),
-(6, 'Sergey', 36, 'male', 'Привет', '', ''),
-(7, 'Sergey2', 31, 'male', 'Пока', '', ''),
-(8, 'Denys', 18, 'male', 'Коментарии', '', ''),
-(10, 'Yamamoto', 9, 'male', 'Коментарии', '', ''),
-(11, 'inpost', 2, 'male', 'Коментарии', 'inpost@list.ru', '123'),
-(12, 'Vasilij', 19, 'male', 'Коментарии', 'Vasilij@.ru', '345'),
-(13, 'Tolya', 18, 'male', 'Коментарии', 'Tolya2003@i.ua', '123456789'),
-(15, 'Dima', 22, 'male', 'Коментарии', 'Dima1999@i.ua', 'Dima1999'),
-(16, 'login1', 20, 'male', 'Коментарии', 'Login@i.ua', 'login1'),
-(18, 'login2', 25, 'male', 'Коментарии', 'Login2@i.ua', 'password2'),
-(19, 'login1', 20, 'male', 'Коментарии', 'Login@i.ua', 'login1'),
-(20, 'login2', 25, 'male', 'Коментарии', 'Login2@i.ua', 'password2'),
-(21, 'login1', 20, 'male', 'Коментарии', 'Login@i.ua', 'login1'),
-(22, 'login2', 25, 'male', 'Коментарии', 'Login2@i.ua', 'password2'),
-(23, 'Jenya', 0, 'male', 'Коментарии', 'qwert@i.ua', 'йцу'),
-(24, 'Jenya', 35, 'male', 'Коментарии', 'qwert@i.ua', '123456'),
-(25, 'Jenya', 0, 'male', 'Коментарии', 'qwert@i.ua', 'йцу'),
-(26, 'Jenya', 35, 'male', 'Коментарии', 'qwert@i.ua', '12345'),
-(27, 'Jenya', 35, 'male', 'Коментарии', 'qwert@i.ua', 'йцу45'),
-(28, 'Jenya', 35, 'male', 'Коментарии', 'qwert@i.ua', '12345'),
-(29, 'Jenya', 35, 'male', 'Коментарии', 'qwert@i.ua', '12345'),
-(30, 'Jenya', 35, 'male', 'Коментарии', 'qwert@i.ua', '12345'),
-(31, 'Jenya', 35, 'male', 'Коментарии', 'jenyamelnik1986@gmail.com', '12345'),
-(32, 'Jenya', 35, 'male', 'Коментарии', 'jenyamelnik1986@gmail.com', '1234'),
-(33, 'login', 35, 'male', 'Коментарии', 'jenyamelnik1986@gmail.com', '1234');
+INSERT INTO `users` (`id`, `login`, `age`, `email`, `password`, `active`, `hash`, `access`) VALUES
+(2, 'Sasha', 34, '', '', 0, '', 0),
+(4, 'Marharita', 31, '', '', 0, '', 0),
+(5, 'Olya', 31, '', '', 0, '', 0),
+(6, 'Sergey', 36, '', '', 0, '', 0),
+(7, 'Sergey2', 31, '', '', 0, '', 0),
+(8, 'Denys', 18, '', '', 0, '', 0),
+(10, 'Yamamoto', 9, '', '', 0, '', 0),
+(11, 'inpost', 2, 'inpost@list.ru', '123', 0, '', 0),
+(12, 'Vasilij', 19, 'Vasilij@.ru', '345', 0, '', 0),
+(13, 'Tolya', 18, 'Tolya2003@i.ua', '123456789', 0, '', 0),
+(15, 'Dima', 22, 'Dima1999@i.ua', 'Dima1999', 0, '', 0),
+(16, 'login1', 20, 'Login@i.ua', 'login1', 0, '', 0),
+(18, 'login2', 25, 'Login2@i.ua', 'password2', 0, '', 0),
+(19, 'login1', 20, 'Login@i.ua', 'login1', 0, '', 0),
+(20, 'login2', 25, 'Login2@i.ua', 'password2', 0, '', 0),
+(21, 'login1', 20, 'Login@i.ua', 'login1', 0, '', 0),
+(22, 'login2', 25, 'Login2@i.ua', 'password2', 0, '', 0),
+(37, 'йцукен', 35, 'qwe@i.ua', 'CBZTe5Z/qEk9k', 0, 'CBZcRlzfIbJF6', 0),
+(38, 'Oleh', 12, 'Oleh@i.ua', 'CB99YZft.ZCQA', 0, 'CBde.826jBqjY', 0),
+(39, 'Oleh2', 12, 'Oleh2@i.ua', 'CB4wFZWK//fyU', 1, 'CB0xkbSMbBNUQ', 0),
+(40, 'qwerwrt', 42, 'Jekadfjadgk@i.ua', 'CBTlOo1SR9Yw.', 1, 'CB7kb5P8tDZnM', 0),
+(41, 'Jenya', 35, 'jenyamelnik1986@gmail.com', 'CBcGtU7HY7hPU', 1, 'CBqntOhfFysrE', 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -231,7 +226,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -243,7 +238,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

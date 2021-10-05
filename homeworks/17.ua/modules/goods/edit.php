@@ -25,11 +25,11 @@ if (isset($_POST['edit'],
         $errors['price'] = 'Вы не ввели цену';
     }
     if (!count($errors)) {
-        q("
+        query("
 UPDATE `goods` SET 
-`category`     = '" . mres(trim($_POST['category'])) . "',
-`title`        = '" . mres(trim($_POST['title'])) . "',
-`description`  = '" . mres(trim($_POST['description'])) . "',
+`category`     = '" . escapeString(trim($_POST['category'])) . "',
+`title`        = '" . escapeString(trim($_POST['title'])) . "',
+`description`  = '" . escapeString(trim($_POST['description'])) . "',
 `strength`     = " . (float)trim($_POST['strength']) . ",
 `price`        = " . (float)trim($_POST['price']) . ",
 `availability` = " . (int)trim($_POST['availability']) . "
@@ -37,12 +37,12 @@ WHERE `id`     = " . (int)$_GET['id'] . "
     ") or exit(mysqli_error($dbc));
 
         $_SESSION['notice'] = 'Товар отредактирован';
-        header("Location:index.php?module=goods");
+        header("Location:/index.php?module=goods");
         exit();
     }
 }
 
-$wines = q("
+$wines = query("
 SELECT *
 FROM `goods`
 WHERE `id` = " . (int)$_GET['id'] . "
@@ -51,7 +51,7 @@ LIMIT 1
 
 if (!mysqli_num_rows($wines)) {
     $_SESSION['notice'] = 'Данного товара не существует';
-    header("Location:index.php?module=goods");
+    header("Location:/index.php?module=goods");
     exit();
 }
 

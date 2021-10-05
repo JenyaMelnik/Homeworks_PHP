@@ -25,18 +25,18 @@ if (isset($_POST['add'],
         $errors['price'] = 'Вы не ввели цену';
     }
     if (!count($errors)) {
-        q("
+        query("
 INSERT INTO `goods` SET 
-`category`     = '" . mres(trim($_POST['category'])) . "',
-`title`        = '" . mres(trim($_POST['title'])) . "',
-`description`  = '" . mres(trim($_POST['description'])) . "',
+`category`     = '" . escapeString(trim($_POST['category'])) . "',
+`title`        = '" . escapeString(trim($_POST['title'])) . "',
+`description`  = '" . escapeString(trim($_POST['description'])) . "',
 `strength`     = " . (float)trim($_POST['strength']) . ",
 `price`        = " . (float)trim($_POST['price']) . ",
 `availability` = " . (int)trim($_POST['availability']) . "
     ") or exit(mysqli_error($dbc));
 
         $_SESSION['notice'] = 'Товар добавлен';
-        header("Location:index.php?module=goods");
+        header("Location:/index.php?module=goods");
         exit();
     }
 }

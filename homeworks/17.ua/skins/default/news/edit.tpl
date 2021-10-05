@@ -6,22 +6,31 @@
 
 <div>
     <form action="" method="post">
-        <div>
-            <span>Заголовок новости:</span>
-            <input type="text" name="title" value="<?= htmlspecialchars($row['title']); ?>">
-        </div>
-        <div>
-            <span>Категория новости:</span>
-            <input type="text" name="category" value="<?= htmlspecialchars($row['category']); ?>">
-        </div>
-        <div>
-            <span>Описание новости:</span>
-            <textarea name="description"><?= htmlspecialchars($row['description']); ?></textarea>
-        </div>
-        <div>
-            <span>Полный текст новости:</span>
-            <textarea name="text"><?= htmlspecialchars($row['text']); ?></textarea>
-        </div>
+        <table>
+            <tr>
+                <td>Заголовок новости:</td>
+                <td><input type="text" name="title"
+                           value="<?= htmlspecialchars($row['title'] ?? '') ?>"></td>
+                <td><?= $errors['title'] ?? '' ?></td>
+            </tr>
+            <tr>
+                <td>Введите категорию:</td>
+                <td><input type="text" name="category"
+                           value="<?= htmlspecialchars($row['category'] ?? '') ?>"></td>
+                <td><?= $errors['category'] ?? '' ?></td>
+            </tr>
+            <tr>
+                <td>Введите описание:
+                <td><textarea name="description"><?= htmlspecialchars($row['description'] ?? '') ?></textarea></td>
+                <td><?= $errors['description'] ?? '' ?></td>
+            </tr>
+            <tr>
+                <td>Введите категорию:</td>
+                <td><input type="text" name="text"
+                           value="<?= htmlspecialchars($row['text'] ?? '') ?>"></td>
+                <td><?= $errors['text'] ?? '' ?></td>
+            </tr>
+        </table>
         <input type="submit" name="edit" value="Отредактировать новость">
     </form>
 </div>

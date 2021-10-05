@@ -3,10 +3,11 @@
 class Core {
     static  $CREATED = '2021';
     static  $SKIN = 'default';
-    static  $DB_NAME = 'main';
-    static  $DB_LOGIN = 'root';
-    static  $DB_PASS = 'root';
+    static  $DB_NAME = 'jenyamelnik1986';
+    static  $DB_LOGIN = 'jenyamelnik1986';
+    static  $DB_PASS = 'Jrwq1_13jwqdnXX';
     static  $DB_LOCAL = 'localhost';
+    static  $DOMAIN = 'https://17.ua/';
 }
 
 

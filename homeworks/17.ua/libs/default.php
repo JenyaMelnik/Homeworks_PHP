@@ -1,8 +1,22 @@
 <?php
-
+/**
+ * autoload classes
+ */
 spl_autoload_register(function ($class) {
     include './libs/class_' . $class . '.php';
 });
+
+/**
+ * hashing
+ *
+ * @param $var
+ * @return string
+ */
+function myHash ($var) {
+    $salt = 'ABC';
+    $salt2 = 'CBA';
+    return crypt(md5($var.$salt),$salt2);
+}
 
 function dump($array, $stop = false)
 {
@@ -60,7 +74,7 @@ function redirectTo(array $params): void
  * @param $query string
  * @return bool|mysqli_result
  */
-function q(string $query)
+function query(string $query)
 {
     global $dbc;
     $res = mysqli_query($dbc, $query);
@@ -98,7 +112,6 @@ function trimAll($el)
     }
     return $el;
 }
-
 
 /**
  * to int all array's elements
@@ -138,13 +151,13 @@ function htmlspecialcharsAll($el)
  * @param $el
  * @return array|string
  */
-function mres($el)
+function escapeString($el)
 {
     if (!is_array($el)) {
         global $dbc;
         $el = mysqli_real_escape_string($dbc, $el);
     } else {
-        $el = array_map('mres', $el);
+        $el = array_map('escapeString', $el);
     }
     return $el;
 }

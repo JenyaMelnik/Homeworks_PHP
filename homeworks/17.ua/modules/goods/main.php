@@ -20,7 +20,7 @@ WHERE `id` IN (" . $ids . ")
     } else {
         $_SESSION['notice'] = 'Выберите хотя бы один товар';
     }
-    header("Location:index.php?module=goods");
+    header("Location:/index.php?module=goods");
     exit();
 }
 
@@ -31,7 +31,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     ") or exit(mysqli_error($dbc));
 
     $_SESSION['notice'] = 'Товар удален';
-    header("Location:index.php?module=goods");
+    header("Location:/index.php?module=goods");
     exit();
 }
 
