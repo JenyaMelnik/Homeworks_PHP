@@ -1,5 +1,20 @@
 <?php
 
+if (isset($_GET['route'])) {
+    $temp = explode('/', $_GET['route']);
+    foreach ($temp as $k => $v) {
+        if ($k == 0) {
+            $_GET['module'] = $v;
+        } elseif ($k == 1) {
+            $_GET['page'] = $v;
+        } else {
+            $_GET['key'. ($k-1)] = $v;
+        }
+    }
+    unset($_GET['route']);
+}
+
+
 $allowed = ['draft', 'comments', 'comments2', 'components', 'static', 'contacts', 'aboutus', 'game', 'game2', 'manager', 'manager2',
             'errors', 'cab', 'admin', 'food', 'wines', 'gifts', 'news', 'goods'];
 
