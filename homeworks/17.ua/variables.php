@@ -14,7 +14,6 @@ if (isset($_GET['route'])) {
     unset($_GET['route']);
 }
 
-
 $allowed = ['draft', 'comments', 'comments2', 'components', 'static', 'contacts', 'aboutus', 'game', 'game2', 'manager', 'manager2',
             'errors', 'cab', 'admin', 'food', 'wines', 'gifts', 'news', 'goods'];
 

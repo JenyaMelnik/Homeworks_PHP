@@ -12,10 +12,11 @@ spl_autoload_register(function ($class) {
  * @param $var
  * @return string
  */
-function myHash ($var) {
+function myHash($var)
+{
     $salt = 'ABC';
     $salt2 = 'CBA';
-    return crypt(md5($var.$salt),$salt2);
+    return crypt(md5($var . $salt), $salt2);
 }
 
 function dump($array, $stop = false)
@@ -105,12 +106,9 @@ function query(string $query)
  */
 function trimAll($el)
 {
-    if (!is_array($el)) {
-        $el = trim($el);
-    } else {
-        $el = array_map('trimAll', $el);
-    }
-    return $el;
+    return !is_array($el)
+        ? trim($el)
+        : array_map('trimAll', $el);
 }
 
 /**
@@ -121,28 +119,22 @@ function trimAll($el)
  */
 function intAll($el)
 {
-    if (!is_array($el)) {
-        $el = (int)($el);
-    } else {
-        $el = array_map('intAll', $el);
-    }
-    return $el;
+    return !is_array($el)
+        ? (int)$el
+        : array_map('intAll', $el);
 }
 
 /**
  * htmlspecialchars all array's elements
  *
  * @param $el
- * @return array
+ * @return array|string
  */
 function htmlspecialcharsAll($el)
 {
-    if (!is_array($el)) {
-        $el = htmlspecialcharsAll($el);
-    } else {
-        $el = array_map('htmlspecialcharsAll', $el);
-    }
-    return $el;
+    return !is_array($el)
+        ? htmlspecialchars($el)
+        : array_map('htmlspecialcharsAll', $el);
 }
 
 /**
@@ -153,12 +145,9 @@ function htmlspecialcharsAll($el)
  */
 function escapeString($el)
 {
-    if (!is_array($el)) {
-        global $dbc;
-        $el = mysqli_real_escape_string($dbc, $el);
-    } else {
-        $el = array_map('escapeString', $el);
-    }
-    return $el;
+    global $dbc;
+    return !is_array($el)
+        ? mysqli_real_escape_string($dbc, $el)
+        : array_map('escapeString', $el);
 }
 
