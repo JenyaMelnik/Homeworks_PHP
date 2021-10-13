@@ -10,7 +10,7 @@ if (isset($_SESSION['user'])) {
             if (isset($info)) { ?>
                 <h2> <?= $info; ?> </h2>
             <?php } ?>
-            <a href="/index.php?module=news&page=add">ДОБАВИТЬ НОВОСТЬ</a>
+            <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'add']) ?>">ДОБАВИТЬ НОВОСТЬ</a>
             <div>
                 <br>
                 <p><b>Все существующие новости:</b></p>
@@ -20,8 +20,8 @@ if (isset($_SESSION['user'])) {
                         <div>
                             <div>
                                 <input type="checkbox" name="ids[]" value="<?= $row['id'] ?>">
-                                <a href="/index.php?module=news&page=edit&id=<?= $row['id'] ?>">РЕДАКТИРОВАТЬ</a>
-                                <a href="/index.php?module=news&action=delete&id=<?= $row['id'] ?>">УДАЛИТЬ</a>
+                                <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?id=<?= $row['id'] ?>">РЕДАКТИРОВАТЬ</a>
+                                <a href="<?= createUrlChpu(['module' => 'news']) ?>&action=delete&id=<?= $row['id'] ?>">УДАЛИТЬ</a>
                             </div>
                             <div><?= $row['date']; ?></div>
                             <div class="text"><?= $row['title']; ?></div>

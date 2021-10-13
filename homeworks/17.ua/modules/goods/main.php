@@ -20,8 +20,7 @@ WHERE `id` IN (" . $ids . ")
     } else {
         $_SESSION['notice'] = 'Выберите хотя бы один товар';
     }
-    header("Location:/index.php?module=goods");
-    exit();
+    redirectTo(['module' => 'goods']);
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
@@ -31,8 +30,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     ") or exit(mysqli_error($dbc));
 
     $_SESSION['notice'] = 'Товар удален';
-    header("Location:/index.php?module=goods");
-    exit();
+    redirectTo(['module' => 'goods']);
 }
 
 $wines = mysqli_query($dbc, "

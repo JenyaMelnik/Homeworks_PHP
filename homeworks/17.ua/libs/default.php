@@ -12,7 +12,7 @@ spl_autoload_register(function ($class) {
  * @param $var
  * @return string
  */
-function myHash($var)
+function myHash($var): string
 {
     $salt = 'ABC';
     $salt2 = 'CBA';
@@ -59,13 +59,23 @@ function createUrl(array $params): string
 }
 
 /**
+ * Create Chpu URL
+ *
+ * @param array $params
+ * @return string
+ */
+function createUrlChpu(array $params): string {
+    return URI.implode('/', $params);
+}
+
+/**
  * Redirect
  *
  * @param array $params
  */
 function redirectTo(array $params): void
 {
-    header("Location: " . createUrl($params));
+    header("Location: " . createUrlChpu($params));
     exit();
 }
 
@@ -150,4 +160,3 @@ function escapeString($el)
         ? mysqli_real_escape_string($dbc, $el)
         : array_map('escapeString', $el);
 }
-

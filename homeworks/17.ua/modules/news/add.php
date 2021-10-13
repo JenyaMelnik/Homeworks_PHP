@@ -35,7 +35,6 @@ if (isset($_POST['add'],
 ") or exit(mysqli_error($dbc));
 
         $_SESSION['info'] = 'Запись добавлена';
-        header("Location: /index.php?module=news");
-        exit();
+        redirectTo(['module' => 'news']);
     }
 }

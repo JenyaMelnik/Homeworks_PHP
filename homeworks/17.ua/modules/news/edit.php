@@ -39,8 +39,7 @@ WHERE `id` = " . (int)$_GET['id'] . "
 ");
 
         $_SESSION['info'] = 'Запись была изменена';
-        header("Location: /index.php?module=news");
-        exit();
+        redirectTo(['module' => 'news']);
     }
 }
 
@@ -52,8 +51,7 @@ LIMIT 1
 ");
 if (!mysqli_num_rows($news)) {
     $_SESSION['info'] = 'Данной новости не существует!';
-    header("Location: /index.php?module=news");
-    exit();
+    redirectTo(['module' => 'news']);
 }
 $row = mysqli_fetch_assoc($news);
 

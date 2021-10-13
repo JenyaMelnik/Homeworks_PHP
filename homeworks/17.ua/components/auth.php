@@ -2,7 +2,7 @@
 /**
  * @var $module string
  */
-
+/*
 $isAuthAdmin = $_COOKIE['auth_admin'] ?? null;
 $isAuthUser = $_COOKIE['auth_user'] ?? null;
 
@@ -16,3 +16,4 @@ if($isAdminRoute && (!$isAdminIP && !$isAuthAdmin)) {
 	$module = 'errors';
 	$page = '403';
 }
+*/

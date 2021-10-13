@@ -8,15 +8,15 @@
     if (isset($notice)) { ?>
         <h2> <?= $notice ?> </h2>
     <?php } ?>
-    <a href="/index.php?module=goods&page=add">ДОБАВИТЬ ТОВАР</a><br><br>
+    <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'add']) ?>">ДОБАВИТЬ ТОВАР</a><br><br>
     <div class="item">
         <form action="" method="post">
             <?php
             if (mysqli_num_rows($wines)) {
                 while ($row = mysqli_fetch_assoc($wines)) { ?>
                     <div>
-                        <a href="/index.php?module=goods&action=delete&id=<?= (int)$row['id'] ?>">УДАЛИТЬ</a>
-                        <a href="/index.php?module=goods&page=edit&id=<?= (int)$row['id'] ?>">РЕДАКТИРОВАТЬ</a>
+                        <a href="<?= createUrlChpu(['module' => 'goods']) ?>&action=delete&id=<?= (int)$row['id'] ?>">УДАЛИТЬ</a>
+                        <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'edit']) ?>&id=<?= (int)$row['id'] ?>">РЕДАКТИРОВАТЬ</a>
                         <h1 class="category"><?= htmlspecialchars($row['category']) ?></h1>
                         <h2>
                             <input type="checkbox" name="ids[]" value="<?= (int)$row['id'] ?>">

@@ -1,5 +1,5 @@
 <div class="language">
-	<a href="<?=createUrl(['module' => 'wines', 'page' => 'red'])?>">RED WINES</a>
+	<a href="<?=createUrlChpu(['module' => 'wines', 'page' => 'red'])?>">RED WINES</a>
 	<div class="drop-menu clearfix">
 		<div class="drop-col">
 			<a href="#" class="padding"><strong>RED WINE</strong></a>
@@ -45,17 +45,17 @@
 		</div>
 	</div>
 </div>
-<a href="<?=createUrl(['module' => 'draft'])?>">DRAFT</a>
-<a href="<?=createUrl(['module' => 'wines', 'page' => 'rose'])?>">ROSÉ WINES</a>
-<a href="<?=createUrl(['module' => 'wines', 'page' => 'white'])?>">WHITE WINES</a>
-<a href="<?=createUrl(['module' => 'gifts', 'page' => 'packs'])?>">GIFT PACKS</a>
-<a href="<?=createUrl(['module' => 'food', 'page' => 'sea'])?>">SEAFOOD</a>
-<a href="<?=createUrl(['module' => 'food', 'page' => 'snack-cheese'])?>">SNACK AND CHEESE</a>
-<a href="<?=createUrl(['module' => 'game'])?>">GAME</a>
-<a href="<?=createUrl(['module' => 'game2'])?>">GAME_2</a>
-<a href="<?=createUrl(['module' => 'manager'])?>">MANAGER</a>
-<a href="<?=createUrl(['module' => 'manager2'])?>">MANAGER_2</a>
-<a href="<?=createUrl(['module' => 'comments'])?>">COMMENTS</a>
-<a href="<?=createUrl(['module' => 'comments2'])?>">COMMENTS_2</a>
-<a href="<?=createUrl(['module' => 'news'])?>">NEWS</a>
-<a href="<?=createUrl(['module' => 'goods'])?>">GOODS</a>
+<a href="<?=createUrlChpu(['module' => 'draft'])?>">DRAFT</a>
+<a href="<?=createUrlChpu(['module' => 'wines', 'page' => 'rose'])?>">ROSÉ WINES</a>
+<a href="<?=createUrlChpu(['module' => 'wines', 'page' => 'white'])?>">WHITE WINES</a>
+<a href="<?=createUrlChpu(['module' => 'gifts', 'page' => 'packs'])?>">GIFT PACKS</a>
+<a href="<?=createUrlChpu(['module' => 'food', 'page' => 'sea'])?>">SEAFOOD</a>
+<a href="<?=createUrlChpu(['module' => 'food', 'page' => 'snack-cheese'])?>">SNACK AND CHEESE</a>
+<a href="<?=createUrlChpu(['module' => 'game'])?>">GAME</a>
+<a href="<?=createUrlChpu(['module' => 'game2'])?>">GAME_2</a>
+<a href="<?=createUrlChpu(['module' => 'manager'])?>">MANAGER</a>
+<a href="<?=createUrlChpu(['module' => 'manager2'])?>">MANAGER_2</a>
+<a href="<?=createUrlChpu(['module' => 'comments'])?>">COMMENTS</a>
+<a href="<?=createUrlChpu(['module' => 'comments2'])?>">COMMENTS_2</a>
+<a href="<?=createUrlChpu(['module' => 'news'])?>">NEWS</a>
+<a href="<?=createUrlChpu(['module' => 'goods'])?>">GOODS</a>

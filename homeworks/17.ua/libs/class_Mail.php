@@ -4,13 +4,13 @@
 
 class Mail
 {
-    static $subject = 'По умолчанию';
-    static $to = 'Jenyamelnik1986@i.ua';
-    static $from = 'Jenyamelnik1986@gmail.com';
-    static $text = 'Какойто текст';
-    static $headers = '';
+    static string $subject = 'По умолчанию';
+    static string $to = 'Jenyamelnik1986@i.ua';
+    static string $from = 'Jenyamelnik1986@gmail.com';
+    static string $text = 'Какойто текст';
+    static string $headers = '';
 
-    static function send()
+    static function send(): bool
     {
         self::$subject = '=?utf-8?b?' . base64_encode(self::$subject) . '?=';
         self::$headers = "Content-type: text/html; charset=\"utf-8\"\r\n";
@@ -23,6 +23,9 @@ class Mail
     }
 
 
+    /**
+     * sending test mail
+     */
     static function testSend()
     {
         if (mail(self::$to, 'English words', 'English words', self::$headers)) {

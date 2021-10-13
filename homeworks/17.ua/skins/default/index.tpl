@@ -6,17 +6,24 @@
  * @var $isAdminIP bool
  * @var $module string
  * @var $page string
+ * @var $content array
  */
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Заголовок страницы</title>
-    <meta name="description" content="Описание страницы">
-    <meta name="keywords" content="Ключевые слова через запятую">
+    <title> <?= Core::$META['title'] ?> </title>
+    <meta name="description" content="<?= Core::$META['description'] ?>">
+    <meta name="keywords" content="<?= Core::$META['keywords'] ?>">
     <link href="/css/normalize.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <?php if (count(Core::$CSS)) {
+        echo implode('\n', Core::$CSS);
+    } ?>
+    <?php if (count(Core::$JS)) {
+        echo implode('\n', Core::$JS);
+    } ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -54,16 +61,16 @@
                         <span class="notice"> <?= $notice ?> </span>
                     <?php endif ?>
                     <?php if (!isset($_SESSION['user'])) { ?>
-                        <a href="<?= createUrl(['module' => 'cab', 'page' => 'auth']) ?>">AUTHORIZE </a> /
-                        <a href="<?= createUrl(['module' => 'cab', 'page' => 'registration']) ?>">REGISTER </a>
+                        <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'auth']) ?>">AUTHORIZE </a> /
+                        <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'registration']) ?>">REGISTER </a>
                     <?php } else { ?>
                         <span>Привет, <?= $_SESSION['user']['login'] ?></span>
-                        <a href="<?= createUrl(['module' => 'cab', 'page' => 'exit']) ?>"
+                        <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'exit']) ?>"
                            class="sprite sprite-zz-sign-in"></a>
                     <?php } ?>
-                    <?php if ($isAdminIP || $isAuthAdmin): ?>
-                        <a href="<?= createUrl(['module' => 'admin', 'page' => 'main']) ?>" class="admin">ADMIN</a>
-                    <?php endif ?>
+                    <!--                    --><?php //if ($isAdminIP || $isAuthAdmin): ?>
+                    <a href="<?= createUrlChpu(['module' => 'admin', 'page' => 'main']) ?>" class="admin">ADMIN</a>
+                    <!--                    --><?php //endif ?>
                 </div>
             </div>
         </div>
@@ -94,7 +101,7 @@
         <?php include "components/nav.tpl" ?>
     </nav>
     <div id="content">
-        <?php include "$module/$page.tpl"; ?>
+        <?= $content ?>
     </div>
 </main>
 <footer>

@@ -36,7 +36,6 @@ INSERT INTO `goods` SET
     ") or exit(mysqli_error($dbc));
 
         $_SESSION['notice'] = 'Товар добавлен';
-        header("Location:/index.php?module=goods");
-        exit();
+        redirectTo(['module' => 'goods']);
     }
 }

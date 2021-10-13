@@ -3,6 +3,9 @@
  * @var $dbc mysqli
  */
 
+Core::$META['title'] = 'TITLE NEWS';
+Core::$CSS[] = '<link href="/css/style.css" rel="stylesheet">';
+
 if (isset($_POST['delete'])) {
     foreach ($_POST['ids'] as $k => $v) {
         $_POST['ids'][$k] = (int)$v;
@@ -15,8 +18,7 @@ WHERE `id` IN (" . $ids . ")
     ") or exit(mysqli_error($dbc));
 
     $_SESSION['info'] = 'Новости удалены';
-    header("Location: /index.php?module=news");
-    exit();
+    redirectTo(['module' => 'news']);
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
@@ -26,8 +28,7 @@ WHERE `id` = " . $_GET['id'] . "
     ") or exit(mysqli_error($dbc));
 
     $_SESSION['info'] = 'Новость удалена';
-    header("Location: /index.php?module=news");
-    exit();
+    redirectTo(['module' => 'news']);
 }
 
 $news = query("SELECT * FROM `news` ORDER BY `id` DESC ");
