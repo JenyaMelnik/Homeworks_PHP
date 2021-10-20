@@ -26,14 +26,14 @@ if (isset($_POST['add'],
     }
     if (!count($errors)) {
         query("
-INSERT INTO `goods` SET 
-`category`     = '" . escapeString(trim($_POST['category'])) . "',
-`title`        = '" . escapeString(trim($_POST['title'])) . "',
-`description`  = '" . escapeString(trim($_POST['description'])) . "',
-`strength`     = " . (float)trim($_POST['strength']) . ",
-`price`        = " . (float)trim($_POST['price']) . ",
-`availability` = " . (int)trim($_POST['availability']) . "
-    ") or exit(mysqli_error($dbc));
+            INSERT INTO `goods` 
+            SET `category`     = '" . escapeString(trim($_POST['category'])) . "',
+                `title`        = '" . escapeString(trim($_POST['title'])) . "',
+                `description`  = '" . escapeString(trim($_POST['description'])) . "',
+                `strength`     = " . (float)trim($_POST['strength']) . ",
+                `price`        = " . (float)trim($_POST['price']) . ",
+                `availability` = " . (int)trim($_POST['availability']) . "
+        ");
 
         $_SESSION['notice'] = 'Товар добавлен';
         redirectTo(['module' => 'goods']);

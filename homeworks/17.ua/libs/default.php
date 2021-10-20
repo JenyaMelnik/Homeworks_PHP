@@ -65,7 +65,12 @@ function createUrl(array $params): string
  * @return string
  */
 function createUrlChpu(array $params): string {
-    return URI.implode('/', $params);
+    if (Core::$CONTROLLER == 'modules') {
+        $url = URI.implode('/', $params);
+    } else {
+        $url = URI. 'admin/' . implode('/', $params);
+    }
+    return $url;
 }
 
 /**

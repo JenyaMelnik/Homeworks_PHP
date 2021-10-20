@@ -11,7 +11,12 @@ LIMIT 1
     ");
     if (mysqli_num_rows($res)) {
         $_SESSION['user'] = mysqli_fetch_assoc($res);
-        $status = 'ok';
+        if (Core::$CONTROLLER != 'modules' && $_SESSION['user']['access'] != 5) {
+            $errors = $_SESSION['user']['login'] . ', вы не админ!';
+            $status = 'false';
+        } else {
+            $status = 'ok';
+        }
         if (isset($_POST['autoauth'])) {
             setcookie('autoAuthHash', escapeString(myHash($_SESSION['user']['id'] . $_SESSION['user']['login'] . $_SESSION['user']['email'])), time() + 360 * 24 * 30 * 12, '/');
             $_COOKIE['autoAuthHash'] = escapeString(myHash($_SESSION['user']['id'] . $_SESSION['user']['login'] . $_SESSION['user']['email']));

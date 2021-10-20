@@ -26,15 +26,15 @@ if (isset($_POST['edit'],
     }
     if (!count($errors)) {
         query("
-UPDATE `goods` SET 
-`category`     = '" . escapeString(trim($_POST['category'])) . "',
-`title`        = '" . escapeString(trim($_POST['title'])) . "',
-`description`  = '" . escapeString(trim($_POST['description'])) . "',
-`strength`     = " . (float)trim($_POST['strength']) . ",
-`price`        = " . (float)trim($_POST['price']) . ",
-`availability` = " . (int)trim($_POST['availability']) . "
-WHERE `id`     = " . (int)$_GET['id'] . "
-    ") or exit(mysqli_error($dbc));
+            UPDATE `goods` 
+            SET `category`     = '" . escapeString(trim($_POST['category'])) . "',
+                `title`        = '" . escapeString(trim($_POST['title'])) . "',
+                `description`  = '" . escapeString(trim($_POST['description'])) . "',
+                `strength`     = " . (float)trim($_POST['strength']) . ",
+                `price`        = " . (float)trim($_POST['price']) . ",
+                `availability` = " . (int)trim($_POST['availability']) . "
+            WHERE `id`     = " . (int)$_GET['id'] . "
+        ");
 
         $_SESSION['notice'] = 'Товар отредактирован';
         redirectTo(['module' => 'goods']);
@@ -42,11 +42,11 @@ WHERE `id`     = " . (int)$_GET['id'] . "
 }
 
 $wines = query("
-SELECT *
-FROM `goods`
-WHERE `id` = " . (int)$_GET['id'] . "
-LIMIT 1
-") or exit(mysqli_error($dbc));
+            SELECT *
+            FROM `goods`
+            WHERE `id` = " . (int)$_GET['id'] . "
+            LIMIT 1
+         ");
 
 if (!mysqli_num_rows($wines)) {
     $_SESSION['notice'] = 'Данного товара не существует';

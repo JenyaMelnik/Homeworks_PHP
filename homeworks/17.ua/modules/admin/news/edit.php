@@ -29,26 +29,25 @@ if (isset($_POST['edit'],
         }
 
         query("
-    UPDATE `news` SET 
-`date`        = NOW(),
-`title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
-`category`    = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
-`text`        = '" . mysqli_real_escape_string($dbc, trim($_POST['text'])) . "',
-`description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
-WHERE `id` = " . (int)$_GET['id'] . "
-");
-
+            UPDATE `news` 
+            SET `date`        = NOW(),
+                `title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
+                `category`    = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
+                `text`        = '" . mysqli_real_escape_string($dbc, trim($_POST['text'])) . "',
+                `description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
+            WHERE `id`        = " . (int)$_GET['id'] . "
+        ");
         $_SESSION['info'] = 'Запись была изменена';
         redirectTo(['module' => 'news']);
     }
 }
 
 $news = query("
-SELECT *
-FROM `news`
-WHERE `id` = " . (int)$_GET['id'] . "
-LIMIT 1
-");
+            SELECT *
+            FROM `news`
+            WHERE `id` = " . (int)$_GET['id'] . "
+            LIMIT 1
+        ");
 if (!mysqli_num_rows($news)) {
     $_SESSION['info'] = 'Данной новости не существует!';
     redirectTo(['module' => 'news']);

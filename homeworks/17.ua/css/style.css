@@ -375,6 +375,23 @@ main {
     margin-left: 40px;
 }
 
+.admin-auth {
+    text-align: center;
+    font-size: 20px;
+}
+
+.admin-auth a {
+    margin-right: 0;
+}
+
+.admin-nav {
+    margin: 20px 0;
+}
+
+.centre {
+    padding-left: 38%;
+}
+
 .search {
     height: 120px;
     background-color: black;
@@ -748,6 +765,7 @@ h2 {
 }
 
 footer {
+    margin-top: 40px;
     background-color: black;
     color: white;
 }

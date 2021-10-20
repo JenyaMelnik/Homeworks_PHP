@@ -21,7 +21,7 @@ include_once './components/notice.php';
 include_once './route.php';
 
 ob_start();
-    include './modules/allPages.php';
+    include './' . Core::$CONTROLLER . '/allPages.php';
     include $modulePath;
     include $skinPath;
     $content = ob_get_contents();
