@@ -28,9 +28,7 @@
 </head>
 <body>
 <header>
-    <div class="logPass">
-    </div>
-    <div class="registration">
+    <div>
         <div class="container clearfix">
             <div class="col-registration clearfix">
                 <div class="language">
@@ -67,10 +65,10 @@
                         <span>Привет, <?= $_SESSION['user']['login'] ?></span>
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'exit']) ?>"
                            class="sprite sprite-zz-sign-in"></a>
+                    <?php }
+                    if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 5) { ?>
+                        <a href="<?= createUrlChpu(['module' => 'admin']) ?>" class="admin">ADMIN</a>
                     <?php } ?>
-                    <!--                    --><?php //if ($isAdminIP || $isAuthAdmin): ?>
-                    <a href="<?= createUrlChpu(['module' => 'admin', 'page' => 'main']) ?>" class="admin">ADMIN</a>
-                    <!--                    --><?php //endif ?>
                 </div>
             </div>
         </div>

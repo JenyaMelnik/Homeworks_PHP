@@ -3,9 +3,8 @@ php_flag display_errors ON
 
 RewriteEngine on
 
-RewriteRule ^admin/(.*)$ admin/index.php?route=$1 [L,QSA]
+#RewriteRule ^admin/(.*)$ admin/index.php?route=$1 [L,QSA]
 
-RewriteCond %{REQUEST_URI} !^/admin
 RewriteCond %{REQUEST_URI} !^/forum
 RewriteCond %{REQUEST_URI} !^/ckeditor
 

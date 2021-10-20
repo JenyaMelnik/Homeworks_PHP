@@ -1,43 +1,10 @@
 <?php
-/**
- * @var $dbc mysqli
- */
 
-if (isset($_POST['delete'])) {
-    if (!empty($_POST['ids'])) {
-        $arrayIds = [];
-        foreach ($_POST['ids'] as $v) {
-            $arrayIds[] = (int)$v;
-        }
-        $ids = implode(',', $arrayIds);
-        mysqli_query($dbc, "
-DELETE FROM `goods`
-WHERE `id` IN (" . $ids . ")
-        ") or exit(mysqli_error($dbc));
-
-        $_SESSION['notice'] = 'Товары удалены';
-
-    } else {
-        $_SESSION['notice'] = 'Выберите хотя бы один товар';
-    }
-    redirectTo(['module' => 'goods']);
-}
-
-if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-    mysqli_query($dbc, "
-    DELETE FROM `goods` 
-    WHERE `id` = " . (int)$_GET['id'] . "
-    ") or exit(mysqli_error($dbc));
-
-    $_SESSION['notice'] = 'Товар удален';
-    redirectTo(['module' => 'goods']);
-}
-
-$wines = mysqli_query($dbc, "
-SELECT *
-FROM `goods`
-ORDER BY `id` DESC
-") or exit(mysqli_error($dbc));
+$wines = query("
+    SELECT *
+    FROM `goods`
+    ORDER BY `id` DESC
+");
 
 if (isset($_SESSION['notice'])) {
     $notice = $_SESSION['notice'];

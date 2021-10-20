@@ -1,43 +1,34 @@
 <?php
 /**
  * @var $wines array
+ * @var $notice string
  */
+
+echo $notice ?? '';
 ?>
-<div>
+<div class="item">
     <?php
-    if (isset($notice)) { ?>
-        <h2> <?= $notice ?> </h2>
+    if (mysqli_num_rows($wines)) {
+        while ($row = mysqli_fetch_assoc($wines)) { ?>
+            <div>
+                <h1 class="category"><?= htmlspecialchars($row['category']) ?></h1>
+                <h2>
+                    <strong><?= htmlspecialchars($row['title']) ?></strong>
+                </h2>
+                <span>Крепость: <b><?= (float)$row['strength'] ?>%</b></span><br>
+                <span>Цена: <b><?= (float)$row['price'] ?></b> грн.</span><br><br>
+                <span>Наличие товара: </span>
+                <?php if ($row['availability']) { ?>
+                    <span><b>Есть в наличии</b></span>
+                <?php } else { ?>
+                    <span><b>Нет в наличии</b></span>
+                <?php } ?>
+                <br>
+                <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'currentItem']) ?>&id=<?= (int)$row['id'] ?>">Подробнее...</a>
+            </div>
+            <hr>
+        <?php }
+    } else { ?>
+        <span>Нет товаров</span>
     <?php } ?>
-    <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'add']) ?>">ДОБАВИТЬ ТОВАР</a><br><br>
-    <div class="item">
-        <form action="" method="post">
-            <?php
-            if (mysqli_num_rows($wines)) {
-                while ($row = mysqli_fetch_assoc($wines)) { ?>
-                    <div>
-                        <a href="<?= createUrlChpu(['module' => 'goods']) ?>&action=delete&id=<?= (int)$row['id'] ?>">УДАЛИТЬ</a>
-                        <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'edit']) ?>&id=<?= (int)$row['id'] ?>">РЕДАКТИРОВАТЬ</a>
-                        <h1 class="category"><?= htmlspecialchars($row['category']) ?></h1>
-                        <h2>
-                            <input type="checkbox" name="ids[]" value="<?= (int)$row['id'] ?>">
-                            <strong><?= htmlspecialchars($row['title']) ?></strong>
-                        </h2>
-                        <span><?= nl2br(htmlspecialchars($row['description'])) ?></span><br><br>
-                        <span>Крепость: <b><?= (float)$row['strength'] ?>%</b></span><br>
-                        <span>Цена: <b><?= (float)$row['price'] ?></b> грн.</span><br><br>
-                        <span>Наличие товара: </span>
-                        <?php if ($row['availability']) { ?>
-                            <span><b>Есть в наличии</b></span>
-                        <?php } else { ?>
-                            <span><b>Нет в наличии</b></span>
-                        <?php } ?>
-                    </div>
-                    <hr>
-                <?php }
-            } else { ?>
-                <span>Нет товаров</span>
-            <?php } ?>
-            <input type="submit" name="delete" value="Удалить отмеченные записи">
-        </form>
-    </div>
 </div>

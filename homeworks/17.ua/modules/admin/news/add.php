@@ -26,14 +26,13 @@ if (isset($_POST['add'],
 
     if (!$errors) {
         query("
-    INSERT INTO `news` SET 
-`date`        = NOW(),
-`title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
-`category`    = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
-`text`        = '" . mysqli_real_escape_string($dbc, trim($_POST['text'])) . "',
-`description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
-") or exit(mysqli_error($dbc));
-
+            INSERT INTO `news` 
+            SET `date`        = NOW(),
+                `title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
+                `category`    = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
+                `text`        = '" . mysqli_real_escape_string($dbc, trim($_POST['text'])) . "',
+                `description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
+        ");
         $_SESSION['info'] = 'Запись добавлена';
         redirectTo(['module' => 'news']);
     }

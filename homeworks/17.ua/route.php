@@ -16,5 +16,5 @@ if (!file_exists($modulePath)) {
 if (!file_exists($skinPath)) {
     $module = 'errors';
     $page = '404';
-    $skinPath = './modules/' . $module . '/' . $page . '.tpl';
+    $skinPath = './skins/' . Core::$SKIN . '/' . $module . '/' . $page . '.tpl';
 }
