@@ -62,7 +62,7 @@
         <?php if ($comments): ?>
             <?php foreach ($comments as $comment_): ?>
                 <div class="comment">
-                    <div class="nameComment"> <?= htmlspecialchars($comment_['name']) ?> <?= $comment_['date'] ?> </div>
+                    <div class="nameComment"> <?= htmlspecialchars($comment_['login']) ?> <?= $comment_['date'] ?> </div>
                     <div class="textComment"> <?= nl2br(htmlspecialchars($comment_['comment'])) ?> </div>
                 </div>
             <?php endforeach ?>

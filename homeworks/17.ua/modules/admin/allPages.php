@@ -10,3 +10,5 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 5) {
         exit();
     }
 }
+
+include './modules/allPages.php';
