@@ -17,9 +17,15 @@ class Core
         'description' => 'd',
         'keywords' => 'k'
     ];
+
+    public static function isAdminController(): bool
+    {
+        return self::$CONTROLLER !== 'modules';
+    }
 }
 
 define('COPYRIGHT', Core::$CREATED === date('Y') ? Core::$CREATED : Core::$CREATED . ' - ' . date('Y'));
 
 $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https' : 'http';
 define('URI', "$protocol://" . $_SERVER["SERVER_NAME"] . '/');
+

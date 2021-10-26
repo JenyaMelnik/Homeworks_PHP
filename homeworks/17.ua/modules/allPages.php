@@ -22,9 +22,7 @@ if (isset($_SESSION['user'])) {
     ");
     $_SESSION['user'] = mysqli_fetch_assoc($res);
     if ($_SESSION['user']['active'] != 1) {
-        if ($page != 'exit') {
-            redirectTo(['module' => 'cab', 'page' => 'exit']);
-        }
+        include './modules/cab/exit.php';
     }
 } elseif (isset($_COOKIE['autoAuthHash'], $_COOKIE['autoAuthId'])) {
     $res = query("
