@@ -42,6 +42,7 @@
         if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 5) { ?>
             <a href="<?= createUrlChpu(['module' => 'news']) ?>">NEWS</a>
             <a href="<?= createUrlChpu(['module' => 'goods']) ?>">GOODS</a>
+            <a href="<?= createUrlChpu(['module' => 'users']) ?>">USERS</a>
         <?php } else { ?>
             <h2>Авторизируйтесь как администратор</h2>
         <?php } ?>

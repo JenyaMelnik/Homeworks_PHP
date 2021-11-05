@@ -858,3 +858,42 @@ file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\goods\main.php
 line: 15
 date2021-10-20 09:20:48
 
+QUERY: 
+SELECT *
+FROM `users`
+WHERE `id` = 
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\users\main.php
+line: 14
+date2021-11-03 13:06:42
+
+QUERY: 
+            INSERT INTO `users` 
+            SET `login` = 'Polina',
+                `password` = 'password',
+                `age` = 20,
+                `email` = 'Polina@i.ua',
+                `active` = 0,
+                `access` = 0
+        
+Field 'hash' doesn't have a default value
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\users\add.php
+line: 69
+date2021-11-04 22:18:15
+
+QUERY: 
+            UPDATE `users` 
+            SET `login` = 'Dima',
+             `password` = 'CBOM7nZdyk33c',
+                  `age` = 25,
+                `email` = 'Alenka@i.ua',
+               `active` = 1,
+               `access` = 0
+             WHERE `id` = 52
+       
+Duplicate entry 'Dima' for key 'ixLogin'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\users\edit.php
+line: 84
+date2021-11-05 16:01:46
+

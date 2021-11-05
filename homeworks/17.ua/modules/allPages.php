@@ -33,7 +33,7 @@ if (isset($_SESSION['user'])) {
         AND `ip`        = '" . escapeString(myHash($_SERVER['REMOTE_ADDR'])) . "'
         AND `userAgent` = '" . escapeString(myHash($_SERVER['HTTP_USER_AGENT'])) . "'
         LIMIT 1
-    "); // нужно ли писать LIMIT 1, так как только один id может быть со значением $_COOKIE['autoauthid'] ??
+    ");
     if (mysqli_num_rows($res)) {
         $_SESSION['user'] = mysqli_fetch_assoc($res);
     } else {
