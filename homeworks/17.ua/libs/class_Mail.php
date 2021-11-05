@@ -6,7 +6,7 @@ class Mail
 {
     static string $subject = 'По умолчанию';
     static string $to = 'Jenyamelnik1986@i.ua';
-    static string $from = 'Jenyamelnik1986@gmail.com';
+    static string $from = 'admin@melnykyevhenii.school-php.com';
     static string $text = 'Какойто текст';
     static string $headers = '';
 

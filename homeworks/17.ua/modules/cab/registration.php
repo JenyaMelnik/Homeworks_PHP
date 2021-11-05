@@ -51,10 +51,10 @@ LIMIT 1
     if (!count($errors)) {
         query("
         INSERT INTO `users` SET 
-`login`    = '" . escapeString($_POST['login']) . "',
+`login`    = '" . escapeString(trim($_POST['login'])) . "',
 `password` = '" . escapeString(myHash($_POST['pass'])) . "',
-`email`    = '" . escapeString($_POST['email']) . "',
-`age`      = " . (int)($_POST['age']) . ",
+`email`    = '" . escapeString(trim($_POST['email'])) . "',
+`age`      = " . (int)trim($_POST['age']) . ",
 `hash`     = '" . escapeString(myHash($_POST['login'] . $_POST['age'])) . "'
         ");
 
