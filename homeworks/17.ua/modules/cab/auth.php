@@ -31,7 +31,7 @@ SET `hash`  = '" . escapeString(myHash($_SESSION['user']['id'] . $_SESSION['user
 `userAgent` = '" . escapeString(myHash($_SERVER['HTTP_USER_AGENT'])) . "'
 WHERE `id`  = " . (int)($_SESSION['user']['id']) . "
 LIMIT 1 
-            "); // нужно ли писать LIMIT 1, так как только один id может быть со значением $_SESSION['user']['id'] ??
+            ");
         }
     } else {
         $errors = 'Нет пользавателя с таким логином и паролем, или ваш аккаунт не активен';

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 25 2021 г., 12:41
+-- Время создания: Ноя 08 2021 г., 16:33
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.4.5
 
@@ -92,7 +92,7 @@ INSERT INTO `comments` (`id`, `login`, `email`, `comment`, `date`) VALUES
 
 CREATE TABLE `goods` (
   `id` int(11) NOT NULL,
-  `category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `category` enum('Белые вина','Красные вина','Крепленые вина','') COLLATE utf8_unicode_ci NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `strength` float NOT NULL,
@@ -111,7 +111,7 @@ INSERT INTO `goods` (`id`, `category`, `title`, `description`, `strength`, `pric
 (4, 'Красные вина', 'Cabernet Sauvignon Reserva', 'Кольчагуа - одна из чилийских винных долин, с большим международным авторитетом. В этой же долине, между прибрежным хребтом и Тихим океаном разбиты виноградники хозяйства. Линейка «Reserva» - прекрасные повседневные вина, которые никогда не подведут. Перед вами 100% Кабарне Совиньон, выдержанный 6 месяцев в дубовых бочках. Вино предлагает четко очерченные оттенки черной смородины, ванили и фиалки. Вино средней насыщенности, с сочными танинами и прекрасным фруктовым акцентом на послевкусие. Хорошее дополнение к мясным блюдам.', 14, 430, 1),
 (5, 'Крепленые вина', 'Fonseca Tawny', 'Аромат раскрывается оттенками абрикос, спелых слив, пряностей и сливочного масла. Во вкусе ощущаются нюансы джема и прекрасный баланс. Послевкусие затяжное, уравновешенное хорошо интегрированной кислотностью.', 20, 385, 1),
 (6, 'Крепленые вина', 'Taylor\'s Fine Ruby', 'Яркий фруктовый аромат наполнен оттенками черной смородины, вишни и спелой сливы. Вкус переполнен фруктовым характером. Послевкусие долгое, оставляющее приятную сладость.', 20, 350, 0),
-(8, 'Белые вина', 'Каберне', 'фтаиофвтжипофтвпжиофтвпи', 20, 100, 1);
+(8, 'Белые вина', 'Каберне', 'фтаиофвтжипофтвпжиофтвпи', 15, 100, 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +122,7 @@ INSERT INTO `goods` (`id`, `category`, `title`, `description`, `strength`, `pric
 CREATE TABLE `news` (
   `id` int(11) NOT NULL,
   `date` datetime NOT NULL,
-  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `text` text COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
@@ -150,7 +150,7 @@ INSERT INTO `news` (`id`, `date`, `title`, `category`, `text`, `description`, `m
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `login` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'login',
-  `age` tinyint(4) NOT NULL DEFAULT '18',
+  `age` tinyint(4) UNSIGNED NOT NULL DEFAULT '18',
   `email` text COLLATE utf8_unicode_ci NOT NULL,
   `password` text COLLATE utf8_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '0',
@@ -173,22 +173,23 @@ INSERT INTO `users` (`id`, `login`, `age`, `email`, `password`, `active`, `hash`
 (8, 'Denys', 18, '', '', 0, '', 0, '', ''),
 (10, 'Yamamoto', 9, '', '', 0, '', 0, '', ''),
 (11, 'inpost', 2, 'inpost@list.ru', '123', 0, '', 0, '', ''),
-(12, 'Vasilij', 19, 'Vasilij@.ru', '345', 0, '', 0, '', ''),
+(12, 'Vasilij', 25, 'Vasilij@.ru', '345', 0, '', 0, '', ''),
 (13, 'Tolya', 18, 'Tolya2003@i.ua', '123456789', 0, '', 0, '', ''),
-(15, 'Dima', 22, 'Dima1999@i.ua', 'Dima1999', 0, '', 0, '', ''),
+(15, 'Dima', 34, 'Dima1999@i.ua', 'CB4wFZWK//fyU', 0, '', 0, '', ''),
 (16, 'login1', 20, 'Login@i.ua', 'login1', 0, '', 0, '', ''),
 (18, 'login2', 25, 'Login2@i.ua', 'password2', 0, '', 0, '', ''),
-(19, 'login1', 20, 'Login@i.ua', 'login1', 0, '', 0, '', ''),
-(20, 'login2', 25, 'Login2@i.ua', 'password2', 0, '', 0, '', ''),
-(21, 'login1', 20, 'Login@i.ua', 'login1', 0, '', 0, '', ''),
-(22, 'login2', 25, 'Login2@i.ua', 'password2', 0, '', 0, '', ''),
-(37, 'йцукен', 35, 'qwe@i.ua', 'CBZTe5Z/qEk9k', 0, 'CBZcRlzfIbJF6', 0, '', ''),
-(38, 'Oleh', 12, 'Oleh@i.ua', 'CB99YZft.ZCQA', 0, 'CBde.826jBqjY', 0, '', ''),
-(39, 'Oleh2', 12, 'Oleh2@i.ua', 'CB4wFZWK//fyU', 1, 'CB0xkbSMbBNUQ', 0, '', ''),
-(40, 'qwerwrt', 42, 'Jekadfjadgk@i.ua', 'CBTlOo1SR9Yw.', 1, 'CB7kb5P8tDZnM', 0, '', ''),
 (41, 'Jenya', 35, 'jenyamelnik1986@gmail.com', 'CBcGtU7HY7hPU', 1, 'CB6epMtaLxOII', 5, 'CBacOoVtp4.ZM', 'CBqpDcR7bIjQs'),
 (43, 'Rita', 31, 'Rita@i.ua', 'CB4wFZWK//fyU', 1, 'CBQHm3yu2ikWc', 0, '', ''),
-(45, 'Anna', 21, 'Anna@i.ua', 'CB4wFZWK//fyU', 1, 'CBLkijhaQAl2Y', 0, 'CBacOoVtp4.ZM', 'CBsArLTFekQzI');
+(45, 'Anna', 25, 'Anna@i.ua', 'CB4wFZWK//fyU', 1, 'CBLkijhaQAl2Y', 0, 'CBacOoVtp4.ZM', 'CBsArLTFekQzI'),
+(46, 'Nikolay', 40, 'Nikolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBcxQMfO0TWCg', 0, '', ''),
+(50, 'Makar', 25, 'Makar@i.ua', 'CBTKEi/g6HDxk', 1, 'CB0A346UhHAos', 0, '', ''),
+(51, 'Polina', 27, 'Polina@i.ua', 'CBdb5tnrHmBWA', 1, 'CBR0sB1y4qpcA', 0, '', ''),
+(52, 'Alenka', 31, 'Alenka@i.ua', 'CBaNmpw53Mh92', 1, 'CBgEcjpXVK6ag', 0, '', ''),
+(54, 'Nikkolay', 45, 'Nikkolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBp.fGK4ttVE.', 0, '', ''),
+(58, 'Vassya', 45, 'Vassya@i.ua', 'CBdb5tnrHmBWA', 1, 'CBAcldwPMYj0.', 0, '', ''),
+(62, 'Roman', 25, 'Roman@i.ua', 'CBdb5tnrHmBWA', 1, 'CB88tkMWL6Gns', 0, '', ''),
+(64, 'Oleh', 25, 'Oleh@i.ua', 'CBdb5tnrHmBWA', 1, 'CB7253PFLDhUg', 0, '', ''),
+(66, 'Vova', 23, 'Vova@i.ua', 'CBdb5tnrHmBWA', 1, 'CBptHAn6dli0c', 0, '', '');
 
 --
 -- Индексы сохранённых таблиц
@@ -204,19 +205,23 @@ ALTER TABLE `comments`
 -- Индексы таблицы `goods`
 --
 ALTER TABLE `goods`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ixTitle` (`title`),
+  ADD KEY `ixCategory` (`category`);
 
 --
 -- Индексы таблицы `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ixTitle` (`title`);
 
 --
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ixLogin` (`login`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -244,7 +249,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
