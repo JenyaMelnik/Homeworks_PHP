@@ -18,7 +18,12 @@ if(isset($_GET['id'])) {
 
 	$userInfo = mysqli_fetch_assoc($usersInfo);
 
-	if(isset($_POST['edit'], $_POST['login'], $_POST['age'], $_POST['email'], $_POST['access'], $_POST['active'])) {
+	if(isset($_POST['edit'],
+			 $_POST['login'],
+			 $_POST['age'],
+			 $_POST['email'],
+			 $_POST['access'],
+			 $_POST['active'])) {
 
 		$errors = [];
 
