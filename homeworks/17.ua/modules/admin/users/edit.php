@@ -111,6 +111,3 @@ if (isset($_GET['id'])) {
     $userInfo['active'] = $_POST['active'] ?? $userInfo['active'];
     $userInfo['access'] = $_POST['access'] ?? $userInfo['access'];
 }
-
-
-
