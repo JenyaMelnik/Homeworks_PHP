@@ -19,6 +19,7 @@ if(isset($_GET['id'])) {
 	$userInfo = mysqli_fetch_assoc($usersInfo);
 
 	if(isset($_POST['edit'],
+			 $_POST['password'],
 			 $_POST['login'],
 			 $_POST['age'],
 			 $_POST['email'],
