@@ -98,12 +98,12 @@ if(isset($_GET['id'])) {
 			query("
             	UPDATE `users` 
             	SET `login` = '".escapeString(trim($_POST['login']))."',
-             	`password` = '".escapeString(trim(myHash($_POST['password'])))."',
+             	 `password` = '".escapeString(trim(myHash($_POST['password'])))."',
             	      `age` = ".(int)trim($_POST['age']).",
-             	   `email` = '".escapeString(trim($_POST['email']))."',
-             	  `active` = ".(int)trim($_POST['active']).",
-             	  `access` = ".(int)trim($_POST['access'])."
-             	WHERE `id` = ".(int)trim($_GET['id'])."
+             	    `email` = '".escapeString(trim($_POST['email']))."',
+             	   `active` = ".(int)trim($_POST['active']).",
+             	   `access` = ".(int)trim($_POST['access'])."
+             	 WHERE `id` = ".(int)trim($_GET['id'])."
       		");
 			$_SESSION['notice'] = 'Данные пользавателя отредактированы';
 			header("Location: /admin/users&id=".$_GET['id']);
