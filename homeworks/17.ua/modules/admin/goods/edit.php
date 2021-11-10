@@ -1,6 +1,5 @@
 <?php
 /**
- * @var $dbc mysqli
  * @var $img string
  */
 
