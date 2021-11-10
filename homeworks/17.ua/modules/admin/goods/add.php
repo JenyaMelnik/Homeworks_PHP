@@ -1,9 +1,10 @@
 <?php
 /**
  * @var $dbc mysqli
+ * @var $img string
  */
 
-if (isset($_POST['add'],
+if (isset($_POST['edit'],
     $_POST['category'],
     $_POST['title'],
     $_POST['description'],
@@ -12,6 +13,7 @@ if (isset($_POST['add'],
     $_POST['availability'])) {
 
     $errors = [];
+
     if (empty($_POST['title'])) {
         $errors['title'] = 'Вы не ввели название';
     }
@@ -24,12 +26,20 @@ if (isset($_POST['add'],
     if (empty($_POST['price'])) {
         $errors['price'] = 'Вы не ввели цену';
     }
+
+    if ($_FILES['img']['error'] == 0) {
+        include "./" . Core::$CONTROLLER . "/goods/checkImg.php";
+    } else {
+        $errors['img'] = 'Выберите картинку';
+    }
+
     if (!count($errors)) {
         query("
             INSERT INTO `goods` 
             SET `category`     = '" . escapeString(trim($_POST['category'])) . "',
                 `title`        = '" . escapeString(trim($_POST['title'])) . "',
                 `description`  = '" . escapeString(trim($_POST['description'])) . "',
+                `img`          = '" . escapeString(trim($img)) . "',
                 `strength`     = " . (float)trim($_POST['strength']) . ",
                 `price`        = " . (float)trim($_POST['price']) . ",
                 `availability` = " . (int)trim($_POST['availability']) . "

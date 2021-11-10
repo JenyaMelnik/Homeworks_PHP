@@ -26,7 +26,7 @@
     <a href="/">ВЕРНУТСЯ К ПРОСМОТРУ САЙТА</a><br>
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 5) { ?>
         <p><b> СТРАНИЦА УПРАВЛЕНИЯ САЙТОМ </b></p>
-       <a href="/cab/exit"> Выход </a>
+        <a href="/cab/exit"> Выход </a>
     <?php } ?>
 </div>
 <div class="search">

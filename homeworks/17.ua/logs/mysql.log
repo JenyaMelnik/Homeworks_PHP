@@ -897,3 +897,20 @@ file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\users\edit.php
 line: 84
 date2021-11-05 16:01:46
 
+QUERY: 
+            INSERT INTO `goods` 
+            SET `category`     = 'Красные вина',
+                `title`        = 'Саперави',
+                `description`  = 'йкцуууууууууууууууууууууууууууууууууууууууууууууууууу',
+                `img`          = '/uploaded/20211110-151116img25660.jpg'
+                `strength`     = 2,
+                `price`        = 500,
+                `availability` = 1
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`strength`     = 2,
+                `price`        = 500,
+                `ava' at line 6
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\goods\add.php
+line: 45
+date2021-11-10 15:11:16
+

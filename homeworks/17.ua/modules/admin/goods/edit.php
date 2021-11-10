@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $dbc mysqli
+ * @var $img string
  */
 
 if (isset($_POST['edit'],
@@ -12,6 +13,7 @@ if (isset($_POST['edit'],
     $_POST['availability'])) {
 
     $errors = [];
+
     if (empty($_POST['title'])) {
         $errors['title'] = 'Вы не ввели название';
     }
@@ -24,6 +26,11 @@ if (isset($_POST['edit'],
     if (empty($_POST['price'])) {
         $errors['price'] = 'Вы не ввели цену';
     }
+
+    if ($_FILES['img']['error'] == 0) {
+        include "./" . Core::$CONTROLLER . "/goods/checkImg.php";
+    }
+
     if (!count($errors)) {
         query("
             UPDATE `goods` 
@@ -35,6 +42,14 @@ if (isset($_POST['edit'],
                 `availability` = " . (int)trim($_POST['availability']) . "
             WHERE `id`     = " . (int)$_GET['id'] . "
         ");
+
+        if ($_FILES['img']['error'] == 0) {
+            query("
+                        UPDATE `goods` 
+                        SET  `img` = '" . escapeString(trim($img)) . "'
+                        WHERE `id` = " . (int)$_GET['id'] . "
+                    ");
+        }
 
         $_SESSION['notice'] = 'Товар отредактирован';
         redirectTo(['module' => 'goods']);
@@ -55,6 +70,7 @@ if (!mysqli_num_rows($wines)) {
 
 $row = mysqli_fetch_assoc($wines);
 
+$row['category'] = $_POST['category'] ?? $row['category'];
 $row['title'] = $_POST['title'] ?? $row['title'];
 $row['description'] = $_POST['description'] ?? $row['description'];
 $row['strength'] = $_POST['strength'] ?? $row['strength'];

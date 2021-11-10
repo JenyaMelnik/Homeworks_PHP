@@ -10,12 +10,43 @@
 }
 
 .item {
-    border: 2px solid;
     padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.border {
+    border-right: 1px solid darkred;
+}
+
+.first-col {
+    padding-left: 5px;
+    height: 40px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.second-col {
+    width: 300px;
+    padding-left: 5px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .category {
     font-size: 16px;
+}
+
+.foto {
+    margin: 10px 0;
+    text-align: center;
+    height: 150px;
+    width: 120px;
+    border: 1px solid brown;
 }
 
 .admin-auth {
