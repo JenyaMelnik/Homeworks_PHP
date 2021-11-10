@@ -3,7 +3,7 @@
         <table class="user-info user">
             <tr class="description">
                 <td class="first-col">Логин</td>
-                <td class="second-col"><input type="text" name="login"
+                <td><input type="text" name="login"
                                               value="<?= htmlspecialchars($userInfo['login'] ?? '') ?>">
                 </td>
                 <td> <?= (htmlspecialchars($errors['login'] ?? '')) ?></td>

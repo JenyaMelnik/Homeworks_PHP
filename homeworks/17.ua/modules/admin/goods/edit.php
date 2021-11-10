@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $dbc mysqli
+ * @var $name string
  */
 
 if (isset($_POST['edit'],
@@ -24,6 +25,11 @@ if (isset($_POST['edit'],
     if (empty($_POST['price'])) {
         $errors['price'] = 'Вы не ввели цену';
     }
+
+    if ($_FILES['img']['error'] == 0) {
+        include "./" . Core::$CONTROLLER . "/goods/checkImg.php";
+    }
+
     if (!count($errors)) {
         query("
             UPDATE `goods` 
@@ -35,6 +41,14 @@ if (isset($_POST['edit'],
                 `availability` = " . (int)trim($_POST['availability']) . "
             WHERE `id`     = " . (int)$_GET['id'] . "
         ");
+
+        if ($_FILES['img']['error'] == 0) {
+            query("
+                        UPDATE `goods` 
+                        SET  `img` = '" . escapeString(trim($name)) . "'
+                        WHERE `id` = " . (int)$_GET['id'] . "
+                    ");
+        }
 
         $_SESSION['notice'] = 'Товар отредактирован';
         redirectTo(['module' => 'goods']);
