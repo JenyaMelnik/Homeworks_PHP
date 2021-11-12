@@ -8,7 +8,7 @@ if (isset($_POST['delete']) && !isset($_GET['id'])) {
 } elseif ((isset($_POST['delete'], $_GET['id']))) {
     query("
         DELETE FROM `users`
-        WHERE `id` = " . (int)trim($_GET['id']) . "
+        WHERE `id` = " . (int)$_GET['id'] . "
         LIMIT 1
     ");
 

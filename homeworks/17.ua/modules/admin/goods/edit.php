@@ -27,7 +27,7 @@ if (isset($_POST['edit'],
     }
 
     if ($_FILES['img']['error'] == 0) {
-        include "./" . Core::$CONTROLLER . "/goods/checkImg.php";
+        include "./components/checkImg.php";
     }
 
     if (!count($errors)) {

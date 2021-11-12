@@ -62,7 +62,9 @@
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'auth']) ?>">AUTHORIZE </a> /
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'registration']) ?>">REGISTER </a>
                     <?php } else { ?>
-                        <span>Привет, <?= $_SESSION['user']['login'] ?></span>
+                        <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'edit']) ?>">
+                            Привет, <?= $_SESSION['user']['login'] ?>
+                            <img src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"> </a>
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'exit']) ?>"
                            class="sprite sprite-zz-sign-in"></a>
                     <?php }
@@ -70,6 +72,7 @@
                         <a href="<?= createUrlChpu(['module' => 'admin']) ?>" class="admin">ADMIN</a>
                     <?php } ?>
                 </div>
+                <br>
             </div>
         </div>
     </div>
