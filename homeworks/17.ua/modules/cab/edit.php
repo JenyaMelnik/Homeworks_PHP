@@ -3,7 +3,6 @@
  * @var $img string
  */
 
-
 if (isset($_POST['edit'],
     $_POST['login'],
     $_POST['age'],
@@ -15,6 +14,7 @@ if (isset($_POST['edit'],
         && $_FILES['img']['error'] != 0) {
 
         $_SESSION['notice'] = 'Вы ничего не изменили';
+
     } else {
 
         $errors = [];
@@ -27,6 +27,10 @@ if (isset($_POST['edit'],
             $errors['login'] = 'Логин должен быть не менее двух символа';
         } elseif (mb_strlen($_POST['login']) > 20) {
             $errors['login'] = 'Логин должен быть не более 20 символов';
+        }
+
+        if (mb_strlen($_POST['password']) > 0 && mb_strlen($_POST['password'] < 5)) {
+            $errors['password'] = 'Пароль должен быть не менее 5 символов';
         }
 
         if (empty($_POST['age'])) {
@@ -73,15 +77,23 @@ if (isset($_POST['edit'],
             	SET `login` = '" . escapeString(trim($_POST['login'])) . "',
             	      `age` = " . (int)$_POST['age'] . ",
              	    `email` = '" . escapeString(trim($_POST['email'])) . "'
-             	 WHERE `id` = " . (int)$_SESSION['user']['id'] . "
+             	WHERE  `id` = " . (int)$_SESSION['user']['id'] . "
       		");
 
             if ($_FILES['img']['error'] == 0) {
                 query("
-                        UPDATE `users` 
-                        SET  `avatar` = '" . escapeString(trim($img)) . "'
-                        WHERE `id` = " . (int)$_SESSION['user']['id'] . "
-                    ");
+                    UPDATE `users` 
+                    SET  `avatar` = '" . escapeString(trim($img)) . "'
+                    WHERE `id` = " . (int)$_SESSION['user']['id'] . "
+                ");
+            }
+
+            if (!isset($errors['password']) ?? !empty($_POST['password'])) {
+                query("
+                    UPDATE `users`
+                    SET `password` = '" . escapeString(trim(myHash($_POST['password']))) . "'
+                    WHERE `id` = " . (int)$_SESSION['user']['id'] . "
+                ");
             }
 
             $_SESSION['notice'] = 'Ваши данные отредактированы';

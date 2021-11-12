@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['notice'])) { ?>
-    <p> <?= $_SESSION['notice'] ?> </p>
+    <p><b> <?= $_SESSION['notice'] ?> </b></p>
     <?php unset($_SESSION['notice']);
 } ?>
 
@@ -13,6 +13,12 @@ if (isset($_SESSION['notice'])) { ?>
                            value="<?= htmlspecialchars($_SESSION['user']['login'] ?? '') ?>">
                 </td>
                 <td> <?= (htmlspecialchars($errors['login'] ?? '')) ?></td>
+            </tr>
+            <tr class="description">
+                <td class="first-col">Сменить пароль</td>
+                <td><input type="password" name="password">
+                </td>
+                <td> <?= (htmlspecialchars($errors['password'] ?? '')) ?></td>
             </tr>
             <tr>
                 <td>Ваш возраст:</td>
