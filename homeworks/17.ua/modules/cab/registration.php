@@ -19,8 +19,6 @@ if (isset($_POST['login'],
         $errors['login'] = 'Логин должен быть не менее двух символа';
     } elseif (mb_strlen($_POST['login']) > 20) {
         $errors['login'] = 'Логин должен быть не более 20 символов';
-    } elseif ($_POST['login'] != trim($_POST['login'])) {
-        $errors['login'] = 'Не ставьте пробелы в начале и конце строки';
     }
 
     if (empty($_POST['password'])) {
@@ -41,7 +39,7 @@ if (isset($_POST['login'],
         $res = query("
 SELECT `id` 
 FROM `users`
-WHERE `login` = '" . escapeString($_POST['login']) . "'
+WHERE `login` = '" . escapeString(trim($_POST['login'])) . "'
 LIMIT 1
         ");
         if (mysqli_num_rows($res)) {
@@ -51,7 +49,7 @@ LIMIT 1
         $res = query("
 SELECT `id` 
 FROM `users`
-WHERE `email` = '" . escapeString($_POST['email']) . "'
+WHERE `email` = '" . escapeString(trim($_POST['email'])) . "'
 LIMIT 1
         ");
         if (mysqli_num_rows($res)) {
@@ -64,7 +62,7 @@ LIMIT 1
 `login`    = '" . escapeString(trim($_POST['login'])) . "',
 `password` = '" . escapeString(myHash($_POST['password'])) . "',
 `email`    = '" . escapeString(trim($_POST['email'])) . "',
-`age`      = " . (int)trim($_POST['age']) . ",
+`age`      = " . (int)$_POST['age'] . ",
 `hash`     = '" . escapeString(myHash($_POST['login'] . $_POST['age'])) . "'
         ");
 
@@ -75,7 +73,7 @@ LIMIT 1
             query("
                 UPDATE `users` 
                 SET  `avatar`  = '" . escapeString(trim($img)) . "'
-                WHERE `id`  = " . (int)trim($id) . "
+                WHERE `id`  = " . $id . "
             ");
         }
 

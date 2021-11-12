@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $img string
+ * @var $type string
  */
 
 if (isset($_POST['edit'],
@@ -29,7 +30,7 @@ if (isset($_POST['edit'],
             $errors['login'] = 'Логин должен быть не более 20 символов';
         }
 
-        if (mb_strlen($_POST['password']) > 0 && mb_strlen($_POST['password'] < 5)) {
+        if (!empty($_POST['password']) && mb_strlen($_POST['password']) < 5) {
             $errors['password'] = 'Пароль должен быть не менее 5 символов';
         }
 
@@ -45,6 +46,11 @@ if (isset($_POST['edit'],
 
         if ($_FILES['img']['error'] == 0) {
             include "./components/checkImg.php";
+            if (!count($errors['img'])) {
+                if (!resize_img($type, '.' . $img, '.' . $img, 100, 100)) {
+                    $errors['img'] = 'Не подходит тип файла или размер изображения';
+                }
+            }
         }
 
         if (!count($errors)) {
@@ -66,7 +72,7 @@ if (isset($_POST['edit'],
             		LIMIT 1
 				");
                 if (mysqli_num_rows($res)) {
-                    $errors['email'] = 'Пользователь с таким логином уже существует';
+                    $errors['email'] = 'Пользователь с таким email уже существует';
                 }
             }
         }
@@ -88,10 +94,10 @@ if (isset($_POST['edit'],
                 ");
             }
 
-            if (!isset($errors['password']) ?? !empty($_POST['password'])) {
+            if (!isset($errors['password']) && !empty($_POST['password'])) {
                 query("
                     UPDATE `users`
-                    SET `password` = '" . escapeString(trim(myHash($_POST['password']))) . "'
+                    SET `password` = '" . escapeString(myHash($_POST['password'])) . "'
                     WHERE `id` = " . (int)$_SESSION['user']['id'] . "
                 ");
             }

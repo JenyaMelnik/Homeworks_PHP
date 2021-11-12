@@ -98,7 +98,7 @@ if (isset($_GET['id'])) {
             if (!isset($errors['password']) && !empty($_POST['password'])) {
                 query("
                     UPDATE `users`
-                    SET `password` = '" . escapeString(trim(myHash($_POST['password']))) . "'
+                    SET `password` = '" . escapeString(myHash($_POST['password'])) . "'
                     WHERE `id` = " . (int)$_GET['id'] . "
                 ");
             }
