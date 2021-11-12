@@ -64,7 +64,7 @@ LIMIT 1
 `login`    = '" . escapeString(trim($_POST['login'])) . "',
 `password` = '" . escapeString(myHash($_POST['password'])) . "',
 `email`    = '" . escapeString(trim($_POST['email'])) . "',
-`age`      = " . (int)trim($_POST['age']) . ",
+`age`      = " . (int)$_POST['age'] . ",
 `hash`     = '" . escapeString(myHash($_POST['login'] . $_POST['age'])) . "'
         ");
 
@@ -75,7 +75,7 @@ LIMIT 1
             query("
                 UPDATE `users` 
                 SET  `avatar`  = '" . escapeString(trim($img)) . "'
-                WHERE `id`  = " . (int)trim($id) . "
+                WHERE `id`  = " . $id . "
             ");
         }
 
