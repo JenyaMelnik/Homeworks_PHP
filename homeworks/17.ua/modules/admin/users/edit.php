@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
             $errors['login'] = 'Пароль должен быть не более 20 символов';
         }
 
-        if (mb_strlen($_POST['password']) > 0 && mb_strlen($_POST['password'] < 5)) {
+        if (!empty($_POST['password']) && mb_strlen($_POST['password']) < 5 ) {
             $errors['password'] = 'Пароль должен быть не менее 5 символов';
         }
 
