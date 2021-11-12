@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 08 2021 г., 16:33
+-- Время создания: Ноя 12 2021 г., 18:56
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.4.5
 
@@ -97,21 +97,21 @@ CREATE TABLE `goods` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `strength` float NOT NULL,
   `price` smallint(6) NOT NULL,
-  `availability` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 - есть в наличии\r\n0 - нет в наличии'
+  `availability` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 - есть в наличии\r\n0 - нет в наличии',
+  `img` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '/uploaded/no_foto.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `goods`
 --
 
-INSERT INTO `goods` (`id`, `category`, `title`, `description`, `strength`, `price`, `availability`) VALUES
-(1, 'Белые вина', 'Sauvignon Blanc Marlborough Sun', 'Яркость Совиньон Блана проявляется в выразительном аромате маракуйи, крыжовника, листьев черной смородины в обрамлении тонких цитрусовых тонов. Во вкусе хорошо сбалансированное вино, обладает приятной свежестью и ярким характером. Послевкусие затяжное, освежающее.', 13, 345, 1),
-(2, 'Белые вина', 'Chardonnay', 'Ароматное, утонченное Шардоне с нюансами манго, персиков, цитрусов и цветения липы. Во вкусе, свежее, фруктовое, питкое. Послевкусие мягкое, фруктовое. Отлично сочетается с различной рыбой, моллюсками, пастой со сливочным соусом и белым мясом, а также хорошо в качестве аперитива.', 13, 520, 1),
-(3, 'Красные вина', 'Pinot Noir', 'Применяя свой многолетний опыт в Бургундии Doudet Naudin создали этот Пино Нуар с лоз, высаженных в Долине Од региона Лангедок-Руссильон вблизи Пиренеев, где прохладнее климат и мягче температуры. Вино с выразительным ароматом темных и красных ягод, гармонично переплетенных с цветочными тонами. Вкус обладает прекрасным балансом и элегантностью присущему Пино Нуару. Вино дополнит множество блюд от холодных закусок до белого и красного мяса.', 12.5, 290, 1),
-(4, 'Красные вина', 'Cabernet Sauvignon Reserva', 'Кольчагуа - одна из чилийских винных долин, с большим международным авторитетом. В этой же долине, между прибрежным хребтом и Тихим океаном разбиты виноградники хозяйства. Линейка «Reserva» - прекрасные повседневные вина, которые никогда не подведут. Перед вами 100% Кабарне Совиньон, выдержанный 6 месяцев в дубовых бочках. Вино предлагает четко очерченные оттенки черной смородины, ванили и фиалки. Вино средней насыщенности, с сочными танинами и прекрасным фруктовым акцентом на послевкусие. Хорошее дополнение к мясным блюдам.', 14, 430, 1),
-(5, 'Крепленые вина', 'Fonseca Tawny', 'Аромат раскрывается оттенками абрикос, спелых слив, пряностей и сливочного масла. Во вкусе ощущаются нюансы джема и прекрасный баланс. Послевкусие затяжное, уравновешенное хорошо интегрированной кислотностью.', 20, 385, 1),
-(6, 'Крепленые вина', 'Taylor\'s Fine Ruby', 'Яркий фруктовый аромат наполнен оттенками черной смородины, вишни и спелой сливы. Вкус переполнен фруктовым характером. Послевкусие долгое, оставляющее приятную сладость.', 20, 350, 0),
-(8, 'Белые вина', 'Каберне', 'фтаиофвтжипофтвпжиофтвпи', 15, 100, 1);
+INSERT INTO `goods` (`id`, `category`, `title`, `description`, `strength`, `price`, `availability`, `img`) VALUES
+(1, 'Белые вина', 'Sauvignon Blanc Marlborough Sun', 'Яркость Совиньон Блана проявляется в выразительном аромате маракуйи, крыжовника, листьев черной смородины в обрамлении тонких цитрусовых тонов. Во вкусе хорошо сбалансированное вино, обладает приятной свежестью и ярким характером. Послевкусие затяжное, освежающее.', 13, 345, 1, ''),
+(2, 'Белые вина', 'Chardonnay', 'Ароматное, утонченное Шардоне с нюансами манго, персиков, цитрусов и цветения липы. Во вкусе, свежее, фруктовое, питкое. Послевкусие мягкое, фруктовое. Отлично сочетается с различной рыбой, моллюсками, пастой со сливочным соусом и белым мясом, а также хорошо в качестве аперитива.', 13, 520, 1, '/uploaded/20211110-152345img67305.jpg'),
+(3, 'Красные вина', 'Pinot Noir', 'Применяя свой многолетний опыт в Бургундии Doudet Naudin создали этот Пино Нуар с лоз, высаженных в Долине Од региона Лангедок-Руссильон вблизи Пиренеев, где прохладнее климат и мягче температуры. Вино с выразительным ароматом темных и красных ягод, гармонично переплетенных с цветочными тонами. Вкус обладает прекрасным балансом и элегантностью присущему Пино Нуару. Вино дополнит множество блюд от холодных закусок до белого и красного мяса.', 12.5, 290, 1, '/uploaded/20211110-152317img82471.jpg'),
+(4, 'Белые вина', 'Cabernet Sauvignon Reserva', 'Кольчагуа - одна из чилийских винных долин, с большим международным авторитетом. В этой же долине, между прибрежным хребтом и Тихим океаном разбиты виноградники хозяйства. Линейка «Reserva» - прекрасные повседневные вина, которые никогда не подведут. Перед вами 100% Кабарне Совиньон, выдержанный 6 месяцев в дубовых бочках. Вино предлагает четко очерченные оттенки черной смородины, ванили и фиалки. Вино средней насыщенности, с сочными танинами и прекрасным фруктовым акцентом на послевкусие. Хорошее дополнение к мясным блюдам.', 25, 430, 1, '/uploaded/20211110-140110img96564.jpg'),
+(5, 'Белые вина', 'Fonseca Tawny', 'Аромат раскрывается оттенками абрикос, спелых слив, пряностей и сливочного масла. Во вкусе ощущаются нюансы джема и прекрасный баланс. Послевкусие затяжное, уравновешенное хорошо интегрированной кислотностью.', 15, 385, 1, '/uploaded/20211110-135028img44986.jpg'),
+(6, 'Крепленые вина', 'Taylor\'s Fine Ruby', 'Яркий фруктовый аромат наполнен оттенками черной смородины, вишни и спелой сливы. Вкус переполнен фруктовым характером. Послевкусие долгое, оставляющее приятную сладость.', 20, 350, 1, '/uploaded/20211111-174117img57393.jpg');
 
 -- --------------------------------------------------------
 
@@ -150,6 +150,7 @@ INSERT INTO `news` (`id`, `date`, `title`, `category`, `text`, `description`, `m
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `login` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'login',
+  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '/uploaded/no_foto.jpg',
   `age` tinyint(4) UNSIGNED NOT NULL DEFAULT '18',
   `email` text COLLATE utf8_unicode_ci NOT NULL,
   `password` text COLLATE utf8_unicode_ci NOT NULL,
@@ -164,32 +165,32 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `age`, `email`, `password`, `active`, `hash`, `access`, `ip`, `userAgent`) VALUES
-(2, 'Sasha', 34, '', '', 0, '', 0, '', ''),
-(4, 'Marharita', 31, '', '', 0, '', 0, '', ''),
-(5, 'Olya', 31, '', '', 0, '', 0, '', ''),
-(6, 'Sergey', 36, '', '', 0, '', 0, '', ''),
-(7, 'Sergey2', 31, '', '', 0, '', 0, '', ''),
-(8, 'Denys', 18, '', '', 0, '', 0, '', ''),
-(10, 'Yamamoto', 9, '', '', 0, '', 0, '', ''),
-(11, 'inpost', 2, 'inpost@list.ru', '123', 0, '', 0, '', ''),
-(12, 'Vasilij', 25, 'Vasilij@.ru', '345', 0, '', 0, '', ''),
-(13, 'Tolya', 18, 'Tolya2003@i.ua', '123456789', 0, '', 0, '', ''),
-(15, 'Dima', 34, 'Dima1999@i.ua', 'CB4wFZWK//fyU', 0, '', 0, '', ''),
-(16, 'login1', 20, 'Login@i.ua', 'login1', 0, '', 0, '', ''),
-(18, 'login2', 25, 'Login2@i.ua', 'password2', 0, '', 0, '', ''),
-(41, 'Jenya', 35, 'jenyamelnik1986@gmail.com', 'CBcGtU7HY7hPU', 1, 'CB6epMtaLxOII', 5, 'CBacOoVtp4.ZM', 'CBqpDcR7bIjQs'),
-(43, 'Rita', 31, 'Rita@i.ua', 'CB4wFZWK//fyU', 1, 'CBQHm3yu2ikWc', 0, '', ''),
-(45, 'Anna', 25, 'Anna@i.ua', 'CB4wFZWK//fyU', 1, 'CBLkijhaQAl2Y', 0, 'CBacOoVtp4.ZM', 'CBsArLTFekQzI'),
-(46, 'Nikolay', 40, 'Nikolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBcxQMfO0TWCg', 0, '', ''),
-(50, 'Makar', 25, 'Makar@i.ua', 'CBTKEi/g6HDxk', 1, 'CB0A346UhHAos', 0, '', ''),
-(51, 'Polina', 27, 'Polina@i.ua', 'CBdb5tnrHmBWA', 1, 'CBR0sB1y4qpcA', 0, '', ''),
-(52, 'Alenka', 31, 'Alenka@i.ua', 'CBaNmpw53Mh92', 1, 'CBgEcjpXVK6ag', 0, '', ''),
-(54, 'Nikkolay', 45, 'Nikkolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBp.fGK4ttVE.', 0, '', ''),
-(58, 'Vassya', 45, 'Vassya@i.ua', 'CBdb5tnrHmBWA', 1, 'CBAcldwPMYj0.', 0, '', ''),
-(62, 'Roman', 25, 'Roman@i.ua', 'CBdb5tnrHmBWA', 1, 'CB88tkMWL6Gns', 0, '', ''),
-(64, 'Oleh', 25, 'Oleh@i.ua', 'CBdb5tnrHmBWA', 1, 'CB7253PFLDhUg', 0, '', ''),
-(66, 'Vova', 23, 'Vova@i.ua', 'CBdb5tnrHmBWA', 1, 'CBptHAn6dli0c', 0, '', '');
+INSERT INTO `users` (`id`, `login`, `avatar`, `age`, `email`, `password`, `active`, `hash`, `access`, `ip`, `userAgent`) VALUES
+(2, 'Sasha', '', 34, '', '', 0, '', 0, '', ''),
+(4, 'Marharita', '', 31, '', '', 0, '', 0, '', ''),
+(5, 'Olya', '', 31, '', '', 0, '', 0, '', ''),
+(6, 'Sergey', '', 36, '', '', 0, '', 0, '', ''),
+(7, 'Sergey2', '', 31, '', '', 0, '', 0, '', ''),
+(8, 'Denys', '', 18, '', '', 0, '', 0, '', ''),
+(10, 'Yamamoto', '', 9, '', '', 0, '', 0, '', ''),
+(11, 'inpost', '', 2, 'inpost@list.ru', 'CBouTQUYHXuWI', 0, '', 0, '', ''),
+(12, 'Vasilij', '', 25, 'Vasilij@.ru', '345', 0, '', 0, '', ''),
+(13, 'Tolya', '', 18, 'Tolya2003@i.ua', '123456789', 0, '', 0, '', ''),
+(15, 'Dima', '', 34, 'Dima1999@i.ua', 'CBouTQUYHXuWI', 1, '', 0, '', ''),
+(16, 'login1', '', 20, 'Login@i.ua', 'CBouTQUYHXuWI', 0, '', 0, '', ''),
+(18, 'login2', '', 25, 'Login2@i.ua', 'password2', 0, '', 0, '', ''),
+(41, 'Jenya', '/uploaded/20211112-173958img18251.jpg', 33, 'jenyamelnik1986@gmail.com', 'CBouTQUYHXuWI', 1, 'CB6epMtaLxOII', 5, 'CBacOoVtp4.ZM', 'CBqpDcR7bIjQs'),
+(43, 'Rita', '', 31, 'Rita@i.ua', 'CB4wFZWK//fyU', 1, 'CBQHm3yu2ikWc', 0, '', ''),
+(45, 'Anna', '', 25, 'Anna@i.ua', 'CB4wFZWK//fyU', 1, 'CBLkijhaQAl2Y', 5, 'CBacOoVtp4.ZM', 'CBsArLTFekQzI'),
+(46, 'Nikolay', '', 40, 'Nikolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBcxQMfO0TWCg', 0, '', ''),
+(50, 'Makar', '', 25, 'Makar@i.ua', 'CBTKEi/g6HDxk', 1, 'CB0A346UhHAos', 0, '', ''),
+(51, 'Polina', '', 27, 'Polina@i.ua', 'CBdb5tnrHmBWA', 1, 'CBR0sB1y4qpcA', 0, '', ''),
+(52, 'Alenka', '', 31, 'Alenka@i.ua', 'CBaNmpw53Mh92', 1, 'CBgEcjpXVK6ag', 0, '', ''),
+(54, 'Nikkolay', '', 45, 'Nikkolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBp.fGK4ttVE.', 0, '', ''),
+(58, 'Vassya', '', 45, 'Vassya@i.ua', 'CBdb5tnrHmBWA', 1, 'CBAcldwPMYj0.', 0, '', ''),
+(62, 'Roman', '', 25, 'Roman@i.ua', 'CBdb5tnrHmBWA', 1, 'CB88tkMWL6Gns', 0, '', ''),
+(64, 'Oleh', '', 25, 'Oleh@i.ua', 'CBdb5tnrHmBWA', 1, 'CB7253PFLDhUg', 0, '', ''),
+(74, 'qqqqq', '/uploaded/20211111-135909img96099.jpg', 35, 'aaaaaaaaaaaaa@i.ua', 'CBTmAKGeGP9p6', 1, 'CBrUrTCoFgjfE', 0, '', '');
 
 --
 -- Индексы сохранённых таблиц
@@ -237,7 +238,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -249,7 +250,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
