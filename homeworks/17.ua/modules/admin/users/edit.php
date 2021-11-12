@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     $usersInfo = query("
         SELECT *
         FROM `users`
-        WHERE `id` = " . (int)trim($_GET['id']) . "
+        WHERE `id` = " . (int)$_GET['id'] . "
         LIMIT 1
     ");
     if (!mysqli_num_rows($usersInfo)) {

@@ -27,13 +27,11 @@ if (isset($_POST['edit'],
             $errors['login'] = 'Логин должен быть не менее двух символа';
         } elseif (mb_strlen($_POST['login']) > 20) {
             $errors['login'] = 'Логин должен быть не более 20 символов';
-        } elseif ($_POST['login'] != trim($_POST['login'])) {
-            $errors['login'] = 'Не ставьте пробелы в начале и конце строки';
         }
 
         if (empty($_POST['age'])) {
             $errors['age'] = 'Вы не ввели возраст';
-        } elseif (!preg_match('#^[\d]{1,3}$#ui', $_POST['age'])) {
+        } elseif (!is_numeric($_POST['age'])) {
             $errors['age'] = 'используйте только цифры';
         }
 
@@ -73,16 +71,16 @@ if (isset($_POST['edit'],
             query("
             	UPDATE `users` 
             	SET `login` = '" . escapeString(trim($_POST['login'])) . "',
-            	      `age` = " . (int)trim($_POST['age']) . ",
+            	      `age` = " . (int)$_POST['age'] . ",
              	    `email` = '" . escapeString(trim($_POST['email'])) . "'
-             	 WHERE `id` = " . (int)trim($_SESSION['user']['id']) . "
+             	 WHERE `id` = " . (int)$_SESSION['user']['id'] . "
       		");
 
             if ($_FILES['img']['error'] == 0) {
                 query("
                         UPDATE `users` 
                         SET  `avatar` = '" . escapeString(trim($img)) . "'
-                        WHERE `id` = " . (int)trim($_SESSION['user']['id']) . "
+                        WHERE `id` = " . (int)$_SESSION['user']['id'] . "
                     ");
             }
 
