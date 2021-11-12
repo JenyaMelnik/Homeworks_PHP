@@ -2,7 +2,7 @@
 $array = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
 $array2 = ['gif', 'jpeg', 'png', 'jpg'];
 
-if ($_FILES['img']['size'] < 2000 || $_FILES['img']['size'] > 50000000) {
+if ($_FILES['img']['size'] < 1000 || $_FILES['img']['size'] > 50000000) {
     $errors['img'] = 'Размер изображения не подходит';
 } else {
     preg_match('#\.([a-z]+)$#ui', $_FILES['img']['name'], $matches);
@@ -24,7 +24,6 @@ if ($_FILES['img']['size'] < 2000 || $_FILES['img']['size'] > 50000000) {
         if (!resize_img($type, '.' . $img, '.' . $img, 100, 100)) {
             $errors['img'] = 'Не подходит тип файла или размер изображения';
         }
-
     } else {
         $errors['img'] = 'Даный файл не является картинкой. Допускаются типы файлов: jpg, jpeg, png, gif';
     }

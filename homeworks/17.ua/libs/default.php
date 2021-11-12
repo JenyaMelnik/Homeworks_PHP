@@ -202,28 +202,33 @@ function resize_img($type, $name, $resizedName, $maxWidth, $maxHeight): bool
         $imgWidth = imagesx($image);
         $imgHeight = imagesy($image);
 
-        if (round($imgWidth / $maxWidth, 2) > round($imgHeight / $maxHeight, 2)) {
-            $ratio = round($imgWidth / $maxWidth, 2);
+        if ($imgWidth > $maxWidth || $imgHeight > $maxHeight) {
+
+            if (round($imgWidth / $maxWidth, 2) > round($imgHeight / $maxHeight, 2)) {
+                $ratio = round($imgWidth / $maxWidth, 2);
+            } else {
+                $ratio = round($imgHeight / $maxHeight, 2);
+            }
+
+            $newWidth = $imgWidth / $ratio;
+            $newHeight = $imgHeight / $ratio;
+
+            if ($newWidth > 10 && $newHeight > 10) {
+
+                $newImg = imagecreatetruecolor($newWidth, $newHeight);
+
+                imagecopyresampled($newImg, $image, 0, 0, 0, 0, $newWidth, $newHeight, $imgWidth, $imgHeight);
+                imagejpeg($newImg, $resizedName);
+
+                imagedestroy($image);
+                imagedestroy($newImg);
+
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            $ratio = round($imgHeight / $maxHeight, 2);
-        }
-
-        $newWidth = $imgWidth / $ratio;
-        $newHeight = $imgHeight / $ratio;
-
-        if ($newWidth > 10 && $newHeight > 10) {
-
-            $newImg = imagecreatetruecolor($newWidth, $newHeight);
-
-            imagecopyresampled($newImg, $image, 0, 0, 0, 0, $newWidth, $newHeight, $imgWidth, $imgHeight);
-            imagejpeg($newImg, $resizedName);
-
-            imagedestroy($image);
-            imagedestroy($newImg);
-
             return true;
-        } else {
-            return false;
         }
     } else {
         return false;
