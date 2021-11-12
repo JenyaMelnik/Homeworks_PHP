@@ -914,3 +914,48 @@ file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\goods\add.php
 line: 45
 date2021-11-10 15:11:16
 
+QUERY: 
+                        UPDATE `users` 
+                        SET  `img` = '/uploaded/20211111-124934img21106.jpg'
+                        WHERE `id` = 41
+                    
+Unknown column 'img' in 'field list'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\cab\edit.php
+line: 76
+date2021-11-11 12:49:34
+
+QUERY: 
+                INSERT INTO `users` 
+                SET  `avatar` = '/uploaded/20211111-133755img50966.jpg'
+                WHERE `login` = wwwwwwwwwwwwww
+                AND `password` = 'CBouTQUYHXuWI'
+            
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `login` = wwwwwwwwwwwwww
+                AND `password` = 'CBouTQUYHXuWI'' at line 3
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\cab\registration.php
+line: 76
+date2021-11-11 13:37:55
+
+QUERY: 
+                INSERT INTO `users` 
+                SET  `avatar` = '/uploaded/20211111-133931img22813.jpg'
+                WHERE `login` = eeeeeeeeeeeeeee
+                AND `password` = 'CBrJq376wjglQ'
+            
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `login` = eeeeeeeeeeeeeee
+                AND `password` = 'CBrJq376wjglQ' at line 3
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\cab\registration.php
+line: 76
+date2021-11-11 13:39:31
+
+QUERY: 
+                UPDATE `users` 
+                SET  `avatar` = '/uploaded/20211111-134331img69336.jpg'
+                WHERE `login` = eeeeeeeeeeeee
+                AND `password` = 'CBrJq376wjglQ'
+            
+Unknown column 'eeeeeeeeeeeee' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\cab\registration.php
+line: 76
+date2021-11-11 13:43:31
+

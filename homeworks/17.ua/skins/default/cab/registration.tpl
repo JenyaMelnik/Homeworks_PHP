@@ -5,7 +5,7 @@
 
 if (!isset($_SESSION['regOk'])) { ?>
     <div>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td><input type="text" name="login" placeholder="* введите логин"
@@ -13,8 +13,8 @@ if (!isset($_SESSION['regOk'])) { ?>
                     <td> <?= htmlspecialchars($errors['login'] ?? '') ?></td>
                 </tr>
                 <tr>
-                    <td><input type="password" name="pass" placeholder="* введите пароль"></td>
-                    <td> <?= htmlspecialchars($errors['pass'] ?? '') ?></td>
+                    <td><input type="password" name="password" placeholder="* введите пароль"></td>
+                    <td> <?= htmlspecialchars($errors['password'] ?? '') ?></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="email" placeholder="* введите email"
@@ -26,13 +26,19 @@ if (!isset($_SESSION['regOk'])) { ?>
                                value="<?= htmlspecialchars($_POST['age'] ?? '') ?>"></td>
                     <td> <?= htmlspecialchars($errors['age'] ?? '') ?></td>
                 </tr>
+                <tr>
+                    <td>Добавить фото:</td>
+                    <td class="second-col"><input type="file" name="img"
+                                                  accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp"></td>
+                    <td> <?= $errors['img'] ?? '' ?> </td>
+                </tr>
             </table>
             <p>* - обязательно для заполнения</p>
             <input type="submit" name="submit" value="Зарегистрироваться">
         </form>
     </div>
 <?php } else {
-    unset($_SESSION['regOk'])?>
+    unset($_SESSION['regOk']) ?>
     <p>Поздравляем, Вы успешно зарегистривались. Для активации аккаунта пройдите по ссылке, которую мы отправили вам на
         почту</p>
 <?php } ?>

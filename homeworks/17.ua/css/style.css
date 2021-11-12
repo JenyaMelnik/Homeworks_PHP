@@ -242,9 +242,17 @@
     clear: both;
 }
 
-/* Блок: SPRITES + CLEARFIX ----------Конец------------
+/* Блок: SPRITES + CLEARFIX ----------Конец------------ */
 
-   Блок: GOODS ---------Начало---------  */
+.foto {
+    margin: 10px 0;
+    text-align: center;
+    height: 150px;
+    width: 120px;
+    border: 1px solid brown;
+}
+
+  /* Блок: GOODS ---------Начало---------  */
 
 .item {
     border: 2px solid;
@@ -254,12 +262,6 @@
 .category {
     font-size: 16px;
 }
-
-/* Блок: GOODS ---------Конец--------- */
-
-/* Блок: CABINET -----------Начало----------- */
-
-/* Блок: CABINET -----------Конец----------- */
 
 .enter {
     padding-bottom: 20px;

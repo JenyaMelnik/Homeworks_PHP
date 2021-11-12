@@ -27,7 +27,7 @@ if (isset($_POST['edit'],
     }
 
     if ($_FILES['img']['error'] == 0) {
-        include "./" . Core::$CONTROLLER . "/goods/checkImg.php";
+        include "./components/checkImg.php";
     }
 
     if (!count($errors)) {
@@ -36,9 +36,9 @@ if (isset($_POST['edit'],
             SET `category`     = '" . escapeString(trim($_POST['category'])) . "',
                 `title`        = '" . escapeString(trim($_POST['title'])) . "',
                 `description`  = '" . escapeString(trim($_POST['description'])) . "',
-                `strength`     = " . (float)trim($_POST['strength']) . ",
-                `price`        = " . (float)trim($_POST['price']) . ",
-                `availability` = " . (int)trim($_POST['availability']) . "
+                `strength`     = " . (float)$_POST['strength'] . ",
+                `price`        = " . (float)$_POST['price'] . ",
+                `availability` = " . (int)$_POST['availability'] . "
             WHERE `id`     = " . (int)$_GET['id'] . "
         ");
 

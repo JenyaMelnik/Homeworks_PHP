@@ -13,12 +13,8 @@
 <div>
     <?php if (isset($notice)) { ?>
         <h2><?= $notice ?></h2>
-    <?php } ?>
-    <div>
-        <a href="users/add"><b>ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ</b></a>
-        <br><br>
-    </div>
-    <?php include "./skins/" . Core::$SKIN . "/users/search.tpl"; ?>
+    <?php }
+    include "./skins/" . Core::$SKIN . "/users/search.tpl"; ?>
     <br>
     <div class="clearfix user-list">
         <table class="user">

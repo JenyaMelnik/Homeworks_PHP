@@ -36,19 +36,15 @@ if (isset($_GET['id'])) {
             $errors['login'] = 'Пароль должен быть не менее двух символа';
         } elseif (mb_strlen($_POST['login']) > 20) {
             $errors['login'] = 'Пароль должен быть не более 20 символов';
-        } elseif ($_POST['login'] != trim($_POST['login'])) {
-            $errors['login'] = 'Не ставьте пробелы в начале и конце строки';
         }
 
-        if (empty($_POST['password'])) {
-            $errors['password'] = 'Вы не ввели пароль';
-        } elseif (mb_strlen($_POST['password']) < 5) {
-            $errors['password'] = 'Вы должен быть не менее 5 символов';
+        if (mb_strlen($_POST['password']) > 0 && mb_strlen($_POST['password'] < 5)) {
+            $errors['password'] = 'Пароль должен быть не менее 5 символов';
         }
 
         if (empty($_POST['age'])) {
             $errors['age'] = 'Вы не ввели возраст';
-        } elseif (!preg_match('#^[\d]{1,3}$#ui', $_POST['age'])) {
+        } elseif (!is_numeric($_POST['age'])) {
             $errors['age'] = 'используйте только цифры';
         }
 
@@ -83,7 +79,7 @@ if (isset($_GET['id'])) {
             		LIMIT 1
 				");
                 if (mysqli_num_rows($res)) {
-                    $errors['email'] = 'Пользователь с таким логином уже существует';
+                    $errors['email'] = 'Пользователь с таким email уже существует';
                 }
             }
         }
@@ -92,13 +88,21 @@ if (isset($_GET['id'])) {
             query("
             	UPDATE `users` 
             	SET `login` = '" . escapeString(trim($_POST['login'])) . "',
-             	 `password` = '" . escapeString(trim(myHash($_POST['password']))) . "',
-            	      `age` = " . (int)trim($_POST['age']) . ",
+            	      `age` = " . (int)$_POST['age'] . ",
              	    `email` = '" . escapeString(trim($_POST['email'])) . "',
-             	   `active` = " . (int)trim($_POST['active']) . ",
-             	   `access` = " . (int)trim($_POST['access']) . "
-             	 WHERE `id` = " . (int)trim($_GET['id']) . "
+             	   `active` = " . (int)$_POST['active'] . ",
+             	   `access` = " . (int)$_POST['access'] . "
+             	 WHERE `id` = " . (int)$_GET['id'] . "
       		");
+
+            if (!isset($errors['password']) ?? !empty($_POST['password'])) {
+                query("
+                    UPDATE `users`
+                    SET `password` = '" . escapeString(trim(myHash($_POST['password']))) . "'
+                    WHERE `id` = " . (int)$_GET['id'] . "
+                ");
+            }
+
             $_SESSION['notice'] = 'Данные пользавателя отредактированы';
             header("Location: /admin/users&id=" . $_GET['id']);
             exit();

@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $img string
+ * @var $dbc mysqli
  */
 
 if (isset($_POST['edit'],
@@ -27,9 +28,7 @@ if (isset($_POST['edit'],
     }
 
     if ($_FILES['img']['error'] == 0) {
-        include "./" . Core::$CONTROLLER . "/goods/checkImg.php";
-    } else {
-        $errors['img'] = 'Выберите картинку';
+        include "./components/checkImg.php";
     }
 
     if (!count($errors)) {
@@ -38,11 +37,20 @@ if (isset($_POST['edit'],
             SET `category`     = '" . escapeString(trim($_POST['category'])) . "',
                 `title`        = '" . escapeString(trim($_POST['title'])) . "',
                 `description`  = '" . escapeString(trim($_POST['description'])) . "',
-                `img`          = '" . escapeString(trim($img)) . "',
-                `strength`     = " . (float)trim($_POST['strength']) . ",
-                `price`        = " . (float)trim($_POST['price']) . ",
-                `availability` = " . (int)trim($_POST['availability']) . "
+                `strength`     = " . (float)$_POST['strength'] . ",
+                `price`        = " . (float)$_POST['price'] . ",
+                `availability` = " . (int)$_POST['availability'] . "
         ");
+
+        $id = mysqli_insert_id($dbc);
+
+        if ($_FILES['img']['error'] == 0) {
+            query("
+                UPDATE `goods` SET
+                `img`  = '" . escapeString(trim($img)) . "'
+                WHERE `id` = " . $id . "
+            ");
+        }
 
         $_SESSION['notice'] = 'Товар добавлен';
         redirectTo(['module' => 'goods']);

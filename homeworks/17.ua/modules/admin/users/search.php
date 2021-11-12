@@ -12,8 +12,6 @@ if (isset($_POST['searchLogin'], $_POST['search'])) {
         $search = query("
             SELECT * FROM `users`
             WHERE `login` LIKE '%" . escapeString(trim($_POST['searchLogin'])) . "%'
-            or    `login` LIKE '" . escapeString(trim($_POST['searchLogin'])) . "%'
-            or    `login` LIKE '%" . escapeString(trim($_POST['searchLogin'])) . "'
             ORDER BY `login` ASC 
         ");
 

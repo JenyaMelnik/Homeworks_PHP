@@ -1,11 +1,11 @@
 <?php
 /**
  * @var $dbc mysqli
+ * @var $img string
  */
-// обработка формы
 
 if (isset($_POST['login'],
-    $_POST['pass'],
+    $_POST['password'],
     $_POST['email'],
     $_POST['age'])) {
 
@@ -13,18 +13,28 @@ if (isset($_POST['login'],
 
     if (empty($_POST['login'])) {
         $errors['login'] = 'Вы не ввели логин';
+    } elseif (!preg_match('#^[\wё\s-]+$#u', $_POST['login'])) {
+        $errors['login'] = 'Недопустимые символы!';
     } elseif (mb_strlen($_POST['login']) < 2) {
-        $errors['login'] = 'Слишком короткий логин';
+        $errors['login'] = 'Логин должен быть не менее двух символа';
     } elseif (mb_strlen($_POST['login']) > 20) {
-        $errors['login'] = 'Слишком длинный логин';
+        $errors['login'] = 'Логин должен быть не более 20 символов';
+    } elseif ($_POST['login'] != trim($_POST['login'])) {
+        $errors['login'] = 'Не ставьте пробелы в начале и конце строки';
     }
 
-    if (mb_strlen($_POST['pass']) < 5) {
-        $errors['pass'] = 'длинна пароля должна быть более 4 символов';
+    if (empty($_POST['password'])) {
+        $errors['password'] = 'Вы не ввели пароль';
+    } elseif (mb_strlen($_POST['password']) < 5) {
+        $errors['password'] = 'Вы должен быть не менее 5 символов';
     }
 
     if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Вы не верно ввели email';
+    }
+
+    if ($_FILES['img']['error'] == 0) {
+        include "./components/checkImg.php";
     }
 
     if (!count($errors)) {
@@ -52,7 +62,7 @@ LIMIT 1
         query("
         INSERT INTO `users` SET 
 `login`    = '" . escapeString(trim($_POST['login'])) . "',
-`password` = '" . escapeString(myHash($_POST['pass'])) . "',
+`password` = '" . escapeString(myHash($_POST['password'])) . "',
 `email`    = '" . escapeString(trim($_POST['email'])) . "',
 `age`      = " . (int)trim($_POST['age']) . ",
 `hash`     = '" . escapeString(myHash($_POST['login'] . $_POST['age'])) . "'
@@ -60,6 +70,14 @@ LIMIT 1
 
         $id = mysqli_insert_id($dbc);
         $_SESSION['regOk'] = 'ok';
+
+        if ($_FILES['img']['error'] == 0) {
+            query("
+                UPDATE `users` 
+                SET  `avatar`  = '" . escapeString(trim($img)) . "'
+                WHERE `id`  = " . (int)trim($id) . "
+            ");
+        }
 
         Mail::$subject = 'Регистрация на сайте';
         Mail::$to = $_POST['email'];
