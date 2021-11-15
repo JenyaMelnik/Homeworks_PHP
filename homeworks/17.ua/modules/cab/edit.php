@@ -111,3 +111,4 @@ if (isset($_POST['edit'],
 $_SESSION['user']['login'] = $_POST['login'] ?? $_SESSION['user']['login'];
 $_SESSION['user']['age'] = $_POST['age'] ?? $_SESSION['user']['age'];
 $_SESSION['user']['email'] = $_POST['email'] ?? $_SESSION['user']['email'];
+
