@@ -18,12 +18,12 @@
             if (mysqli_num_rows($wines)) {
                 while ($row = mysqli_fetch_assoc($wines)) { ?>
                     <div>
-                        <a href="<?= createUrlChpu(['module' => 'goods']) ?>&action=delete&id=<?= (int)$row['id'] ?>">УДАЛИТЬ</a>
-                        <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'edit']) ?>&id=<?= (int)$row['id'] ?>">РЕДАКТИРОВАТЬ</a>
+                        <a href="<?= createUrlChpu(['module' => 'goods']) ?>?action=delete&id=<?= (int)$row['id'] ?>">УДАЛИТЬ</a>
+                        <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'edit']) ?>?id=<?= (int)$row['id'] ?>">РЕДАКТИРОВАТЬ</a>
                         <h1 class="category"><?= htmlspecialchars($row['category']) ?></h1>
                         <h2>
-                            <input type="checkbox" name="ids[]" value="<?= (int)$row['id'] ?>">
-                            <strong><?= htmlspecialchars($row['title']) ?></strong>
+                            <label><input type="checkbox" name="ids[]" value="<?= (int)$row['id'] ?>">
+                            <strong><?= htmlspecialchars($row['title']) ?></strong></label>
                         </h2>
                         <div class="foto">
                             <img src="<?= htmlspecialchars($row['img']) ?>" height="150">

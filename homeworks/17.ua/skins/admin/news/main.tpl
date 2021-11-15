@@ -20,9 +20,9 @@ if (isset($_SESSION['user'])) {
                     while ($row = mysqli_fetch_assoc($news)) { ?>
                         <div>
                             <div>
-                                <input type="checkbox" name="ids[]" value="<?= $row['id'] ?>">
+                                <label><input type="checkbox" name="ids[]" value="<?= $row['id'] ?>"></label>
                                 <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?id=<?= $row['id'] ?>">РЕДАКТИРОВАТЬ</a>
-                                <a href="<?= createUrlChpu(['module' => 'news']) ?>&action=delete&id=<?= $row['id'] ?>">УДАЛИТЬ</a>
+                                <a href="<?= createUrlChpu(['module' => 'news']) ?>?action=delete&id=<?= $row['id'] ?>">УДАЛИТЬ</a>
                             </div>
                             <div><?= $row['date']; ?></div>
                             <div class="text"><?= $row['title']; ?></div>

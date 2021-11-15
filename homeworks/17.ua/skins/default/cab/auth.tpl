@@ -11,7 +11,7 @@ if (!isset($status) || $status != 'ok') {
                     <td><input type="password" name="pass" placeholder="введите пароль"></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" name="autoauth"> Запомнить меня</td>
+                    <td><label><input type="checkbox" name="autoauth"> Запомнить меня</label></td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="submit" value="Войти"></td>

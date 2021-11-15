@@ -24,7 +24,7 @@ echo $notice ?? '';
                     <span><b>Нет в наличии</b></span>
                 <?php } ?>
                 <br>
-                <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'currentItem']) ?>&id=<?= (int)$row['id'] ?>">Подробнее...</a>
+                <a href="<?= createUrlChpu(['module' => 'goods', 'page' => 'currentItem']) ?>?id=<?= (int)$row['id'] ?>">Подробнее...</a>
             </div>
             <hr>
         <?php }

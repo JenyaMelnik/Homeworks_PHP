@@ -4,7 +4,7 @@
             <tr class="description">
                 <td class="first-col">Логин</td>
                 <td><input type="text" name="login"
-                                              value="<?= htmlspecialchars($userInfo['login'] ?? '') ?>">
+                           value="<?= htmlspecialchars($userInfo['login'] ?? '') ?>">
                 </td>
                 <td> <?= (htmlspecialchars($errors['login'] ?? '')) ?></td>
             </tr>
@@ -28,25 +28,25 @@
             <tr class="description">
                 <td class="first-col">Доступ</td>
                 <td>
-                    <input type="radio" name="active" value="1"
-                        <?php if (isset($userInfo['active']) && $userInfo['active'] == 1) { ?> checked <?php } ?> >
-                    Открыт
+                    <label><input type="radio" name="active" value="1"
+                            <?php if (isset($userInfo['active']) && $userInfo['active'] == 1) { ?> checked <?php } ?> >
+                        Открыт</label>
                     <br>
-                    <input type="radio" name="active" value="0"
-                        <?php if (isset($userInfo['active']) && $userInfo['active'] == 0) { ?> checked <?php } ?> >
-                    Бан
+                    <label><input type="radio" name="active" value="0"
+                            <?php if (isset($userInfo['active']) && $userInfo['active'] == 0) { ?> checked <?php } ?> >
+                        Бан</label>
                 </td>
             </tr>
             <tr class="description">
                 <td class="first-col">Группа прав</td>
                 <td>
-                    <input type="radio" name="access" value="5"
-                        <?php if (isset($userInfo['access']) && $userInfo['access'] == 5) { ?> checked <?php } ?> >
-                    Админ
+                    <label><input type="radio" name="access" value="5"
+                            <?php if (isset($userInfo['access']) && $userInfo['access'] == 5) { ?> checked <?php } ?> >
+                        Админ</label>
                     <br>
-                    <input type="radio" name="access" value="0"
-                        <?php if (isset($userInfo['access']) && $userInfo['access'] != 5) { ?> checked <?php } ?> >
-                    User
+                    <label><input type="radio" name="access" value="0"
+                            <?php if (isset($userInfo['access']) && $userInfo['access'] != 5) { ?> checked <?php } ?> >
+                        User</label>
                 </td>
             </tr>
         </table>

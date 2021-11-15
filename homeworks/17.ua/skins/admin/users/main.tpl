@@ -22,7 +22,7 @@
                 while ($userSearch = mysqli_fetch_assoc($search)) { ?>
                     <tr>
                         <td class="user"> - <a
-                                    href="users&id=<?= $userSearch['id'] ?>"><?= htmlspecialchars($userSearch['login']) ?></a>
+                                    href="users?id=<?= $userSearch['id'] ?>"><?= htmlspecialchars($userSearch['login']) ?></a>
                         </td>
                     </tr>
                 <?php }
@@ -30,7 +30,7 @@
                 while ($user = mysqli_fetch_assoc($users)) { ?>
                     <tr>
                         <td class="user"> - <a
-                                    href="users&id=<?= $user['id'] ?>"><?= htmlspecialchars($user['login']) ?></a>
+                                    href="users?id=<?= $user['id'] ?>"><?= htmlspecialchars($user['login']) ?></a>
                         </td>
                     </tr>
                 <?php }
