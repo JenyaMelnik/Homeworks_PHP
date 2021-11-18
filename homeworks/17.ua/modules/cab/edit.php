@@ -1,7 +1,6 @@
 <?php
 /**
  * @var $img string
- * @var $type string
  */
 
 if (isset($_POST['edit'],
@@ -45,10 +44,15 @@ if (isset($_POST['edit'],
         }
 
         if ($_FILES['img']['error'] == 0) {
-            include "./components/checkImg.php";
-            if (!count($errors['img'])) {
-                if (!resize_img($type, '.' . $img, '.' . $img, 100, 100)) {
-                    $errors['img'] = 'Не подходит тип файла или размер изображения';
+            $img = '/uploaded/' . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
+            $name = '.' . $img;
+
+            $newFoto = new LoadFoto;
+            $errors = $newFoto->checkAndLoad($name);
+
+            if (!count($errors)) {
+                if (!$newFoto->resize($name, 100, 100)) {
+                    $errors['img'] = 'Не подходящий размер фото';
                 }
             }
         }
@@ -89,7 +93,7 @@ if (isset($_POST['edit'],
             if ($_FILES['img']['error'] == 0) {
                 query("
                     UPDATE `users` 
-                    SET  `avatar` = '" . escapeString(trim($img)) . "'
+                    SET  `avatar` = '" . escapeString($img) . "'
                     WHERE `id` = " . (int)$_SESSION['user']['id'] . "
                 ");
             }
