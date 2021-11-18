@@ -1,7 +1,6 @@
 <?php
 /**
  * @var $img string
- * @var $type string
  */
 
 if (isset($_POST['edit'],
@@ -45,10 +44,17 @@ if (isset($_POST['edit'],
         }
 
         if ($_FILES['img']['error'] == 0) {
-            include "./components/checkImg.php";
-            if (!count($errors['img'])) {
-                if (!resize_img($type, '.' . $img, '.' . $img, 100, 100)) {
-                    $errors['img'] = 'Не подходит тип файла или размер изображения';
+            $img = Core::$ORIGINAL_PATH . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
+            $name = '.' . $img;
+
+            $newFoto = new ImageUploadAndResize;
+            $errors = $newFoto->checkAndLoad($name, $_FILES);
+
+            if (!count($errors)) {
+                $imgResized = Core::$RESIZED_PATH . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
+                $name2 = '.' . $imgResized;
+                if (!$newFoto->resize($name, $name2, $_FILES, 100, 100)) {
+                    $errors['img'] = 'Не подходящий размер фото';
                 }
             }
         }
@@ -86,10 +92,10 @@ if (isset($_POST['edit'],
              	WHERE  `id` = " . (int)$_SESSION['user']['id'] . "
       		");
 
-            if ($_FILES['img']['error'] == 0) {
+            if ($_FILES['img']['error'] == 0 && isset($imgResized)) {
                 query("
                     UPDATE `users` 
-                    SET  `avatar` = '" . escapeString(trim($img)) . "'
+                    SET  `avatar` = '" . escapeString($imgResized) . "'
                     WHERE `id` = " . (int)$_SESSION['user']['id'] . "
                 ");
             }

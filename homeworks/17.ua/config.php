@@ -4,6 +4,8 @@ class Core
 {
     static $CREATED = '2021';
     static $SKIN = 'default';
+    static $ORIGINAL_PATH = '/uploaded/original/';
+    static $RESIZED_PATH = '/uploaded/100x100/';
     static $CONTROLLER = 'modules';
     static $DB_NAME = 'jenyamelnik1986';
     static $DB_LOGIN = 'jenyamelnik1986';
