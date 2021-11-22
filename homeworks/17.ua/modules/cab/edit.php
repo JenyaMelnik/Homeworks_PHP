@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $img string
+ * @var $imgPath string
  */
 
 if (isset($_POST['edit'],
@@ -44,16 +44,16 @@ if (isset($_POST['edit'],
         }
 
         if ($_FILES['img']['error'] == 0) {
-            $img = Core::$ORIGINAL_PATH . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
-            $name = '.' . $img;
+            $imgPath = Core::$ORIGINAL_PATH . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
+            $uploadedImagePath = '.' . $imgPath;
 
             $newFoto = new ImageUploadAndResize;
-            $errors = $newFoto->checkAndLoad($name, $_FILES);
+            $errors = $newFoto->checkAndLoad($uploadedImagePath, $_FILES);
 
             if (!count($errors)) {
-                $imgResized = Core::$RESIZED_PATH . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
-                $name2 = '.' . $imgResized;
-                if (!$newFoto->resize($name, $name2, $_FILES, 100, 100)) {
+                $imgResizedPath = Core::$RESIZED_PATH . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
+                $resizedImagePath = '.' . $imgResizedPath;
+                if (!$newFoto->resize($uploadedImagePath, $resizedImagePath, $_FILES, 100, 100)) {
                     $errors['img'] = 'Не подходящий размер фото';
                 }
             }
@@ -61,23 +61,23 @@ if (isset($_POST['edit'],
 
         if (!count($errors)) {
             if ($_POST['login'] != $_SESSION['user']['login']) {
-                $res = query("
+                $queryRezult = query("
 					SELECT `id` FROM `users`
  					WHERE `login` = '" . escapeString(trim($_POST['login'])) . "'
             		LIMIT 1
 				");
-                if (mysqli_num_rows($res)) {
-                    $errors['login'] = 'Пользователь с таким логином уже существует';
+                if (mysqli_num_rows($queryRezult)) {
+                    $errors['login'] = 'Пользователь с таким Kлогином уже существует';
                 }
             }
 
             if ($_POST['email'] != $_SESSION['user']['email']) {
-                $res = query("
+                $queryRezult = query("
 					SELECT `id` FROM `users`
  					WHERE `email` = '" . escapeString(trim($_POST['email'])) . "'
             		LIMIT 1
 				");
-                if (mysqli_num_rows($res)) {
+                if (mysqli_num_rows($queryRezult)) {
                     $errors['email'] = 'Пользователь с таким email уже существует';
                 }
             }
@@ -92,10 +92,10 @@ if (isset($_POST['edit'],
              	WHERE  `id` = " . (int)$_SESSION['user']['id'] . "
       		");
 
-            if ($_FILES['img']['error'] == 0 && isset($imgResized)) {
+            if ($_FILES['img']['error'] == 0 && isset($imgResizedPath)) {
                 query("
                     UPDATE `users` 
-                    SET  `avatar` = '" . escapeString($imgResized) . "'
+                    SET  `avatar` = '" . escapeString($imgResizedPath) . "'
                     WHERE `id` = " . (int)$_SESSION['user']['id'] . "
                 ");
             }

@@ -5,23 +5,23 @@ class ImageUploadAndResize
     public array $array = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
     public array $array2 = ['gif', 'jpeg', 'png', 'jpg'];
 
-    public function checkAndLoad($name, $array): array
+    public function checkAndLoad($uploadedImagePath, $uploadedImageArray): array
     {
         $errors = [];
-        if ($array['img']['size'] < 1000 || $array['img']['size'] > 50000000) {
+        if ($uploadedImageArray['img']['size'] < 1000 || $uploadedImageArray['img']['size'] > 50000000) {
             $errors['img'] = 'Размер изображения не подходит';
         } else {
-            preg_match('#\.([a-z]+)$#ui', $array['img']['name'], $matches);
+            preg_match('#\.([a-z]+)$#ui', $uploadedImageArray['img']['name'], $matches);
             if (isset($matches[1])) {
 
                 $type = mb_strtolower($matches[1]);
-                $temp = getimagesize($array['img']['tmp_name']);
+                $temp = getimagesize($uploadedImageArray['img']['tmp_name']);
 
                 if (!in_array($type, $this->array2)) {
                     $errors['img'] = 'Не подходит расширение изображения';
                 } elseif (!in_array($temp['mime'], $this->array)) {
                     $errors['img'] = 'Не подходит тип файла, можно загружать только изображения';
-                } elseif (!move_uploaded_file($array['img']['tmp_name'], $name)) {
+                } elseif (!move_uploaded_file($uploadedImageArray['img']['tmp_name'], $uploadedImagePath)) {
                     $errors['img'] = 'Изображение не загружено. Ошибка';
                 }
             } else {
@@ -31,26 +31,26 @@ class ImageUploadAndResize
         return $errors;
     }
 
-    public function resize($name, $name2, $array, $maxWidth, $maxHeight): bool
+    public function resize($uploadedImagePath, $resizedImagePath, $uploadedImageArray, $setedMaxWidth, $setedMaxHeight): bool
     {
-        $type = $array['img']['type'];
+        $type = $uploadedImageArray['img']['type'];
         switch ($type) {
 
             case 'image/jpg':
             case 'image/jpeg':
-                $image = imagecreatefromjpeg($name);
+                $image = imagecreatefromjpeg($uploadedImagePath);
                 break;
 
             case 'image/png':
-                $image = imagecreatefrompng($name);
+                $image = imagecreatefrompng($uploadedImagePath);
                 break;
 
             case 'image/gif':
-                $image = imagecreatefromgif($name);
+                $image = imagecreatefromgif($uploadedImagePath);
                 break;
 
             case 'image/bmp':
-                $image = imagecreatefrombmp($name);
+                $image = imagecreatefrombmp($uploadedImagePath);
                 break;
         }
 
@@ -65,14 +65,14 @@ class ImageUploadAndResize
             return false;
         }
 
-        if ($imgWidth < $maxWidth && $imgHeight < $maxHeight) {
+        if ($imgWidth < $setedMaxWidth && $imgHeight < $setedMaxHeight) {
             return true;
         }
 
-        if (round($imgWidth / $maxWidth, 2) > round($imgHeight / $maxHeight, 2)) {
-            $ratio = round($imgWidth / $maxWidth, 2);
+        if (round($imgWidth / $setedMaxWidth, 2) > round($imgHeight / $setedMaxHeight, 2)) {
+            $ratio = round($imgWidth / $setedMaxWidth, 2);
         } else {
-            $ratio = round($imgHeight / $maxHeight, 2);
+            $ratio = round($imgHeight / $setedMaxHeight, 2);
         }
 
         $newWidth = $imgWidth / $ratio;
@@ -85,7 +85,7 @@ class ImageUploadAndResize
         $newImg = imagecreatetruecolor($newWidth, $newHeight);
 
         imagecopyresampled($newImg, $image, 0, 0, 0, 0, $newWidth, $newHeight, $imgWidth, $imgHeight);
-        imagejpeg($newImg, $name2);
+        imagejpeg($newImg, $resizedImagePath);
 
         imagedestroy($image);
         imagedestroy($newImg);
