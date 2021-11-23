@@ -67,7 +67,7 @@ if (isset($_POST['edit'],
             		LIMIT 1
 				");
                 if (mysqli_num_rows($queryRezult)) {
-                    $errors['login'] = 'Пользователь с таким Kлогином уже существует';
+                    $errors['login'] = 'Пользователь с таким Логином уже существует';
                 }
             }
 
