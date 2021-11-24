@@ -64,7 +64,7 @@
                     <?php } else { ?>
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'edit']) ?>">
                             Привет, <?= $_SESSION['user']['login'] ?>
-                            <img src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>"> </a>
+                            <img src="<?= htmlspecialchars($_SESSION['user']['avatar']) ?>" alt="avatar"> </a>
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'exit']) ?>"
                            class="sprite sprite-zz-sign-in"></a>
                     <?php }
@@ -110,7 +110,7 @@
         <div class="footer-links clearfix">
             <div class="footer-col">
                 <ul>
-                    <li><a href="#">ABOUT US</a></li>
+                    <li><a href="<?= createUrlChpu(['page' => 'aboutus']) ?>">ABOUT US</a></li>
                     <li><a href="#">DELIVERY INFORMATION</a></li>
                     <li><a href="#">PRIVACY POLICY</a></li>
                     <li><a href="#">TERMS & CONDITIONS</a></li>

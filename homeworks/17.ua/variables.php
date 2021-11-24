@@ -49,7 +49,6 @@ if (!isset($_GET['module'])) {
         $staticpage = mysqli_fetch_assoc($res);
         if ($staticpage['static'] == 1) {
             $module = 'staticpage';
-            $page = 'main';
         }
     }
 }
