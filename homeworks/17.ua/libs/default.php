@@ -1,4 +1,73 @@
 <?php
+
+class DBConnectAndClose
+{
+    static public array $mysqli;
+    static public array $connect;
+
+    static public function connect($dbKey = 0)
+    {
+        if (!isset(self::$mysqli[$dbKey])) {
+            if (!isset(self::$connect['server']))
+                self::$connect['server'] = Core::$DB_LOCAL;
+            if (!isset(self::$connect['user']))
+                self::$connect['user'] = Core::$DB_LOGIN;
+            if (!isset(self::$connect['pass']))
+                self::$connect['pass'] = Core::$DB_PASS;
+            if (!isset(self::$connect['db']))
+                self::$connect['db'] = Core::$DB_NAME;
+
+            self::$mysqli[$dbKey] = @new mysqli(self::$connect['server'],
+                self::$connect['user'],
+                self::$connect['pass'],
+                self::$connect['db']);
+
+            if (mysqli_connect_errno()) {
+                $errors = 'Не удалось подключиться к базе данных';
+                exit();
+            }
+
+            if (!self::$mysqli[$dbKey]->set_charset("utf8")) {
+                $errors = 'Ошибка при загрузке набора символов utf8:' . self::$mysqli[$dbKey]->error;
+                exit();
+            }
+        }
+        return self::$mysqli[$dbKey];
+    }
+
+    static public function close($dbKey = 0)
+    {
+        self::$mysqli[$dbKey]->close();
+        unset(self::$mysqli[$dbKey]);
+    }
+}
+
+/**
+ *mysqli_query
+ *
+ * @param $query string
+ * @param int $dbKey
+ * @return bool|mysqli_result
+ */
+function query(string $query, int $dbKey = 0)
+{
+    $res = DBConnectAndClose::connect($dbKey)->query($query);
+    if (!$res) {
+        $info = debug_backtrace();
+        $error = "QUERY: " . $query . "<br>\n" . DBConnectAndClose::connect($dbKey)->error . "<br>\n" .
+            "file: " . $info[0]['file'] . "<br>\n" .
+            "line: " . $info[0]['line'] . "<br>\n" .
+            "date:" . date("Y-m-d H:i:s") . "<br>\n" .
+            "=============================================";
+//        Отправка уведомления на почту
+        file_put_contents('./logs/mysql.log', strip_tags($error) . "\n\n", FILE_APPEND);
+        echo $error;
+        exit();
+    } else {
+        return $res;
+    }
+}
+
 /**
  * autoload classes
  */
@@ -85,34 +154,6 @@ function redirectTo(array $params): void
     exit();
 }
 
-/**
- *mysqli_query
- *
- * @param $query string
- * @return bool|mysqli_result
- */
-function query(string $query)
-{
-    global $dbc;
-    $res = mysqli_query($dbc, $query);
-    if (!$res) {
-        $info = debug_backtrace();
-        $error = "QUERY: " . htmlspecialchars($query) . "<br>\n" . mysqli_error($dbc) . "<br>\n" .
-            "file: " . $info[0]['file'] . "<br>\n" .
-            "line: " . $info[0]['line'] . "<br>\n" .
-            "date:" . date("Y-m-d H:i:s") . "<br>\n";
-        $errorPut = "QUERY: " . $query . "\n" . mysqli_error($dbc) . "\n" .
-            "file: " . $info[0]['file'] . "\n" .
-            "line: " . $info[0]['line'] . "\n" .
-            "date" . date("Y-m-d H:i:s");
-//        Отправка уведомления на почту
-        file_put_contents('./logs/mysql.log', $errorPut . "\n\n", FILE_APPEND);
-        echo $error;
-        exit();
-    } else {
-        return $res;
-    }
-}
 
 /**
  * trim all array's elements

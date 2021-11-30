@@ -7,6 +7,7 @@
 $modulePath = Core::$CONTROLLER . '/' . $module . '/' . $page . '.php';
 $skinPath = './skins/' . Core::$SKIN . '/' . $module . '/' . $page . '.tpl';
 
+/*
 if (!file_exists($modulePath)) {
     $module = 'errors';
     $page = '404';
@@ -18,3 +19,4 @@ if (!file_exists($skinPath)) {
     $page = '404';
     $skinPath = './skins/' . Core::$SKIN . '/' . $module . '/' . $page . '.tpl';
 }
+*/

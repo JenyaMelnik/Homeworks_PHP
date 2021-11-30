@@ -981,3 +981,14 @@ file: W:\domains\homeworks.ua\homeworks\17.ua\variables.php
 line: 35
 date2021-11-23 13:38:27
 
+QUERY: 
+    UPDATE `goods` SET
+        `category` = `ROSE WINES`
+    WHERE `category` = `RED WINES`
+
+Unknown column 'RED WINES' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\draft\main.php
+line: 31
+date:2021-11-30 14:54:06
+=============================================
+
