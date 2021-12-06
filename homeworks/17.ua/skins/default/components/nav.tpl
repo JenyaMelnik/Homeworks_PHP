@@ -59,3 +59,4 @@
 <a href="<?=createUrlChpu(['module' => 'comments2'])?>">COMMENTS_2</a>
 <a href="<?=createUrlChpu(['module' => 'news'])?>">NEWS</a>
 <a href="<?=createUrlChpu(['module' => 'goods'])?>">GOODS</a>
+<a href="<?=createUrlChpu(['module' => 'books'])?>">BOOKS</a>

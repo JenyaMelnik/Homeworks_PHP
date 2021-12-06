@@ -992,3 +992,94 @@ line: 31
 date:2021-11-30 14:54:06
 =============================================
 
+QUERY: 
+            INSERT INTO `news` 
+            SET `title`       = 'Динамо выиграло у Баварии',
+                `category`    = 'Спорт',
+                `text`        = '30.11.2021 года в матче лиги чемпионов, киевское Динамо выиграло у Мюнхенской Баварии со счетом 1:0. Гол на 61 минуте забил Николай Шапаренко.'
+        
+Field 'date' doesn't have a default value
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\add.php
+line: 28
+date:2021-12-01 12:25:53
+=============================================
+
+QUERY: 
+            INSERT INTO `news` 
+            SET `title`       = 'Динамо выиграло у Баварии',
+                `category`    = 'Спорт',
+                `text`        = '30.11.2021 года в матче лиги чемпионов, киевское Динамо выиграло у Мюнхенской Баварии со счетом 1:0. Гол на 61 минуте забил Николай Шапаренко.'
+                `date` = NOW();
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`date` = NOW()' at line 5
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\add.php
+line: 28
+date:2021-12-01 12:27:48
+=============================================
+
+QUERY: 
+            INSERT INTO `news` 
+            SET `title`       = 'Динамо выиграло у Баварии',
+                `category`    = 'Спорт',
+                `text`        = '30.11.2021 года в матче лиги чемпионов, киевское Динамо выиграло у Мюнхенской Баварии со счетом 1:0. Гол на 61 минуте забил Николай Шапаренко.'
+                `date` = date NOW();
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`date` = date NOW()' at line 5
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\add.php
+line: 28
+date:2021-12-01 12:31:37
+=============================================
+
+QUERY: 
+            INSERT INTO `news` 
+            SET `title`       = 'Динамо выиграло у Баварии',
+                `category`    = 'Спорт',
+                `text`        = '30.11.2021 года в матче лиги чемпионов, киевское Динамо выиграло у Мюнхенской Баварии со счетом 1:0. Гол на 61 минуте забил Николай Шапаренко.',
+                `date` = NOW();
+        
+Field 'category_id' doesn't have a default value
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\add.php
+line: 28
+date:2021-12-01 12:32:49
+=============================================
+
+QUERY: 
+            INSERT INTO `news` 
+            SET `title`       = 'Динамо выиграло у Баварии',
+                `category`    = 'Спорт',
+                `category_id` = 1,
+                `text`        = '30.11.2021 года в матче лиги чемпионов, киевское Динамо выиграло у Мюнхенской Баварии со счетом 1:0. Гол на 61 минуте забил Николай Шапаренко.',
+                `date` = NOW();
+        
+Field 'description' doesn't have a default value
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\add.php
+line: 37
+date:2021-12-01 12:48:22
+=============================================
+
+QUERY: 
+            UPDATE `news` 
+            SET `title`       = 'Украина выпустила новую модель ЗАЗкраина',
+                `category`    = 'Авто',
+                `category_id` = 3,
+                `text`        = 'На автовыставке в Дубаи Украина представила новый автомобиль ЗАЗ nosens. Планировали сделать тестдрайв, но авто не смогли завести.',
+                `date`        = NOW();
+            WHERE `id`        = 25
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `id`        = 25' at line 7
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\edit.php
+line: 42
+date:2021-12-01 13:16:50
+=============================================
+
+QUERY: 
+     SELECT *
+     FROM `news_category`
+     ORDER BY ASC 
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ASC' at line 3
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\news\main.php
+line: 3
+date:2021-12-01 14:02:45
+=============================================
+

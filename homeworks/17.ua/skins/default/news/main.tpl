@@ -1,22 +1,31 @@
 <?php
 /**
  * @var $news mysqli
+ * @var $newsCategories mysqli
  */
 
 echo $notice ?? '';
+$category = $_GET['category'] ?? 'Все новости';
 
 if (isset($_SESSION['user'])) { ?>
     <div class="item">
         <div>
-            <p><b>Новости:</b></p>
+            <p>
+                <a href="/news"><b>Все новости</b></a>
+                <?php
+                while ($categories = $newsCategories->fetch_assoc()) { ?>
+                    <a href="/news?category=<?= $categories['category'] ?>"><b><?= $categories['category'] ?></b></a>
+                <?php } ?>
+            </p>
+            <p><b><?= $category ?>:</b></p>
             <?php
-            if (mysqli_num_rows($news)) {
-                while ($row = mysqli_fetch_assoc($news)) { ?>
+            if ($news->num_rows) {
+                while ($newsRow = $news->fetch_assoc()) { ?>
                     <div>
-                        <div><?= $row['date']; ?></div>
-                        <div class="text"><?= $row['title']; ?></div>
+                        <div><?= $newsRow['date']; ?></div>
+                        <div class="text"><?= $newsRow['title']; ?></div>
                     </div>
-                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'currentItem']) ?>&id=<?= (int)$row['id'] ?>">Подробнее...</a>
+                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'currentItem']) ?>?category=<?= $category ?>&id=<?= (int)$newsRow['id'] ?>">Подробнее...</a>
                     <hr>
                 <?php }
             } else { ?>

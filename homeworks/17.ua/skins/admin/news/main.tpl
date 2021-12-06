@@ -1,10 +1,14 @@
 <?php
 /**
  * @var $news mysqli
+ * @var $newsCategories mysqli
  */
 
 if (isset($_SESSION['user'])) {
-    if ($_SESSION['user']['access'] == 5) { ?>
+    if ($_SESSION['user']['access'] == 5) {
+
+        $category = $_GET['category'] ?? 'Все новости'; ?>
+
         <div class="item">
             <?php
             if (isset($info)) { ?>
@@ -13,21 +17,31 @@ if (isset($_SESSION['user'])) {
             <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'add']) ?>">ДОБАВИТЬ НОВОСТЬ</a>
             <hr>
             <div>
-                <br>
-                <p><b>Все существующие новости:</b></p>
+                <p>
+                    <a href="/admin/news"><b>Все категории</b></a>
+                    <?php
+                    while ($categories = $newsCategories->fetch_assoc()) { ?>
+                        <a href="/admin/news?category=<?= $categories['category'] ?>"><b><?= $categories['category'] ?></b></a>
+                    <?php } ?>
+                </p>
+                <p><b><?= $category ?>:</b></p>
                 <form action="" method="post">
                     <?php
-                    while ($row = mysqli_fetch_assoc($news)) { ?>
-                        <div>
+                    if (mysqli_num_rows($news)) {
+                        while ($newsRow = mysqli_fetch_assoc($news)) { ?>
                             <div>
-                                <label><input type="checkbox" name="ids[]" value="<?= $row['id'] ?>"></label>
-                                <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?id=<?= $row['id'] ?>">РЕДАКТИРОВАТЬ</a>
-                                <a href="<?= createUrlChpu(['module' => 'news']) ?>?action=delete&id=<?= $row['id'] ?>">УДАЛИТЬ</a>
+                                <div>
+                                    <label><input type="checkbox" name="ids[]" value="<?= $newsRow['id'] ?>"></label>
+                                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?category=<?= $category ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
+                                    <a href="<?= createUrlChpu(['module' => 'news']) ?>?action=delete&id=<?= $newsRow['id'] ?>">УДАЛИТЬ</a>
+                                </div>
+                                <div><?= $newsRow['date']; ?></div>
+                                <div class="text"><?= $newsRow['title']; ?></div>
                             </div>
-                            <div><?= $row['date']; ?></div>
-                            <div class="text"><?= $row['title']; ?></div>
-                        </div>
-                        <hr>
+                            <hr>
+                        <?php }
+                    } else { ?>
+                        <span>Нет товаров</span>
                     <?php } ?>
                     <input type="submit" name="delete" value="Удалить отмеченные записи">
                 </form>

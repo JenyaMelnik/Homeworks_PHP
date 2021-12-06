@@ -1,39 +1,42 @@
 <?php
-/**
- * @var $dbc mysqli
- */
+
 if (isset($_POST['edit'],
     $_POST['title'],
     $_POST['category'],
-    $_POST['text'],
-    $_POST['description'])) {
+    $_POST['text'])) {
 
     $errors = [];
 
     if (empty($_POST['title'])) {
         $errors['title'] = 'Вы не ввели заголовок';
+    } elseif (mb_strlen($_POST['title']) < 10) {
+        $errors['title'] = 'Заголовок должен быть не менее 10 символа';
     }
     if (empty($_POST['category'])) {
-        $errors['category'] = 'Вы не ввели категорию';
-    }
-    if (empty($_POST['description'])) {
-        $errors['description'] = 'Вы не ввели описание';
+        $errors['category'] = 'Вы не выбрали категорию';
     }
     if (empty($_POST['text'])) {
-        $errors['text'] = 'Вы не ввели текс новости';
+        $errors['text'] = 'Вы не ввели текст новости';
+    } elseif (mb_strlen($_POST['text']) < 20) {
+        $errors['text'] = 'Текст новости должен быть не менее 20 символа';
     }
 
     if (!$errors) {
-        foreach ($_POST as $k => $v) {
-            $_POST['k'] = trim($v);
-        }
+        $result = query("
+            SELECT `id`
+            FROM `news_category`
+            WHERE `category` = '" . htmlspecialchars($_POST['category']) . "'
+            LIMIT 1
+        ");
+        $categoryId = $result->fetch_assoc();
+        $result->close();
 
         query("
             UPDATE `news` 
-            SET `title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
-                `category`    = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
-                `text`        = '" . mysqli_real_escape_string($dbc, trim($_POST['text'])) . "',
-                `description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
+            SET `title`       = '" . escapeString(trim($_POST['title'])) . "',
+                `category_id` = " . (int)($categoryId['id']) . ",
+                `text`        = '" . escapeString(trim($_POST['text'])) . "',
+                `date`        = NOW()
             WHERE `id`        = " . (int)$_GET['id'] . "
         ");
         $_SESSION['info'] = 'Запись была изменена';
@@ -41,19 +44,55 @@ if (isset($_POST['edit'],
     }
 }
 
+//==============================================  Текущая новость  ==================================================
 $news = query("
             SELECT *
             FROM `news`
             WHERE `id` = " . (int)$_GET['id'] . "
             LIMIT 1
         ");
-if (!mysqli_num_rows($news)) {
+if (!$news->num_rows) {
     $_SESSION['info'] = 'Данной новости не существует!';
     redirectTo(['module' => 'news']);
 }
-$row = mysqli_fetch_assoc($news);
 
-$row['title'] = $_POST['title'] ?? $row['title'];
-$row['category'] = $_POST['category'] ?? $row['category'];
-$row['description'] = $_POST['description'] ?? $row['description'];
-$row['text'] = $_POST['text'] ?? $row['text'];
+$currentNews = $news->fetch_assoc();
+$news->close();
+
+//==========================================  Категория текущей новости  ============================================
+$category = query("
+                SELECT `category`
+                FROM `news_category`
+                WHERE `id` = '" . $currentNews['category_id'] . "'
+            ");
+if (!$category->num_rows) {
+    $errors['category'] = 'У новости отсутствует категория';
+} else {
+    $currentCategory = $category->fetch_assoc();
+}
+
+$category->close();
+
+//===============================================  Все категории  ===================================================
+$categories = query("
+              SELECT *
+              FROM `news_category`
+              ORDER BY `id`
+          ");
+while ($category = $categories->fetch_assoc()) {
+    $allCategories[] = $category['category'];
+}
+
+$categories->close();
+
+if (empty($allCategories)) {
+    $allCategories[] = 'Категории отсутствуют';
+}
+//===================================================================================================================
+
+$currentNews['title'] = $_POST['title'] ?? $currentNews['title'];
+$currentNews['text'] = $_POST['text'] ?? $currentNews['text'];
+
+if (isset($currentCategory['category'])) {
+    $currentCategory['category'] = $_POST['category'] ?? $currentCategory['category'];
+}

@@ -23,12 +23,12 @@ class DBConnectAndClose
                 self::$connect['db']);
 
             if (mysqli_connect_errno()) {
-                $errors = 'Не удалось подключиться к базе данных';
+                echo 'Не удалось подключиться к базе данных';
                 exit();
             }
 
             if (!self::$mysqli[$dbKey]->set_charset("utf8")) {
-                $errors = 'Ошибка при загрузке набора символов utf8:' . self::$mysqli[$dbKey]->error;
+                echo 'Ошибка при загрузке набора символов utf8:' . self::$mysqli[$dbKey]->error;
                 exit();
             }
         }

@@ -55,9 +55,6 @@
                 <div class="wishlist">
                     <a href="#">&#9825; &nbsp; MY WISHLIST o</a>
                     &nbsp; &nbsp; &nbsp;
-                    <?php if ($notice): ?>
-                        <span class="notice"> <?= $notice ?> </span>
-                    <?php endif ?>
                     <?php if (!isset($_SESSION['user'])) { ?>
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'auth']) ?>">AUTHORIZE </a> /
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'registration']) ?>">REGISTER </a>

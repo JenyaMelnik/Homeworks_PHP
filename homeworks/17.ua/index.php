@@ -14,9 +14,6 @@ include_once './config.php';
 include_once './libs/default.php';
 include_once './variables.php';
 
-include_once './components/auth.php';
-include_once './components/notice.php';
-
 // Роутер
 include_once './route.php';
 

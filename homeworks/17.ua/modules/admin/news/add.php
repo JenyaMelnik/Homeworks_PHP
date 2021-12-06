@@ -6,33 +6,58 @@
 if (isset($_POST['add'],
     $_POST['title'],
     $_POST['category'],
-    $_POST['text'],
-    $_POST['description'])) {
+    $_POST['text'])) {
 
     $errors = [];
 
     if (empty($_POST['title'])) {
         $errors['title'] = 'Вы не ввели заголовок';
+    } elseif (mb_strlen($_POST['title']) < 10) {
+        $errors['title'] = 'Заголовок должен быть не менее 10 символа';
     }
     if (empty($_POST['category'])) {
-        $errors['category'] = 'Вы не ввели категорию';
-    }
-    if (empty($_POST['description'])) {
-        $errors['description'] = 'Вы не ввели описание';
+        $errors['category'] = 'Вы не выбрали категорию';
     }
     if (empty($_POST['text'])) {
-        $errors['text'] = 'Вы не ввели текс новости';
+        $errors['text'] = 'Вы не ввели текст новости';
+    } elseif (mb_strlen($_POST['text']) < 20) {
+        $errors['text'] = 'Текст новости должен быть не менее 20 символа';
     }
 
     if (!$errors) {
+        $category = query("
+            SELECT `id`
+            FROM `news_category`
+            WHERE `category` = '" . htmlspecialchars($_POST['category']) . "'
+            LIMIT 1
+        ");
+        $categoryId = $category->fetch_assoc();
+        $category->close();
+
         query("
             INSERT INTO `news` 
-            SET `title`       = '" . mysqli_real_escape_string($dbc, trim($_POST['title'])) . "',
-                `category`    = '" . mysqli_real_escape_string($dbc, trim($_POST['category'])) . "',
-                `text`        = '" . mysqli_real_escape_string($dbc, trim($_POST['text'])) . "',
-                `description` = '" . mysqli_real_escape_string($dbc, trim($_POST['description'])) . "'
+            SET `title`       = '" . escapeString(trim($_POST['title'])) . "',
+                `category_id` = " . (int)($categoryId['id']) . ",
+                `text`        = '" . escapeString(trim($_POST['text'])) . "',
+                `date`        = NOW();
         ");
         $_SESSION['info'] = 'Запись добавлена';
         redirectTo(['module' => 'news']);
     }
+}
+
+//==================================================  Все категории  ================================================
+$categories = query("
+              SELECT *
+              FROM `news_category`
+              ORDER BY `id`
+          ");
+while ($category = $categories->fetch_assoc()) {
+    $allCategories[] = $category['category'];
+}
+
+$categories->close();
+
+if (empty($allCategories)) {
+    $allCategories[] = 'Категории отсутствуют';
 }

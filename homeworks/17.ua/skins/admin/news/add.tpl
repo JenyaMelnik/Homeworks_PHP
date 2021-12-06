@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $errors array
+ * @var $allCategories array
  */
 ?>
 
@@ -14,20 +15,23 @@
                 <td><?= $errors['title'] ?? '' ?></td>
             </tr>
             <tr>
-                <td>Введите категорию:</td>
-                <td><input type="text" name="category"
-                           value="<?= htmlspecialchars($_POST['category'] ?? '') ?>"></td>
-                <td><?= $errors['category'] ?? '' ?></td>
+                <td>Выберите категорию:</td>
+                <td>
+                    <select name="category">
+                        <?php
+                        foreach ($allCategories as $category) { ?>
+                            <option value="<?= $category ?>"
+                                <?php if (isset($_POST['category']) && $_POST['category'] == $category) {
+                                    echo ' selected="selected"';
+                                } ?>><?= $category ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td>Введите описание:
-                <td><textarea name="description"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea></td>
-                <td><?= $errors['description'] ?? '' ?></td>
-            </tr>
-            <tr>
-                <td>Введите категорию:</td>
-                <td><input type="text" name="text"
-                           value="<?= htmlspecialchars($_POST['text'] ?? '') ?>"></td>
+                <td>Введите текст:
+                <td><textarea name="text" rows="5" cols="30"><?= htmlspecialchars($_POST['text'] ?? '') ?></textarea>
+                </td>
                 <td><?= $errors['text'] ?? '' ?></td>
             </tr>
         </table>
