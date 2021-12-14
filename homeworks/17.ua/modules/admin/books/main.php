@@ -1,5 +1,45 @@
 <?php
 
+//=========================================== Удаление нескольких записей ===========================================
+if (isset($_POST['delete'])) {
+    if (!empty($_POST['booksToDelete'])) {
+        $booksToDeleteIds = [];
+        foreach ($_POST['booksToDelete'] as $bookToDelete) {
+            $booksToDeleteIds[] = (int)$bookToDelete;
+        }
+        $booksToDelete = implode(',', $booksToDeleteIds);
+        query("
+            DELETE FROM `books`
+            WHERE `id` IN (" . $booksToDelete . ")
+        ");
+        query("
+            DELETE FROM `books2books_author`
+            WHERE `book_id` IN (" . $booksToDelete . ")
+        ");
+
+        $_SESSION['notice'] = 'Книги удалены';
+    } else {
+        $_SESSION['notice'] = 'Выберите хотя бы одну книгу';
+    }
+    redirectTo(['module' => 'books']);
+}
+
+//========================================== Удаление одной записи ==================================================
+if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+    query("
+        DELETE FROM `books` 
+        WHERE `id` = " . (int)$_GET['id'] . "
+    ");
+    query("
+        DELETE FROM `books2books_author` 
+        WHERE `book_id` = " . (int)$_GET['id'] . "
+    ");
+
+    $_SESSION['notice'] = 'Книга удалена';
+    redirectTo(['module' => 'books']);
+}
+//===================================================================================================================
+
 $shownBooks = 'Все книги';
 $author = '';
 

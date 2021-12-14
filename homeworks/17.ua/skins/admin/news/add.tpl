@@ -27,6 +27,7 @@
                         <?php } ?>
                     </select>
                 </td>
+                <td><?= $errors['category'] ?? '' ?></td>
             </tr>
             <tr>
                 <td>Введите текст:

@@ -1083,3 +1083,168 @@ line: 3
 date:2021-12-01 14:02:45
 =============================================
 
+QUERY: 
+            INSERT INTO `pages` SET 
+            `page` = 'qwerty',
+            `static` = 0
+        
+Unknown column 'page' in 'field list'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\pages\add.php
+line: 19
+date:2021-12-06 16:15:40
+=============================================
+
+QUERY: 
+            INSERT INTO `pages` SET 
+            `module` = 'qwerty',
+            `static` = 0
+        
+Field 'meta_description' doesn't have a default value
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\pages\add.php
+line: 19
+date:2021-12-06 16:15:59
+=============================================
+
+QUERY: 
+            INSERT INTO `pages` SET 
+            `module` = 'qwerty',
+            `static` = 0
+        
+Field 'text' doesn't have a default value
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\pages\add.php
+line: 19
+date:2021-12-06 16:18:24
+=============================================
+
+QUERY: 
+        SELECT `id` FROM `books_author`
+        WHERE `auhhor` IN ()
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 65
+date:2021-12-07 14:47:53
+=============================================
+
+QUERY: 
+        SELECT `id` FROM `books_author`
+        WHERE `auhhor` IN (Шекспир,Толстой)
+        
+Unknown column 'auhhor' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 65
+date:2021-12-07 14:48:16
+=============================================
+
+QUERY: 
+        SELECT `id` FROM `books_author`
+        WHERE `author` IN (Шекспир,Толстой)
+        
+Unknown column 'Шекспир' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 65
+date:2021-12-07 14:48:27
+=============================================
+
+QUERY: 
+        SELECT `id` FROM `books_author`
+        WHERE `author` IN (Шекспир, Толстой)
+        
+Unknown column 'Шекспир' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 65
+date:2021-12-07 14:58:01
+=============================================
+
+QUERY: 
+        SELECT * FROM `books_author`
+        WHERE `author` IN (Шекспир, Толстой)
+        
+Unknown column 'Шекспир' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 65
+date:2021-12-07 14:58:27
+=============================================
+
+QUERY: 
+            INSERT INTO `books2books_author`
+            SET `book_id` = 0,
+            `author_id` = 
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 76
+date:2021-12-07 15:08:15
+=============================================
+
+QUERY: 
+        SELECT * FROM `books_author`
+        WHERE `author` IN (Толстой, Шекспир, Толстой)
+        ORDER BY `id` ASC
+        
+Unknown column 'Толстой' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 65
+date:2021-12-08 12:46:26
+=============================================
+
+QUERY: 
+        SELECT * FROM `books_author`
+        WHERE `author` IN (Толстой, Шекспир)
+        ORDER BY `id` ASC
+        
+Unknown column 'Толстой' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 63
+date:2021-12-08 12:50:47
+=============================================
+
+QUERY: 
+SELECT FROM `books`
+WHERE `id` = 70
+LIMIT 1
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM `books`
+WHERE `id` = 70
+LIMIT 1' at line 1
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\currentBook.php
+line: 5
+date:2021-12-08 15:20:20
+=============================================
+
+QUERY: 
+    SELECT `author` 
+    FROM `books_author`
+    WHERE `id` IN (Array)
+
+Unknown column 'Array' in 'where clause'
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\currentBook.php
+line: 36
+date:2021-12-09 14:16:17
+=============================================
+
+QUERY: 
+        SELECT `id`
+        FROM `books_category`
+        WHERE `category` = ''
+        LIMIT 1
+    
+Table 'jenyamelnik1986.books_category' doesn't exist
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\main.php
+line: 45
+date:2021-12-09 15:02:53
+=============================================
+
+QUERY: 
+            SELECT FROM `books_author`
+            WHERE `author` = 'Пушкин'
+            LIMIT 1
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM `books_author`
+            WHERE `author` = 'Пушкин'
+            LI' at line 1
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\addAuthors.php
+line: 11
+date:2021-12-14 10:27:12
+=============================================
+
