@@ -43,6 +43,8 @@
             <a href="<?= createUrlChpu(['module' => 'news']) ?>">NEWS</a>
             <a href="<?= createUrlChpu(['module' => 'goods']) ?>">GOODS</a>
             <a href="<?= createUrlChpu(['module' => 'users']) ?>">USERS</a>
+            <a href="<?= createUrlChpu(['module' => 'books']) ?>">BOOKS</a>
+            <a href="<?= createUrlChpu(['module' => 'pages']) ?>">PAGES</a>
         <?php } else { ?>
             <h2>Авторизируйтесь как администратор</h2>
         <?php } ?>

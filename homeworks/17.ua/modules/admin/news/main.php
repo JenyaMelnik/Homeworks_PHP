@@ -22,7 +22,7 @@ if (isset($_POST['delete'])) {
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     query("
         DELETE FROM `news`
-        WHERE `id` = " . $_GET['id'] . "
+        WHERE `id` = " . (int)$_GET['id'] . "
     ");
 
     $_SESSION['info'] = 'Новость удалена';

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 12 2021 г., 18:56
+-- Время создания: Дек 14 2021 г., 12:07
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.4.5
 
@@ -20,6 +20,88 @@ SET time_zone = "+00:00";
 --
 -- База данных: `jenyamelnik1986`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `books`
+--
+
+CREATE TABLE `books` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `img` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '/uploaded/books/original/no_foto.jpg',
+  `meta_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta title',
+  `meta_keywords` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta keywords',
+  `meta_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta description'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `books`
+--
+
+INSERT INTO `books` (`id`, `title`, `description`, `img`, `meta_title`, `meta_keywords`, `meta_description`) VALUES
+(69, 'Война и мир', '«Война́ и мир» — роман-эпопея Льва Николаевича Толстого, описывающий русское общество в эпоху войн против Наполеона в 1805—1812 годах. Эпилог романа доводит повествование до 1820 года.', '/uploaded/books/100x100/20211214-120612img20664.jpg', 'meta title', 'meta keywords', 'meta description'),
+(70, 'Ромео и Джульета', 'Вниманию читателей предлагается первая значительная трагедия Уильяма Шекспира - \"печальнейшая на свете повесть\" о двух юных влюбленных, ценой своей смерти примиряющих издавна враждовавшие веронские семейства Монтекки и Капулетти. Остродраматические коллизии пьесы, возвышенная свобода и глубина чувств главных героев во многом определили эмоциональный мир и ценности новоевропейской любовной культуры и открыли перед современным искусством возможность виртуозной игры на тему \"влюбленного Шекспира\". Трагедия публикуется в ставшем классическим переводе Т. Щепкиной-Куперник.', '/uploaded/books/100x100/20211214-120537img56488.jpg', 'meta title', 'meta keywords', 'meta description'),
+(81, 'Кобзарь', 'На відміну від численних так званих «повних» збірок, пропоноване видання є насправді максимально повним зібранням поетового спадку, яке поєднало всі твори, що потрапляли під цензурування як за царату, так і за радянщини. До того ж чимало творів подано з авторовими варіянтами, практично невідомими широкому загалові. Основну частину розпочинає авторова передмова до другого (нездійсненого) видання «Кобзаря». Зануритись у Шевченкову добу допоможуть чимало унікальних прижиттєвих документів, поетових автографів віршів, листів, і світлин й автопортретів. Нарешті, усе видання, від першої до останньої сторінки, унормовано згідно з правилами українського правопису 1928 р.(т. зв. Харківського, або Скрипниківського правопису), який, на думку науковців-філологів, є історично й фонетично найближчим до мови, якою промовляв до нас Поет.', '/uploaded/books/100x100/20211214-120319img71867.jpg', 'meta title', 'meta keywords', 'meta description'),
+(82, 'Пиковая дама', 'Одно из первых произведений на русском языке, имевших успех в Европе', '/uploaded/books/100x100/20211214-120302img36188.jpg', 'meta title', 'meta keywords', 'meta description'),
+(83, 'Сказка о царе Салтане', '«Сказка о царе Салта́не, о сыне его славном и могучем богатыре князе Гвидо́не Салта́новиче и о прекрасной царевне Лебеди» — сказка в стихах Александра Пушкина, написанная в 1831 году и впервые изданная в следующем году в собрании стихотворений.', '/uploaded/books/100x100/20211214-120251img65747.jpg', 'meta title', 'meta keywords', 'meta description'),
+(84, 'Руслан и Людмила', '«Русла́н и Людми́ла» — первая законченная поэма Александра Сергеевича Пушкина; волшебная сказка, вдохновлённая древнерусскими былинами', '/uploaded/books/100x100/20211214-120240img21167.jpg', 'meta title', 'meta keywords', 'meta description'),
+(85, 'Гамлет', '«Траги́ческая исто́рия о Га́млете, при́нце да́тском» или просто «Га́млет» — трагедия Уильяма Шекспира в пяти актах, одна из самых известных его пьес и одна из самых знаменитых пьес в мировой драматургии. Написана в 1600—1601 годах. Это самая длинная пьеса Шекспира — в ней 4042 строки и 29 551 слово.', '/uploaded/books/100x100/20211214-120222img44386.jpg', 'meta title', 'meta keywords', 'meta description'),
+(86, 'Отелло', '«Отелло» (1606) – знаменитая трагедия Вильяма Шекспира (1564-1616), по праву считающаяся одним из высочайших его достижений в жанре драматургии. Предназначается для самой широкой читательской аудитории.', '/uploaded/books/100x100/20211214-120203img17840.jpg', 'meta title', 'meta keywords', 'meta description'),
+(87, 'Анна Каренина', '«А́нна Каре́нина» — роман Льва Толстого о трагической любви замужней дамы Анны Карениной и блестящего офицера Алексея Вронского на фоне счастливой семейной жизни дворян Константина Лёвина и Кити Щербацкой.', '/uploaded/books/100x100/20211214-120152img48375.jpg', 'meta title', 'meta keywords', 'meta description'),
+(88, 'Гайдамаки', 'Гайдамаки — историко-героическая поэма Т. Г. Шевченко, первый украинский исторический роман в стихах. Вступление в поэме «Гайдамаки», датировано 7 апреля 1841 года, поэт написал после завершения произведения. Автограф неизвестен.', '/uploaded/books/100x100/20211214-120140img88867.jpg', 'meta title', 'meta keywords', 'meta description');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `books2books_author`
+--
+
+CREATE TABLE `books2books_author` (
+  `id` int(11) NOT NULL,
+  `book_id` int(10) UNSIGNED NOT NULL,
+  `author_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `books2books_author`
+--
+
+INSERT INTO `books2books_author` (`id`, `book_id`, `author_id`) VALUES
+(44, 88, 5),
+(45, 87, 3),
+(46, 86, 2),
+(47, 85, 2),
+(48, 84, 4),
+(49, 83, 4),
+(50, 82, 4),
+(52, 81, 5),
+(53, 70, 2),
+(54, 69, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `books_author`
+--
+
+CREATE TABLE `books_author` (
+  `id` int(11) NOT NULL,
+  `author` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `books_author`
+--
+
+INSERT INTO `books_author` (`id`, `author`) VALUES
+(1, ''),
+(2, 'Шекспир'),
+(3, 'Толстой'),
+(4, 'Пушкин'),
+(5, 'Тарас Шевченко');
 
 -- --------------------------------------------------------
 
@@ -93,25 +175,58 @@ INSERT INTO `comments` (`id`, `login`, `email`, `comment`, `date`) VALUES
 CREATE TABLE `goods` (
   `id` int(11) NOT NULL,
   `category` enum('Белые вина','Красные вина','Крепленые вина','') COLLATE utf8_unicode_ci NOT NULL,
+  `category_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `strength` float NOT NULL,
   `price` smallint(6) NOT NULL,
   `availability` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 - есть в наличии\r\n0 - нет в наличии',
-  `img` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '/uploaded/no_foto.jpg'
+  `img` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '/uploaded/original/no_foto.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `goods`
 --
 
-INSERT INTO `goods` (`id`, `category`, `title`, `description`, `strength`, `price`, `availability`, `img`) VALUES
-(1, 'Белые вина', 'Sauvignon Blanc Marlborough Sun', 'Яркость Совиньон Блана проявляется в выразительном аромате маракуйи, крыжовника, листьев черной смородины в обрамлении тонких цитрусовых тонов. Во вкусе хорошо сбалансированное вино, обладает приятной свежестью и ярким характером. Послевкусие затяжное, освежающее.', 13, 345, 1, ''),
-(2, 'Белые вина', 'Chardonnay', 'Ароматное, утонченное Шардоне с нюансами манго, персиков, цитрусов и цветения липы. Во вкусе, свежее, фруктовое, питкое. Послевкусие мягкое, фруктовое. Отлично сочетается с различной рыбой, моллюсками, пастой со сливочным соусом и белым мясом, а также хорошо в качестве аперитива.', 13, 520, 1, '/uploaded/20211110-152345img67305.jpg'),
-(3, 'Красные вина', 'Pinot Noir', 'Применяя свой многолетний опыт в Бургундии Doudet Naudin создали этот Пино Нуар с лоз, высаженных в Долине Од региона Лангедок-Руссильон вблизи Пиренеев, где прохладнее климат и мягче температуры. Вино с выразительным ароматом темных и красных ягод, гармонично переплетенных с цветочными тонами. Вкус обладает прекрасным балансом и элегантностью присущему Пино Нуару. Вино дополнит множество блюд от холодных закусок до белого и красного мяса.', 12.5, 290, 1, '/uploaded/20211110-152317img82471.jpg'),
-(4, 'Белые вина', 'Cabernet Sauvignon Reserva', 'Кольчагуа - одна из чилийских винных долин, с большим международным авторитетом. В этой же долине, между прибрежным хребтом и Тихим океаном разбиты виноградники хозяйства. Линейка «Reserva» - прекрасные повседневные вина, которые никогда не подведут. Перед вами 100% Кабарне Совиньон, выдержанный 6 месяцев в дубовых бочках. Вино предлагает четко очерченные оттенки черной смородины, ванили и фиалки. Вино средней насыщенности, с сочными танинами и прекрасным фруктовым акцентом на послевкусие. Хорошее дополнение к мясным блюдам.', 25, 430, 1, '/uploaded/20211110-140110img96564.jpg'),
-(5, 'Белые вина', 'Fonseca Tawny', 'Аромат раскрывается оттенками абрикос, спелых слив, пряностей и сливочного масла. Во вкусе ощущаются нюансы джема и прекрасный баланс. Послевкусие затяжное, уравновешенное хорошо интегрированной кислотностью.', 15, 385, 1, '/uploaded/20211110-135028img44986.jpg'),
-(6, 'Крепленые вина', 'Taylor\'s Fine Ruby', 'Яркий фруктовый аромат наполнен оттенками черной смородины, вишни и спелой сливы. Вкус переполнен фруктовым характером. Послевкусие долгое, оставляющее приятную сладость.', 20, 350, 1, '/uploaded/20211111-174117img57393.jpg');
+INSERT INTO `goods` (`id`, `category`, `category_id`, `title`, `description`, `strength`, `price`, `availability`, `img`) VALUES
+(1, 'Белые вина', 0, 'Sauvignon Blanc Marlborough Sun', 'Яркость Совиньон Блана проявляется в выразительном аромате маракуйи, крыжовника, листьев черной смородины в обрамлении тонких цитрусовых тонов. Во вкусе хорошо сбалансированное вино, обладает приятной свежестью и ярким характером. Послевкусие затяжное, освежающее.', 13, 345, 1, '/uploaded/20211123-135524img76152.jpg'),
+(2, 'Белые вина', 0, 'Chardonnay', 'Ароматное, утонченное Шардоне с нюансами манго, персиков, цитрусов и цветения липы. Во вкусе, свежее, фруктовое, питкое. Послевкусие мягкое, фруктовое. Отлично сочетается с различной рыбой, моллюсками, пастой со сливочным соусом и белым мясом, а также хорошо в качестве аперитива.', 13, 520, 1, '/uploaded/original/20211110-152345img67305.jpg'),
+(3, 'Красные вина', 0, 'Pinot Noir', 'Применяя свой многолетний опыт в Бургундии Doudet Naudin создали этот Пино Нуар с лоз, высаженных в Долине Од региона Лангедок-Руссильон вблизи Пиренеев, где прохладнее климат и мягче температуры. Вино с выразительным ароматом темных и красных ягод, гармонично переплетенных с цветочными тонами. Вкус обладает прекрасным балансом и элегантностью присущему Пино Нуару. Вино дополнит множество блюд от холодных закусок до белого и красного мяса.', 12.5, 290, 1, '/uploaded/original/20211110-152317img82471.jpg'),
+(4, 'Белые вина', 0, 'Cabernet Sauvignon Reserva', 'Кольчагуа - одна из чилийских винных долин, с большим международным авторитетом. В этой же долине, между прибрежным хребтом и Тихим океаном разбиты виноградники хозяйства. Линейка «Reserva» - прекрасные повседневные вина, которые никогда не подведут. Перед вами 100% Кабарне Совиньон, выдержанный 6 месяцев в дубовых бочках. Вино предлагает четко очерченные оттенки черной смородины, ванили и фиалки. Вино средней насыщенности, с сочными танинами и прекрасным фруктовым акцентом на послевкусие. Хорошее дополнение к мясным блюдам.', 25, 430, 1, '/uploaded/original/20211110-140110img96564.jpg'),
+(5, 'Белые вина', 0, 'Fonseca Tawny', 'Аромат раскрывается оттенками абрикос, спелых слив, пряностей и сливочного масла. Во вкусе ощущаются нюансы джема и прекрасный баланс. Послевкусие затяжное, уравновешенное хорошо интегрированной кислотностью.', 15, 385, 1, '/uploaded/original/20211110-135028img44986.jpg'),
+(6, 'Крепленые вина', 0, 'Taylor\'s Fine Ruby', 'Яркий фруктовый аромат наполнен оттенками черной смородины, вишни и спелой сливы. Вкус переполнен фруктовым характером. Послевкусие долгое, оставляющее приятную сладость.', 15, 350, 1, '/uploaded/20211123-135202img34729.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `goods2goods_category`
+--
+
+CREATE TABLE `goods2goods_category` (
+  `id` int(11) NOT NULL,
+  `good_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `goods_category`
+--
+
+CREATE TABLE `goods_category` (
+  `id` int(11) NOT NULL,
+  `category` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `goods_category`
+--
+
+INSERT INTO `goods_category` (`id`, `category`) VALUES
+(1, 'Белые вина'),
+(2, 'Красные вина'),
+(3, 'Крепленые вина');
 
 -- --------------------------------------------------------
 
@@ -123,9 +238,8 @@ CREATE TABLE `news` (
   `id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `category_id` int(11) NOT NULL,
   `text` text COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
   `meta_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta title',
   `meta_keywords` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta keywords',
   `meta_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta description'
@@ -135,11 +249,79 @@ CREATE TABLE `news` (
 -- Дамп данных таблицы `news`
 --
 
-INSERT INTO `news` (`id`, `date`, `title`, `category`, `text`, `description`, `meta_title`, `meta_keywords`, `meta_description`) VALUES
-(5, '2021-09-25 17:01:14', 'В Украине родилось много котят', 'Животные', 'В Украине родилось 230 котят. Это на 20 котят больше чем в прошлом году.', 'В Украине родилось 230 котят.', '', '', ''),
-(10, '2021-10-19 21:18:54', 'чарьчаобчпоб', 'ситбсиьбь', 'чттичмтястлдия', 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffgggggggggggggggggggg', 'meta title', 'meta keywords', 'meta description'),
-(11, '2021-10-19 21:18:42', 'пРИВЕТы', 'МЧЬМТЬЧМ', 'МТЬСМТЬ', 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', 'meta title', 'meta keywords', 'meta description'),
-(21, '2021-10-19 21:18:34', 'ahajnar', ',cstyle.css', 'h,fk,fk.', 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', 'meta title', 'meta keywords', 'meta description');
+INSERT INTO `news` (`id`, `date`, `title`, `category_id`, `text`, `meta_title`, `meta_keywords`, `meta_description`) VALUES
+(22, '2021-12-01 11:48:53', 'Динамо выиграло у Баварии', 1, '30.11.2021 года в матче лиги чемпионов, киевское Динамо выиграло у Мюнхенской Баварии со счетом 1:0. Гол на 61 минуте забил Николай Шапаренко.', 'meta title', 'meta keywords', 'meta description'),
+(23, '2021-12-06 10:32:28', 'Свежий рейтинг политических партий', 2, 'По даным компании \"Рога и копыта\", по состоянию на 01.12.2021 рейтинг политических партий снова возглавляет партия \"Европейская солидарность\". На тором месте \"Слуга народа\".', 'meta title', 'meta keywords', 'meta description'),
+(24, '2021-12-02 12:53:08', 'Гривна снова пошла вниз', 4, 'По последний даным Нацбанка, гривна снова начала опускаться.\r\nЭксперты прогнозируют, что снижение закончиться перед Новым годом.', 'meta title', 'meta keywords', 'meta description'),
+(25, '2021-12-03 11:47:08', 'Украина выпустила новую модель ЗАЗ', 3, 'На автовыставке в Дубаи Украина представила новый автомобиль ЗАЗ nosens. Планировали сделать тестдрайв, но авто не смогли завести.', 'meta title', 'meta keywords', 'meta description'),
+(26, '2021-12-02 12:13:26', 'Усик - лучший боксер мира', 1, 'Александр Усик победил Энтони Джошуа, и стал обладателем 4-ох чемпионских поясов!!', 'meta title', 'meta keywords', 'meta description'),
+(27, '2021-12-06 10:33:38', 'Скоро начнется олимпиада 2022', 1, 'В 2022 году пройдет зимняя олимпиада. Сборная Украины планирует попасть в ТОП-10.', 'meta title', 'meta keywords', 'meta description'),
+(29, '2021-12-06 10:39:10', 'Украина показала рост ВВП', 4, 'В 2021 году Украина показывает рост ВВП на уровне 2,3 %.', 'meta title', 'meta keywords', 'meta description');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `news_category`
+--
+
+CREATE TABLE `news_category` (
+  `id` int(11) NOT NULL,
+  `category` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `news_category`
+--
+
+INSERT INTO `news_category` (`id`, `category`) VALUES
+(1, 'Спорт'),
+(2, 'Политика'),
+(3, 'Авто'),
+(4, 'Экономика');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL,
+  `module` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `static` tinyint(1) NOT NULL DEFAULT '0',
+  `meta_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta description',
+  `meta_keywords` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta keywords',
+  `meta_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'meta title',
+  `text` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Text'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `pages`
+--
+
+INSERT INTO `pages` (`id`, `module`, `static`, `meta_description`, `meta_keywords`, `meta_title`, `text`) VALUES
+(1, '404', 1, 'Данная страница отсутствует!', 'Данная страница отсутствует!', 'Данная страница отсутствует!', 'Данная страница отсутствует!'),
+(3, 'comments', 0, '', '', '', ''),
+(4, 'comments2', 0, '', '', '', ''),
+(5, 'components', 0, '', '', '', ''),
+(6, 'static', 0, '', '', '', ''),
+(7, 'contacts', 0, '', '', '', ''),
+(8, 'aboutus', 1, '', '', '', 'Статичная информация о нас!!!'),
+(9, 'game', 0, '', '', '', ''),
+(10, 'game2', 0, '', '', '', ''),
+(11, 'manager', 0, '', '', '', ''),
+(12, 'manager2', 0, '', '', '', ''),
+(13, 'errors', 0, '', '', '', ''),
+(14, 'cab', 0, '', '', '', ''),
+(15, 'admin', 0, '', '', '', ''),
+(17, 'wines', 0, '', '', '', ''),
+(18, 'gifts', 0, '', '', '', ''),
+(19, 'news', 0, '', '', '', ''),
+(20, 'goods', 0, '', '', '', ''),
+(21, 'users', 0, '', '', '', ''),
+(22, 'pages', 0, '', '', '', ''),
+(24, 'food', 1, '', '', '', ''),
+(29, 'books', 0, 'meta description', 'meta keywords', 'meta title', 'Text');
 
 -- --------------------------------------------------------
 
@@ -150,7 +332,7 @@ INSERT INTO `news` (`id`, `date`, `title`, `category`, `text`, `description`, `m
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `login` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'login',
-  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '/uploaded/no_foto.jpg',
+  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '/uploaded/original/no_foto.jpg',
   `age` tinyint(4) UNSIGNED NOT NULL DEFAULT '18',
   `email` text COLLATE utf8_unicode_ci NOT NULL,
   `password` text COLLATE utf8_unicode_ci NOT NULL,
@@ -179,22 +361,40 @@ INSERT INTO `users` (`id`, `login`, `avatar`, `age`, `email`, `password`, `activ
 (15, 'Dima', '', 34, 'Dima1999@i.ua', 'CBouTQUYHXuWI', 1, '', 0, '', ''),
 (16, 'login1', '', 20, 'Login@i.ua', 'CBouTQUYHXuWI', 0, '', 0, '', ''),
 (18, 'login2', '', 25, 'Login2@i.ua', 'password2', 0, '', 0, '', ''),
-(41, 'Jenya', '/uploaded/20211112-173958img18251.jpg', 33, 'jenyamelnik1986@gmail.com', 'CBouTQUYHXuWI', 1, 'CB6epMtaLxOII', 5, 'CBacOoVtp4.ZM', 'CBqpDcR7bIjQs'),
 (43, 'Rita', '', 31, 'Rita@i.ua', 'CB4wFZWK//fyU', 1, 'CBQHm3yu2ikWc', 0, '', ''),
 (45, 'Anna', '', 25, 'Anna@i.ua', 'CB4wFZWK//fyU', 1, 'CBLkijhaQAl2Y', 5, 'CBacOoVtp4.ZM', 'CBsArLTFekQzI'),
 (46, 'Nikolay', '', 40, 'Nikolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBcxQMfO0TWCg', 0, '', ''),
-(50, 'Makar', '', 25, 'Makar@i.ua', 'CBTKEi/g6HDxk', 1, 'CB0A346UhHAos', 0, '', ''),
+(50, 'Makar', '', 25, 'Makar@i.ua', 'CBVEPntF35lX.', 1, 'CB0A346UhHAos', 0, '', ''),
 (51, 'Polina', '', 27, 'Polina@i.ua', 'CBdb5tnrHmBWA', 1, 'CBR0sB1y4qpcA', 0, '', ''),
 (52, 'Alenka', '', 31, 'Alenka@i.ua', 'CBaNmpw53Mh92', 1, 'CBgEcjpXVK6ag', 0, '', ''),
 (54, 'Nikkolay', '', 45, 'Nikkolay@i.ua', 'CBdb5tnrHmBWA', 1, 'CBp.fGK4ttVE.', 0, '', ''),
 (58, 'Vassya', '', 45, 'Vassya@i.ua', 'CBdb5tnrHmBWA', 1, 'CBAcldwPMYj0.', 0, '', ''),
 (62, 'Roman', '', 25, 'Roman@i.ua', 'CBdb5tnrHmBWA', 1, 'CB88tkMWL6Gns', 0, '', ''),
 (64, 'Oleh', '', 25, 'Oleh@i.ua', 'CBdb5tnrHmBWA', 1, 'CB7253PFLDhUg', 0, '', ''),
-(74, 'qqqqq', '/uploaded/20211111-135909img96099.jpg', 35, 'aaaaaaaaaaaaa@i.ua', 'CBTmAKGeGP9p6', 1, 'CBrUrTCoFgjfE', 0, '', '');
+(74, 'qqqqq', '/uploaded/20211111-135909img96099.jpg', 35, 'aaaaaaaaaaaaa@i.ua', 'CBTmAKGeGP9p6', 1, 'CBrUrTCoFgjfE', 0, '', ''),
+(75, 'Jenya', '/uploaded/100x100/20211124-160141img46287.jpg', 35, 'jenyamelnik1986@i.ua', 'CBcGtU7HY7hPU', 1, 'CBlDgUhpO14AU', 5, '', '');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `books2books_author`
+--
+ALTER TABLE `books2books_author`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `books_author`
+--
+ALTER TABLE `books_author`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `comments`
@@ -211,11 +411,35 @@ ALTER TABLE `goods`
   ADD KEY `ixCategory` (`category`);
 
 --
+-- Индексы таблицы `goods2goods_category`
+--
+ALTER TABLE `goods2goods_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `goods_category`
+--
+ALTER TABLE `goods_category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`),
   ADD KEY `ixTitle` (`title`);
+
+--
+-- Индексы таблицы `news_category`
+--
+ALTER TABLE `news_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `users`
@@ -229,6 +453,24 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+
+--
+-- AUTO_INCREMENT для таблицы `books2books_author`
+--
+ALTER TABLE `books2books_author`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT для таблицы `books_author`
+--
+ALTER TABLE `books_author`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
@@ -238,19 +480,43 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT для таблицы `goods2goods_category`
+--
+ALTER TABLE `goods2goods_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `goods_category`
+--
+ALTER TABLE `goods_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT для таблицы `news_category`
+--
+ALTER TABLE `news_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
