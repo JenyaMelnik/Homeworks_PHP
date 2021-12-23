@@ -1,4 +1,5 @@
 <?php
+$paginator = new Paginator();
 
 $shownBooks = 'Все книги';
 $author = '';
@@ -21,11 +22,21 @@ if (isset($_GET['author'])) {
     }
     $queryBookId->close();
 
+    $numberOfItems = query("
+        SELECT COUNT(id) AS cnt
+        FROM `books` 
+        WHERE `id` IN (" . implode(", ", $booksId) . ")
+        ORDER BY `id` DESC 
+    ")->fetch_object()->cnt;
+
+    $paginator->numberOfItems = $numberOfItems;
+
     $books = query("
         SELECT * 
         FROM `books` 
         WHERE `id` IN (" . implode(", ", $booksId) . ")
         ORDER BY `id` DESC 
+        LIMIT " . $paginator->SqlQueryLIMIT() . "
     ");
 
     $queryAuthor = query("
@@ -41,10 +52,19 @@ if (isset($_GET['author'])) {
     $shownBooks = 'Книги автора: ' . $currentAuthor['author'];
     $author = 'author=' . $_GET['author'] . '&';
 } else {
+    $numberOfItems = query("
+        SELECT COUNT(id) AS cnt
+        FROM `books` 
+        ORDER BY `id` DESC 
+    ")->fetch_object()->cnt;
+
+    $paginator->numberOfItems = $numberOfItems;
+
     $books = query("
         SELECT * 
         FROM `books` 
         ORDER BY `id` DESC 
+        LIMIT " . $paginator->SqlQueryLIMIT() . "
     ");
 }
 //===================================================================================================================

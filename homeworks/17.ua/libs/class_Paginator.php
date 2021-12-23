@@ -2,9 +2,9 @@
 
 class Paginator
 {
-    public int $itemsOnPage = 1;
+    public int $itemsOnPage = 3;
     public int $numberOfItems = 0;
-    public int $shownPaginatorPages = 3;
+    public int $shownPaginatorPages = 5;
 
     public function CurrentPage(): int
     {
