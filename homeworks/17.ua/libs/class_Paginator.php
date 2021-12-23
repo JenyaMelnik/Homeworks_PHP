@@ -6,73 +6,117 @@ class Paginator
     public int $numberOfItems = 0;
     public int $shownPaginatorPages = 5;
 
-    public function CurrentPage(): int
+    /**
+     * Количество страниц пагинатора
+     *
+     * @return int
+     */
+    public function numberOfPages(): int
+    {
+        return ceil($this->numberOfItems / $this->itemsOnPage);
+    }
+
+    /**
+     * Текущая страница
+     *
+     * @return int
+     */
+    public function currentPage(): int
     {
         $currentPage = $_GET['p'] ?? 1;
         if ((int)$currentPage < 1) {
             $currentPage = 1;
         }
-        if ((int)$currentPage > $this->NumberOfPages()) {
-            $currentPage = $this->NumberOfPages();
+        if ((int)$currentPage > $this->numberOfPages()) {
+            $currentPage = $this->numberOfPages();
         }
         return $currentPage;
     }
 
-    public function NumberOfPages(): int
+    /**
+     * С какой записи выбирать
+     *
+     * @return int
+     */
+    public function itemToBegin(): int
     {
-        return ceil($this->numberOfItems / $this->itemsOnPage);
+        return ($this->currentPage() - 1) * $this->itemsOnPage;
     }
 
-    public function ItemToBegin(): int
+    /**
+     * Данные для LIMIT (с кокой записи выбирать, к-тво записей)
+     *
+     * @return string
+     */
+    public function sqlQueryLIMIT()
     {
-        return ($this->CurrentPage() - 1) * $this->itemsOnPage;
+        return $this->itemToBegin() . ', ' . $this->itemsOnPage;
     }
 
-    public function SqlQueryLIMIT()
+    /**
+     * К-ство отображаемых страниц пагинатора
+     *
+     * @return int
+     */
+    public function shownPaginatorPages(): int
     {
-        return $this->ItemToBegin() . ', ' . $this->itemsOnPage;
-    }
-
-    public function ShownPaginatorPages(): int
-    {
-        return $this->shownPaginatorPages < $this->NumberOfPages()
+        return $this->shownPaginatorPages < $this->numberOfPages()
             ? $this->shownPaginatorPages
-            : $this->NumberOfPages();
+            : $this->numberOfPages();
     }
 
-
-    public function StartPaginator(): int
+    /**
+     * Первая отображаемая страница пагинатора
+     *
+     * @return int
+     */
+    public function startPaginator(): int
     {
         $start = 1;
-        if ($this->CurrentPage() - floor($this->ShownPaginatorPages() / 2) > 1) {
-            $start = $this->CurrentPage() - floor($this->ShownPaginatorPages() / 2);
+        if ($this->currentPage() - floor($this->shownPaginatorPages() / 2) > 1) {
+            $start = $this->currentPage() - floor($this->shownPaginatorPages() / 2);
         }
 
-        if (($this->NumberOfPages() - $this->CurrentPage()) < floor($this->ShownPaginatorPages() / 2)) {
-            $start = $this->NumberOfPages() - $this->ShownPaginatorPages() + 1;
+        if (($this->numberOfPages() - $this->currentPage()) < floor($this->shownPaginatorPages() / 2)) {
+            $start = $this->numberOfPages() - $this->shownPaginatorPages() + 1;
         }
 
         return $start;
     }
 
-    public function EndPaginator(): int
+    /**
+     * Последняя отображаемая страница пагинатора
+     *
+     * @return int
+     */
+    public function endPaginator(): int
     {
-        return ($this->StartPaginator() + $this->ShownPaginatorPages()) <= $this->NumberOfPages()
-            ? $this->StartPaginator() + $this->ShownPaginatorPages()
-            : $this->NumberOfPages() + 1;
+        return ($this->startPaginator() + $this->shownPaginatorPages()) <= $this->numberOfPages()
+            ? $this->startPaginator() + $this->shownPaginatorPages()
+            : $this->numberOfPages() + 1;
     }
 
-    public function PreviousPage(): int
+    /**
+     * Предидущая страница
+     *
+     * @return int
+     */
+    public function previousPage(): int
     {
-        return ($this->CurrentPage() - 1) > 0
-            ? $this->CurrentPage() - 1
+        return ($this->currentPage() - 1) > 0
+            ? $this->currentPage() - 1
             : 1;
     }
 
-    public function NextPage(): int
+    /**
+     * Следующая страница
+     *
+     * @return int
+     */
+    public function nextPage(): int
     {
-        return ($this->CurrentPage() + 1) > $this->NumberOfPages()
-            ? $this->NumberOfPages()
-            : $this->CurrentPage() + 1;
+        return ($this->currentPage() + 1) > $this->numberOfPages()
+            ? $this->numberOfPages()
+            : $this->currentPage() + 1;
     }
 }

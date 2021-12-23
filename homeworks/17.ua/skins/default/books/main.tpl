@@ -44,15 +44,15 @@ if (isset($_SESSION['user'])) { ?>
 
 <div>
     <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=1"><b>Первая</b></a>
-    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->PreviousPage()) ?>"><b>Назад</b></a>
+    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->previousPage()) ?>"><b>Назад</b></a>
 <?php
-    for ($i = $paginator->StartPaginator(); $i < $paginator->EndPaginator(); ++$i) {
-        if ($i == $paginator->CurrentPage()) { ?>
+    for ($i = $paginator->startPaginator(); $i < $paginator->endPaginator(); ++$i) {
+        if ($i == $paginator->currentPage()) { ?>
             <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?>
         <?php } else { ?>
             <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $i ?>"><?= $i ?>
         <?php }
     } ?>
-    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->NextPage()) ?>"><b>Вперед</b></a>
-    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $paginator->NumberOfPages() ?>"><b>Конец</b></a>
+    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->nextPage()) ?>"><b>Вперед</b></a>
+    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $paginator->numberOfPages() ?>"><b>Конец</b></a>
 </div>
