@@ -27,7 +27,7 @@ if (isset($_SESSION['user'])) { ?>
                         </h2>
                     </div>
                     <div>
-                        <img src="<?= $book['img'] ?>" alt="image">
+                        <img src="<?= $book['img'] ?>" alt="image" height="100">
                     </div>
                     <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'currentBook']) ?>?<?= $author ?>id=<?= (int)$book['id'] ?>">Подробнее...</a>
                     <hr>

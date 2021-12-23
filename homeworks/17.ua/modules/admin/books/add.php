@@ -99,12 +99,12 @@ $authors = query("
               FROM `books_author`
               ORDER BY `author` ASC
           ");
-while ($author = $authors->fetch_assoc()) {
-    $allAuthors[] = $author['author'];
+if ($authors->num_rows) {
+    while ($author = $authors->fetch_assoc()) {
+        $allAuthors[] = $author['author'];
+    }
+} else {
+    $allAuthors[] = 'Нет авторов';
 }
 
 $authors->close();
-
-if (empty($allAuthors)) {
-    $allAuthors[] = 'Нет авторов';
-}
