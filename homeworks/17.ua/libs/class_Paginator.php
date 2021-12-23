@@ -2,12 +2,12 @@
 
 class Paginator
 {
-   // public int $page = 1;
     public int $itemsOnPage = 1;
     public int $numberOfItems = 0;
     public int $shownPaginatorPages = 3;
 
-    public function CurrentPage(): int {
+    public function CurrentPage(): int
+    {
         $currentPage = $_GET['p'] ?? 1;
         if ((int)$currentPage < 1) {
             $currentPage = 1;
@@ -62,13 +62,15 @@ class Paginator
             : $this->NumberOfPages() + 1;
     }
 
-    public function PreviousPage(): int {
+    public function PreviousPage(): int
+    {
         return ($this->CurrentPage() - 1) > 0
             ? $this->CurrentPage() - 1
             : 1;
     }
 
-    public function NextPage(): int {
+    public function NextPage(): int
+    {
         return ($this->CurrentPage() + 1) > $this->NumberOfPages()
             ? $this->NumberOfPages()
             : $this->CurrentPage() + 1;
