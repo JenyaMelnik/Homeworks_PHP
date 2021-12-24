@@ -76,9 +76,9 @@ if (isset($_GET['author'])) {
         SELECT * 
         FROM `books` 
         WHERE `id` IN (" . implode(", ", $booksId) . ")
-        ORDER BY `id` DESC 
-        LIMIT " . $paginator->sqlQueryLIMIT() . "
-    ");
+        ORDER BY `id` DESC"
+        . $paginator->sqlQueryLimit()
+    );
 
     $queryAuthor = query("
         SELECT `author` 
@@ -105,9 +105,9 @@ if (isset($_GET['author'])) {
     $books = query("
         SELECT * 
         FROM `books` 
-        ORDER BY `id` DESC 
-        LIMIT " . $paginator->sqlQueryLIMIT() . "
-    ");
+        ORDER BY `id` DESC"
+        . $paginator->sqlQueryLimit()
+    );
 }
 //===================================================================================================================
 
