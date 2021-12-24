@@ -48,27 +48,20 @@ if (isset($_SESSION['user'])) { ?>
             </form>
         </div>
     </div>
+    <div>
+        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=1"><b>Первая</b></a>
+        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->previousPage()) ?>"><b>Назад</b></a>
+        <?php
+        for ($i = $paginator->startPaginator(); $i < $paginator->endPaginator(); ++$i) {
+        if ($i == $paginator->currentPage()) { ?>
+        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?>
+            <?php } else { ?>
+            <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $i ?>"><?= $i ?>
+                <?php }
+                } ?>
+                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->nextPage()) ?>"><b>Вперед</b></a>
+                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $paginator->numberOfPages() ?>"><b>Конец</b></a>
+    </div>
 <?php } else {
     echo 'Авторизируйтесь что бы просматривать раздел книги';
 } ?>
-
-<div>
-    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=1"><b>Первая</b></a>
-    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->previousPage()) ?>"><b>Назад</b></a>
-<?php
-    for ($i = $paginator->startPaginator(); $i < $paginator->endPaginator(); ++$i) {
-        if ($i == $paginator->currentPage()) { ?>
-            <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?>
-        <?php } else { ?>
-            <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $i ?>"><?= $i ?>
-        <?php }
-    } ?>
-    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= ($paginator->nextPage()) ?>"><b>Вперед</b></a>
-    <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= $author ?>p=<?= $paginator->numberOfPages() ?>"><b>Конец</b></a>
-</div>
-
-
-
-
-
-
