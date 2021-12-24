@@ -27,15 +27,15 @@ if (isset($_POST['delete'])) {
 }
 
 //========================================== Удаление одной записи ==================================================
-if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
     query("
         DELETE FROM `books` 
-        WHERE `id` = " . (int)$_GET['id'] . "
-    ");
+        WHERE `id` = " . (int)$_GET['id']
+    );
     query("
         DELETE FROM `books2books_author` 
-        WHERE `book_id` = " . (int)$_GET['id'] . "
-    ");
+        WHERE `book_id` = " . (int)$_GET['id']
+    );
 
     $_SESSION['notice'] = 'Книга удалена';
     redirectTo(['module' => 'books']);
@@ -50,7 +50,7 @@ if (isset($_GET['author'])) {
     $queryBookId = query("
         SELECT `book_id`
         FROM `books2books_author`
-        WHERE `author_id` = '" . htmlspecialchars($_GET['author']) . "'
+        WHERE `author_id` = '" . (int)$_GET['author'] . "'
     ");
 
     if (!$queryBookId->num_rows) {
@@ -58,32 +58,34 @@ if (isset($_GET['author'])) {
         redirectTo(['module' => 'books']);
     }
 
+    $bookIds = [];
     while ($bookId = $queryBookId->fetch_assoc()) {
-        $booksId[] = (int)$bookId['book_id'];
+        $bookIds[] = (int)$bookId['book_id'];
     }
     $queryBookId->close();
 
     $numberOfItems = query("
         SELECT COUNT(id) AS cnt
         FROM `books` 
-        WHERE `id` IN (" . implode(", ", $booksId) . ")
+        WHERE `id` IN (" . implode(", ", $bookIds) . ")
         ORDER BY `id` DESC 
     ")->fetch_object()->cnt;
+
 
     $paginator->numberOfItems = $numberOfItems;
 
     $books = query("
         SELECT * 
         FROM `books` 
-        WHERE `id` IN (" . implode(", ", $booksId) . ")
-        ORDER BY `id` DESC 
-        LIMIT " . $paginator->sqlQueryLIMIT() . "
-    ");
+        WHERE `id` IN (" . implode(", ", $bookIds) . ")
+        ORDER BY `id` DESC
+        " . $paginator->sqlQueryLimit()
+    );
 
     $queryAuthor = query("
         SELECT `author` 
         FROM `books_author`
-        WHERE `id` = " . htmlspecialchars($_GET['author']) . "
+        WHERE `id` = " . (int)$_GET['author'] . "
         LIMIT 1
     ");
 
@@ -105,9 +107,9 @@ if (isset($_GET['author'])) {
     $books = query("
         SELECT * 
         FROM `books` 
-        ORDER BY `id` DESC 
-        LIMIT " . $paginator->sqlQueryLIMIT() . "
-    ");
+        ORDER BY `id` DESC
+        " . $paginator->sqlQueryLimit()
+    );
 }
 //===================================================================================================================
 

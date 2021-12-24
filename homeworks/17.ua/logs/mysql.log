@@ -1383,3 +1383,25 @@ line: 112
 date:2021-12-23 14:22:33
 =============================================
 
+QUERY: 
+        SELECT * 
+        FROM `books` 
+        ORDER BY `id` DESC 
+        LIMIT  LIMIT 0, 3
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 3' at line 4
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\books\main.php
+line: 67
+date:2021-12-24 12:49:37
+=============================================
+
+QUERY: 
+        SELECT * 
+        FROM `books` 
+        ORDER BY `id` DESC 
+        LIMIT  LIMIT 0, 3
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 3' at line 4
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\books\main.php
+line: 67
+date:2021-12-24 12:50:13
+=============================================
+

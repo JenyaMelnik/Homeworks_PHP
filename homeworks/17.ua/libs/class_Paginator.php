@@ -2,8 +2,13 @@
 
 class Paginator
 {
+    /** @var int Количество елементов на странице */
     public int $itemsOnPage = 3;
+
+    /** @var int Общее количество елементов */
     public int $numberOfItems = 0;
+
+    /** @var int Количество выводимых страниц пагинатора */
     public int $shownPaginatorPages = 5;
 
     /**
@@ -48,9 +53,9 @@ class Paginator
      *
      * @return string
      */
-    public function sqlQueryLIMIT()
+    public function sqlQueryLimit(): string
     {
-        return $this->itemToBegin() . ', ' . $this->itemsOnPage;
+        return ' LIMIT ' . $this->itemToBegin() . ', ' . $this->itemsOnPage;
     }
 
     /**
