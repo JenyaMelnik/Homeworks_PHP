@@ -20,12 +20,13 @@ include_once './route.php';
 ob_start();
 include './' . Core::$CONTROLLER . '/allPages.php';
 
-include $modulePath;
-include $skinPath;
-
 if (!file_exists($modulePath) || !file_exists($skinPath)) {
     redirectTo(['page' => '404']);
 }
+
+include $modulePath;
+include $skinPath;
+
 $content = ob_get_contents();
 ob_end_clean();
 
