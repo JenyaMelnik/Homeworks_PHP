@@ -2,6 +2,7 @@
 /**
  * @var $errors array
  * @var $currentBook array
+ * @var $currentBookAuthorsName array
  * @var $allAuthors array
  */
 ?>
@@ -14,52 +15,25 @@
                 <td><input type="text" name="title"
                            value="<?= htmlspecialchars($currentBook['title']); ?>">
                 </td>
-                <td> <?= (htmlspecialchars($errors['title'] ?? '')) ?></td>
+                <td> <?= $errors['title'] ?? '' ?></td>
             </tr>
             <tr>
-                <td>Автор 1:</td>
+                <td>Авторы:</td>
                 <td>
-                    <select name="author1">
+                    <select name="author[]" multiple="multiple" required size="10">
                         <?php
                         foreach ($allAuthors as $author) { ?>
-                            <option value="<?= $author ?>"
-                                <?php if (isset($currentBookAuthorsName[0]['author']) && $currentBookAuthorsName[0]['author'] == $author) {
-                                    echo ' selected="selected"';
-                                } ?>><?= $author ?></option>
+                            <option value="<?= $author['id'] ?>"
+                                <?php
+                                foreach ($currentBookAuthorsName as $currentBookAuthorName) {
+                                    if ($currentBookAuthorName == $author['author']) {
+                                        echo ' selected="selected"';
+                                    }
+                                } ?>><?= htmlspecialchars($author['author']) ?></option>
                         <?php } ?>
                     </select>
                 </td>
-                <td><?= (htmlspecialchars($errors['author1'] ?? '')) ?></td>
-            </tr>
-            <tr>
-                <td>Автор 2:</td>
-                <td>
-                    <select name="author2">
-                        <?php
-                        foreach ($allAuthors as $author) { ?>
-                            <option value="<?= $author ?>"
-                                <?php if (isset($currentBookAuthorsName[1]['author']) && $currentBookAuthorsName[1]['author'] == $author) {
-                                    echo ' selected="selected"';
-                                } ?>><?= $author ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td><?= (htmlspecialchars($errors['author2'] ?? '')) ?></td>
-            </tr>
-            <tr>
-                <td>Автор 3:</td>
-                <td>
-                    <select name="author3">
-                        <?php
-                        foreach ($allAuthors as $author) { ?>
-                            <option value="<?= $author ?>"
-                                <?php if (isset($currentBookAuthorsName[2]['author']) && $currentBookAuthorsName[2]['author'] == $author) {
-                                    echo ' selected="selected"';
-                                } ?>><?= $author ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td><?= (htmlspecialchars($errors['author3'] ?? '')) ?></td>
+                <td><?= $errors['author'] ?? '' ?></td>
             </tr>
             <tr>
                 <td>Описание книги:</td>

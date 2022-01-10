@@ -3,9 +3,10 @@
  * @var $dbc mysqli
  */
 
+
 if (isset($_POST['edit'],
     $_POST['title'],
-    $_POST['author1'],
+    $_POST['author'],
     $_POST['description'])) {
 
     $errors = [];
@@ -15,9 +16,8 @@ if (isset($_POST['edit'],
     } elseif (mb_strlen($_POST['title']) > 30) {
         $errors['title'] = 'Название книги должно быть не более 30 символов';
     }
-
-    if (empty($_POST['author1'])) {
-        $errors['author1'] = 'Выберите автора книги';
+    if (count($_POST['author']) < 2 && $_POST['author'][0] == 1) {
+        $errors['author'] = 'Выберите автора книги';
     }
 
     if (empty($_POST['description'])) {
@@ -44,18 +44,18 @@ if (isset($_POST['edit'],
     }
 
     if (!count($errors)) {
+        $currentAuthors = [];
 
-        $authors[] = $_POST['author1'];
-        if (!empty($_POST['author2'])) {
-            $authors[] = $_POST['author2'];
-        }
-        if (!empty($_POST['author3'])) {
-            $authors[] = $_POST['author3'];
+        foreach ($_POST['author'] as $author) {
+            if ($author == 1) {
+                continue;
+            }
+            $currentAuthors[] = $author;
         }
 
         $selectedAuthors = query("
             SELECT * FROM `books_author`
-            WHERE `author` IN ('" . implode("','", escapeString($authors)) . "')
+            WHERE `id` IN (" . implode(',', escapeString($currentAuthors)) . ")
             ORDER BY `id` ASC
         ");
 
@@ -87,7 +87,7 @@ if (isset($_POST['edit'],
                 query("
                     INSERT INTO `books2books_author`
                     SET `book_id` = " . (int)$_GET['id'] . ",
-                      `author_id` = " . $selectedAuthor['id'] . "
+                      `author_id` = " . (int)$selectedAuthor['id'] . "
                 ");
             }
 
@@ -142,7 +142,7 @@ if (!$queryAuthors->num_rows) {
     exit();
 }
 while ($authors = $queryAuthors->fetch_assoc()) {
-    $currentBookAuthorsName[] = $authors;
+    $currentBookAuthorsName[] = $authors['author'];
 }
 $queryAuthors->close();
 
@@ -153,7 +153,7 @@ $authors = query("
               ORDER BY `author` ASC
           ");
 while ($author = $authors->fetch_assoc()) {
-    $allAuthors[] = $author['author'];
+    $allAuthors[] = $author;
 }
 
 $authors->close();

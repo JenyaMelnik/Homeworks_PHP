@@ -28,7 +28,7 @@ if (!$authorsIds->num_rows) {
 }
 
 while ($authorId = $authorsIds->fetch_assoc()) {
-    $currentBookAuthorsIds[] = $authorId['author_id'];
+    $currentBookAuthorsIds[] = (int)$authorId['author_id'];
 }
 $authorsIds->close();
 

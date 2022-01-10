@@ -777,7 +777,7 @@ footer a {
 }
 
 .container {
-    width: 1315px;
+    max-width: 1315px;
     margin: 5px auto -5px;
 }
 

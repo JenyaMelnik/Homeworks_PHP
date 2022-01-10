@@ -1,6 +1,18 @@
 <?php
 Core::$CSS[] = '<link type="text/css" rel=stylesheet href="/css/booksStyle.css"';
 
+
+if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+    query("
+        DELETE FROM `books_author`
+        WHERE `id` = " . (int)$_GET['id'] . "
+    ");
+
+    $_SESSION['notice'] = 'Автор удален';
+    redirectTo(['module' => 'books', 'page'=>'authors']);
+}
+
+// =================================================================================================================
 $queryAuthors = query("
     SELECT * FROM `books_author`
 ");

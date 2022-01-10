@@ -20,10 +20,10 @@
                     <select name="category">
                         <?php
                         foreach ($allCategories as $category) { ?>
-                            <option value="<?= $category ?>"
-                                <?php if (isset($_POST['category']) && $_POST['category'] == $category) {
+                            <option value="<?= $category['id'] ?>"
+                                <?php if (isset($_POST['category']) && $_POST['category'] == $category['category']) {
                                     echo ' selected="selected"';
-                                } ?>><?= $category ?></option>
+                                } ?>><?= htmlspecialchars($category['category']) ?></option>
                         <?php } ?>
                     </select>
                 </td>

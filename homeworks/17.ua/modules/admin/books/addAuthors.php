@@ -8,14 +8,14 @@ if (isset($_POST['addAuthor'], $_POST['authorName'])) {
     if (!isset($error)) {
         $queryAurhor = query("
             SELECT * FROM `books_author`
-            WHERE `author` = '" . $_POST['authorName'] . "'
+            WHERE `author` = '" . escapeString($_POST['authorName']) . "'
             LIMIT 1
         ");
 
         if (!$queryAurhor->num_rows) {
             query("
             INSERT INTO `books_author`
-            SET `author` = '" . htmlspecialchars(trim($_POST['authorName'])) . "'
+            SET `author` = '" . escapeString(trim($_POST['authorName'])) . "'
         ");
             $_SESSION['notice'] = 'Автор добавлен';
             redirectTo(['module' => 'books', 'page' => 'authors']);

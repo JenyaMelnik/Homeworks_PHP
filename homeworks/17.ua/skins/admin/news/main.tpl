@@ -15,16 +15,17 @@ if (isset($_SESSION['user'])) {
                 <h2> <?= $info; ?> </h2>
             <?php } ?>
             <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'add']) ?>">ДОБАВИТЬ НОВОСТЬ</a>
+            <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'categories']) ?>">РЕДАКТИРОВАТЬ КАТЕГОРИИ</a>
             <hr>
             <div>
                 <p>
                     <a href="/admin/news"><b>Все категории</b></a>
                     <?php
                     while ($categories = $newsCategories->fetch_assoc()) { ?>
-                        <a href="/admin/news?category=<?= $categories['category'] ?>"><b><?= $categories['category'] ?></b></a>
+                        <a href="/admin/news?category=<?= htmlspecialchars($categories['category']) ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
                     <?php } ?>
                 </p>
-                <p><b><?= $category ?>:</b></p>
+                <p><b><?= htmlspecialchars($category) ?>:</b></p>
                 <form action="" method="post">
                     <?php
                     if (mysqli_num_rows($news)) {
@@ -32,16 +33,16 @@ if (isset($_SESSION['user'])) {
                             <div>
                                 <div>
                                     <label><input type="checkbox" name="ids[]" value="<?= $newsRow['id'] ?>"></label>
-                                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?category=<?= $category ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
+                                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?category=<?= htmlspecialchars($category) ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
                                     <a href="<?= createUrlChpu(['module' => 'news']) ?>?action=delete&id=<?= $newsRow['id'] ?>">УДАЛИТЬ</a>
                                 </div>
                                 <div><?= $newsRow['date']; ?></div>
-                                <div class="text"><?= $newsRow['title']; ?></div>
+                                <div class="text"><?= htmlspecialchars($newsRow['title']); ?></div>
                             </div>
                             <hr>
                         <?php }
                     } else { ?>
-                        <span>Нет товаров</span>
+                        <span>В данной категории нет новостей </span>
                     <?php } ?>
                     <input type="submit" name="delete" value="Удалить отмеченные записи">
                 </form>

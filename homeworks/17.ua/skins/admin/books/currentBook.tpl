@@ -23,5 +23,5 @@
         </div>
         <hr>
     </div>
-    <a href="<?= createUrlChpu(['module' => 'books']) ?><?= $author ?>"> Вернутся к книгам </a>
+    <a href="<?= createUrlChpu(['module' => 'books']) ?><?= htmlspecialchars($author) ?>"> Вернутся к книгам </a>
 </div>

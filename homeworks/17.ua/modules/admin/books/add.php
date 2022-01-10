@@ -5,7 +5,7 @@
 
 if (isset($_POST['add'],
     $_POST['title'],
-    $_POST['author1'],
+    $_POST['author'],
     $_POST['description'])) {
 
     $errors = [];
@@ -16,8 +16,8 @@ if (isset($_POST['add'],
         $errors['title'] = 'Название книги должно быть не более 30 символов';
     }
 
-    if (empty($_POST['author1'])) {
-        $errors['author1'] = 'Выберите автора книги';
+    if (count($_POST['author']) < 2 && $_POST['author'][0] == 1) {
+        $errors['author'] = 'Выберите автора книги';
     }
 
     if (empty($_POST['description'])) {
@@ -44,18 +44,18 @@ if (isset($_POST['add'],
     }
 
     if (!count($errors)) {
+        $currentAuthors = [];
 
-        $authors[] = $_POST['author1'];
-        if (!empty($_POST['author2'])) {
-            $authors[] = $_POST['author2'];
-        }
-        if (!empty($_POST['author3'])) {
-            $authors[] = $_POST['author3'];
+        foreach ($_POST['author'] as $author) {
+            if ($author == 1) {
+                continue;
+            }
+            $currentAuthors[] = $author;
         }
 
         $selectedAuthors = query("
             SELECT * FROM `books_author`
-            WHERE `author` IN ('" . implode("','", escapeString($authors)) . "')
+            WHERE `id` IN (" . implode(',', escapeString($currentAuthors)) . ")
             ORDER BY `id` ASC
         ");
 
@@ -101,10 +101,9 @@ $authors = query("
           ");
 if ($authors->num_rows) {
     while ($author = $authors->fetch_assoc()) {
-        $allAuthors[] = $author['author'];
+        $allAuthors[] = $author;
     }
 } else {
     $allAuthors[] = 'Нет авторов';
 }
-
 $authors->close();
