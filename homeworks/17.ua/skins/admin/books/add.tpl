@@ -13,7 +13,7 @@
                 <td><input type="text" name="title"
                            value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
                 </td>
-                <td> <?= (htmlspecialchars($errors['title'] ?? '')) ?></td>
+                <td> <?= ($errors['title'] ?? '') ?></td>
             </tr>
             <tr>
                 <td>Выберите автора 1:</td>
@@ -21,14 +21,14 @@
                     <select name="author1">
                         <?php
                         foreach ($allAuthors as $author) { ?>
-                            <option value="<?= $author ?>"
-                                <?php if (isset($_POST['author1']) && $_POST['author1'] == $author) {
+                            <option value="<?= $author['id'] ?>"
+                                <?php if (isset($_POST['author1']) && $_POST['author1'] == $author['author']) {
                                     echo ' selected="selected"';
-                                } ?>><?= $author ?></option>
+                                } ?>><?= htmlspecialchars($author['author']) ?></option>
                         <?php } ?>
                     </select>
                 </td>
-                <td><?= (htmlspecialchars($errors['author1'] ?? '')) ?></td>
+                <td><?= ($errors['author1'] ?? '') ?></td>
             </tr>
             <tr>
                 <td>Выберите автора 2:</td>
@@ -36,14 +36,14 @@
                     <select name="author2">
                         <?php
                         foreach ($allAuthors as $author) { ?>
-                            <option value="<?= $author ?>"
-                                <?php if (isset($_POST['author2']) && $_POST['author2'] == $author) {
+                            <option value="<?= $author['id'] ?>"
+                                <?php if (isset($_POST['author2']) && $_POST['author2'] == $author['author']) {
                                     echo ' selected="selected"';
-                                } ?>><?= $author ?></option>
+                                } ?>><?= htmlspecialchars($author['author']) ?></option>
                         <?php } ?>
                     </select>
                 </td>
-                <td><?= (htmlspecialchars($errors['author2'] ?? '')) ?></td>
+                <td><?= ($errors['author2'] ?? '') ?></td>
             </tr>
             <tr>
                 <td>Выберите автора 3:</td>
@@ -51,14 +51,14 @@
                     <select name="author3">
                         <?php
                         foreach ($allAuthors as $author) { ?>
-                            <option value="<?= $author ?>"
-                                <?php if (isset($_POST['author3']) && $_POST['author3'] == $author) {
+                            <option value="<?= $author['id'] ?>"
+                                <?php if (isset($_POST['author3']) && $_POST['author3'] == $author['author']) {
                                     echo ' selected="selected"';
-                                } ?>><?= $author ?></option>
+                                } ?>><?= htmlspecialchars($author['author']) ?></option>
                         <?php } ?>
                     </select>
                 </td>
-                <td><?= (htmlspecialchars($errors['author3'] ?? '')) ?></td>
+                <td><?= ($errors['author3'] ?? '') ?></td>
             </tr>
             <tr>
                 <td>Введите описание книги:</td>

@@ -1405,3 +1405,108 @@ line: 67
 date:2021-12-24 12:50:13
 =============================================
 
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `author` = '''
+            LIMIT 1
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''
+            LIMIT 1' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\addAuthors.php
+line: 11
+date:2022-01-05 13:10:28
+=============================================
+
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `author` = '''
+            LIMIT 1
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''
+            LIMIT 1' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\addAuthors.php
+line: 11
+date:2022-01-05 13:11:18
+=============================================
+
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `author` = '''
+            LIMIT 1
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''
+            LIMIT 1' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\addAuthors.php
+line: 11
+date:2022-01-05 13:11:26
+=============================================
+
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `author` = '''
+            LIMIT 1
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''
+            LIMIT 1' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\addAuthors.php
+line: 11
+date:2022-01-05 13:11:36
+=============================================
+
+QUERY: 
+            INSERT INTO `books_author`
+            SET `author` = '''
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\addAuthors.php
+line: 18
+date:2022-01-05 13:13:04
+=============================================
+
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `author` = '''
+            LIMIT 1
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''
+            LIMIT 1' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\addAuthors.php
+line: 11
+date:2022-01-05 13:33:05
+=============================================
+
+QUERY: 
+            UPDATE `books_author`
+            SET `author` = '''''''
+            WHERE `id` = 6
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''''''
+            WHERE `id` = 6' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\editAuthors.php
+line: 12
+date:2022-01-05 13:34:17
+=============================================
+
+QUERY: 
+        SELECT `id`
+        FROM `news_category`
+        WHERE `category` = '&lt;b&gt;qwerty&lt;b&gt;qwrdfhmdhk//123''''''`''
+        LIMIT 1
+    
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''&lt;b&gt;qwerty&lt;b&gt;qwrdfhmdhk//123''''''`''
+        LIMIT 1' at line 3
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\main.php
+line: 44
+date:2022-01-10 13:01:28
+=============================================
+
+QUERY: 
+        DELETE FROM `books_authors`
+        WHERE `id` = 8
+    
+Table 'jenyamelnik1986.books_authors' doesn't exist
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\authors.php
+line: 8
+date:2022-01-10 14:29:34
+=============================================
+

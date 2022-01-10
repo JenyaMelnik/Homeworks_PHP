@@ -8,7 +8,7 @@ if (isset($_POST['editAuthor'], $_POST['authorName'])) {
     if (!isset($error)) {
         query("
             UPDATE `books_author`
-            SET `author` = '" . htmlspecialchars(trim($_POST['authorName'])) . "'
+            SET `author` = '" . escapeString(trim($_POST['authorName'])) . "'
             WHERE `id` = " . (int)$_GET['id'] . "
         ");
 

@@ -16,7 +16,7 @@ if (isset($_POST['add'],
         $errors['title'] = 'Название книги должно быть не более 30 символов';
     }
 
-    if (empty($_POST['author1'])) {
+    if (empty($_POST['author1']) || $_POST['author1'] == 1) {
         $errors['author1'] = 'Выберите автора книги';
     }
 
@@ -46,16 +46,16 @@ if (isset($_POST['add'],
     if (!count($errors)) {
 
         $authors[] = $_POST['author1'];
-        if (!empty($_POST['author2'])) {
+        if (!empty($_POST['author2']) && $_POST['author2'] != 1) {
             $authors[] = $_POST['author2'];
         }
-        if (!empty($_POST['author3'])) {
+        if (!empty($_POST['author3']) && $_POST['author3'] != 1) {
             $authors[] = $_POST['author3'];
         }
 
         $selectedAuthors = query("
             SELECT * FROM `books_author`
-            WHERE `author` IN ('" . implode("','", escapeString($authors)) . "')
+            WHERE `id` IN (" . implode(',', escapeString($authors)) . ")
             ORDER BY `id` ASC
         ");
 
@@ -101,10 +101,9 @@ $authors = query("
           ");
 if ($authors->num_rows) {
     while ($author = $authors->fetch_assoc()) {
-        $allAuthors[] = $author['author'];
+        $allAuthors[] = $author;
     }
 } else {
     $allAuthors[] = 'Нет авторов';
 }
-
 $authors->close();

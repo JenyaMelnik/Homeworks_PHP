@@ -28,7 +28,7 @@ if (isset($_POST['add'],
         $category = query("
             SELECT `id`
             FROM `news_category`
-            WHERE `category` = '" . htmlspecialchars($_POST['category']) . "'
+            WHERE `id` = '" . escapeString($_POST['id']) . "'
             LIMIT 1
         ");
         $categoryId = $category->fetch_assoc();
@@ -53,7 +53,7 @@ $categories = query("
               ORDER BY `id`
           ");
 while ($category = $categories->fetch_assoc()) {
-    $allCategories[] = $category['category'];
+    $allCategories[] = $category;
 }
 
 $categories->close();

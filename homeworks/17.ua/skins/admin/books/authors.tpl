@@ -15,12 +15,22 @@
 <div class="clearfix">
     <div class="border floatleft">
         <p><b>ВСЕ АВТОРЫ:</b></p>
-        <ul>
+        <table>
             <?php
-            while ($authors = $queryAuthors->fetch_assoc()) { ?>
-                <li><a href="/admin/books/authors?id=<?= $authors['id'] ?>"> <?= $authors['author'] ?></a></li>
+            while ($authors = $queryAuthors->fetch_assoc()) {
+                if ($authors['author'] == '') {
+                    continue;
+                } ?>
+                <tr>
+                    <td>
+                        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'authors']) ?>?id=<?= $authors['id'] ?>"> <?= htmlspecialchars($authors['author']) ?></a>
+                    </td>
+                    <td>
+                        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'authors']) ?>?action=delete&id=<?= $authors['id'] ?>">УДАЛИТЬ</a>
+                    </td>
+                   </tr>
             <?php } ?>
-        </ul>
+        </table>
     </div>
     <div class="border floatleft">
         <p>

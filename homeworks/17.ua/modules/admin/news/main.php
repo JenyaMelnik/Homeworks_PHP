@@ -41,7 +41,7 @@ if (isset($_GET['category'])) {
     $result = query("
         SELECT `id`
         FROM `news_category`
-        WHERE `category` = '" . htmlspecialchars($_GET['category']) . "'
+        WHERE `category` = '" . escapeString($_GET['category']) . "'
         LIMIT 1
     ");
 

@@ -3,6 +3,7 @@
  * @var $dbc mysqli
  */
 
+
 if (isset($_POST['edit'],
     $_POST['title'],
     $_POST['author1'],
@@ -16,7 +17,7 @@ if (isset($_POST['edit'],
         $errors['title'] = 'Название книги должно быть не более 30 символов';
     }
 
-    if (empty($_POST['author1'])) {
+    if (empty($_POST['author1']) || $_POST['author1'] == 1) {
         $errors['author1'] = 'Выберите автора книги';
     }
 
@@ -46,16 +47,16 @@ if (isset($_POST['edit'],
     if (!count($errors)) {
 
         $authors[] = $_POST['author1'];
-        if (!empty($_POST['author2'])) {
+        if (!empty($_POST['author2']) && $_POST['author2'] != 1) {
             $authors[] = $_POST['author2'];
         }
-        if (!empty($_POST['author3'])) {
+        if (!empty($_POST['author3']) && $_POST['author3'] != 1) {
             $authors[] = $_POST['author3'];
         }
 
         $selectedAuthors = query("
             SELECT * FROM `books_author`
-            WHERE `author` IN ('" . implode("','", escapeString($authors)) . "')
+            WHERE `id` IN (" . implode(',', escapeString($authors)) . ")
             ORDER BY `id` ASC
         ");
 
@@ -87,7 +88,7 @@ if (isset($_POST['edit'],
                 query("
                     INSERT INTO `books2books_author`
                     SET `book_id` = " . (int)$_GET['id'] . ",
-                      `author_id` = " . $selectedAuthor['id'] . "
+                      `author_id` = " . (int)$selectedAuthor['id'] . "
                 ");
             }
 
@@ -144,6 +145,7 @@ if (!$queryAuthors->num_rows) {
 while ($authors = $queryAuthors->fetch_assoc()) {
     $currentBookAuthorsName[] = $authors;
 }
+
 $queryAuthors->close();
 
 //============================================== Выбираем всех авторов ==============================================
@@ -153,7 +155,7 @@ $authors = query("
               ORDER BY `author` ASC
           ");
 while ($author = $authors->fetch_assoc()) {
-    $allAuthors[] = $author['author'];
+    $allAuthors[] = $author;
 }
 
 $authors->close();

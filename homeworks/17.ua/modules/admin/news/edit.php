@@ -25,7 +25,7 @@ if (isset($_POST['edit'],
         $result = query("
             SELECT `id`
             FROM `news_category`
-            WHERE `category` = '" . htmlspecialchars($_POST['category']) . "'
+            WHERE `id` = '" . escapeString($_POST['category']) . "'
             LIMIT 1
         ");
         $categoryId = $result->fetch_assoc();
@@ -39,7 +39,7 @@ if (isset($_POST['edit'],
                 `date`        = NOW()
             WHERE `id`        = " . (int)$_GET['id'] . "
         ");
-        $_SESSION['info'] = 'Запись была изменена';
+        $_SESSION['info'] = 'Новость изменена';
         redirectTo(['module' => 'news']);
     }
 }
@@ -80,7 +80,7 @@ $categories = query("
               ORDER BY `id`
           ");
 while ($category = $categories->fetch_assoc()) {
-    $allCategories[] = $category['category'];
+    $allCategories[] = $category;
 }
 
 $categories->close();
@@ -92,7 +92,8 @@ if (empty($allCategories)) {
 
 $currentNews['title'] = $_POST['title'] ?? $currentNews['title'];
 $currentNews['text'] = $_POST['text'] ?? $currentNews['text'];
-
+/*
 if (isset($currentCategory['category'])) {
     $currentCategory['category'] = $_POST['category'] ?? $currentCategory['category'];
 }
+*/
