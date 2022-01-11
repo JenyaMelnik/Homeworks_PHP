@@ -1546,3 +1546,27 @@ line: 58
 date:2022-01-10 23:31:38
 =============================================
 
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `id` IN (Нет авторов)
+            ORDER BY `id` ASC
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'авторов)
+            ORDER BY `id` ASC' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\edit.php
+line: 58
+date:2022-01-11 11:16:00
+=============================================
+
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `id` IN (Нет авторов)
+            ORDER BY `id` ASC
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'авторов)
+            ORDER BY `id` ASC' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\edit.php
+line: 58
+date:2022-01-11 11:16:50
+=============================================
+

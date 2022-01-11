@@ -1,9 +1,3 @@
-<?php
-/**
- * @var $error string
- */
-?>
-
 <div>
     <form action="" method="post">
         Введите автора

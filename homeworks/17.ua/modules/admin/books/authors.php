@@ -1,7 +1,6 @@
 <?php
 Core::$CSS[] = '<link type="text/css" rel=stylesheet href="/css/booksStyle.css"';
 
-
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     query("
         DELETE FROM `books_author`

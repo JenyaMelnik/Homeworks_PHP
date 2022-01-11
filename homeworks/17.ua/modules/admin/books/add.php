@@ -44,18 +44,18 @@ if (isset($_POST['add'],
     }
 
     if (!count($errors)) {
-        $currentAuthors = [];
+        $currentAuthorIds = [];
 
-        foreach ($_POST['author'] as $author) {
-            if ($author == 1) {
+        foreach ($_POST['author'] as $authorId) {
+            if ($authorId == 1) {
                 continue;
             }
-            $currentAuthors[] = $author;
+            $currentAuthorIds[] = $authorId;
         }
 
         $selectedAuthors = query("
             SELECT * FROM `books_author`
-            WHERE `id` IN (" . implode(',', escapeString($currentAuthors)) . ")
+            WHERE `id` IN (" . implode(',', escapeString($currentAuthorIds)) . ")
             ORDER BY `id` ASC
         ");
 
@@ -100,8 +100,8 @@ $authors = query("
               ORDER BY `author` ASC
           ");
 if ($authors->num_rows) {
-    while ($author = $authors->fetch_assoc()) {
-        $allAuthors[] = $author;
+    while ($authorId = $authors->fetch_assoc()) {
+        $allAuthors[] = $authorId;
     }
 } else {
     $allAuthors[] = 'Нет авторов';

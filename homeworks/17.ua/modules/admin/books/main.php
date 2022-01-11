@@ -72,7 +72,6 @@ if (isset($_GET['author'])) {
         ORDER BY `id` DESC 
     ")->fetch_object()->cnt;
 
-
     $paginator->numberOfItems = $numberOfItems;
 
     $books = query("
@@ -118,5 +117,3 @@ if (isset($_SESSION['notice'])) {
     $notice = $_SESSION['notice'];
     unset($_SESSION['notice']);
 }
-
-

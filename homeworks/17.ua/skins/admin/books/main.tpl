@@ -25,7 +25,7 @@ if (isset($_SESSION['user'])) { ?>
                 <?php
                 if ($books->num_rows) {
                     while ($book = $books->fetch_assoc()) { ?>
-                        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'edit']) ?>?<?= $author ?>id=<?= (int)$book['id'] ?>">Редактировать</a>
+                        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'edit']) ?>?<?= htmlspecialchars($author) ?>id=<?= (int)$book['id'] ?>">Редактировать</a>
                         <a href="<?= createUrlChpu(['module' => 'books']) ?>?action=delete&id=<?= (int)$book['id'] ?>">УДАЛИТЬ</a>
                         <div>
                             <h2>
@@ -37,7 +37,7 @@ if (isset($_SESSION['user'])) { ?>
                         <div>
                             <img src="<?= $book['img'] ?>" height="100" >
                         </div>
-                        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'currentBook']) ?>?<?= $author ?>id=<?= (int)$book['id'] ?>">Подробнее...</a>
+                        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'currentBook']) ?>?<?= htmlspecialchars($author) ?>id=<?= (int)$book['id'] ?>">Подробнее...</a>
                         <hr>
                     <?php }
                 } else { ?>

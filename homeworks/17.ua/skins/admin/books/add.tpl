@@ -1,6 +1,5 @@
 <?php
 /**
- * @var $errors array
  * @var $allAuthors array
  */
 ?>
@@ -13,12 +12,12 @@
                 <td><input type="text" name="title"
                            value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
                 </td>
-                <td> <?= ($errors['title'] ?? '') ?></td>
+                <td> <?= $errors['title'] ?? '' ?></td>
             </tr>
             <tr>
                 <td>Выберите авторов:</td>
                 <td>
-                    <select name="author[]" multiple="multiple" required size="10" >
+                    <select name="author[]" multiple="multiple" required size="10">
                         <?php
                         foreach ($allAuthors as $author) { ?>
                             <option value="<?= $author['id'] ?>"
@@ -28,7 +27,7 @@
                         <?php } ?>
                     </select>
                 </td>
-                <td><?= ($errors['author'] ?? '') ?></td>
+                <td><?= $errors['author'] ?? '' ?></td>
             </tr>
             <tr>
                 <td>Введите описание книги:</td>
@@ -40,7 +39,7 @@
             <tr>
                 <td>Добавить фото книги:</td>
                 <td><input type="file" name="img"
-                                              accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp">
+                           accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp">
                 </td>
                 <td> <?= $errors['img'] ?? '' ?> </td>
             </tr>

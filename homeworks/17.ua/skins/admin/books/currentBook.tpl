@@ -2,7 +2,7 @@
 /**
  * @var $author string
  * @var $currentBook array
- * @var $currentBookAuthorsName array
+ * @var $currentBookAuthors array
  */
 ?>
 <div>
@@ -10,13 +10,16 @@
         <div>
             <div class="text"><?= htmlspecialchars($currentBook['title']); ?></div>
             <div class="text">
-                <img src="<?= $currentBook['img']; ?> "alt="image">
+                <img src="<?= $currentBook['img']; ?> " alt="image">
             </div>
             <p>
                 Авторы:
-                <?php
-                foreach ($currentBookAuthorsName as $currentBookAuthorName) { ?>
-                    <a href="<?= createUrlChpu(['module' => 'books']) ?>?author=<?= $currentBookAuthorName['id'] ?>"><?= htmlspecialchars($currentBookAuthorName['author']); ?></a>
+                <?php if (isset($currentBookAuthors)) {
+                    foreach ($currentBookAuthors as $currentBookAuthor) { ?>
+                        <a href="<?= createUrlChpu(['module' => 'books']) ?>?author=<?= $currentBookAuthor['id'] ?>"><?= htmlspecialchars($currentBookAuthor['author']); ?></a>
+                    <?php }
+                } else { ?>
+                    Нет авторов
                 <?php } ?>
             </p>
             <div class="text"><?= nl2br(htmlspecialchars($currentBook['description'])); ?></div>

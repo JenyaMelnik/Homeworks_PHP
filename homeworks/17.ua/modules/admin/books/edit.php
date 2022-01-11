@@ -3,7 +3,6 @@
  * @var $dbc mysqli
  */
 
-
 if (isset($_POST['edit'],
     $_POST['title'],
     $_POST['author'],
@@ -46,11 +45,11 @@ if (isset($_POST['edit'],
     if (!count($errors)) {
         $currentAuthors = [];
 
-        foreach ($_POST['author'] as $author) {
-            if ($author == 1) {
+        foreach ($_POST['author'] as $selectedAuthorId) {
+            if ($selectedAuthorId == 1) {
                 continue;
             }
-            $currentAuthors[] = $author;
+            $currentAuthors[] = $selectedAuthorId;
         }
 
         $selectedAuthors = query("
@@ -120,31 +119,28 @@ $authorsIds = query("
     WHERE `book_id` = " . (int)$_GET['id'] . "
 ");
 
-if (!$authorsIds->num_rows) {
-    $currentBookAuthorsName[] = 'Авторы не указаны';
-    exit();
+if ($authorsIds->num_rows) {
+    while ($authorId = $authorsIds->fetch_assoc()) {
+        $currentBookAuthorsIds[] = $authorId['author_id'];
+    }
+    $authorsIds->close();
 }
-
-while ($authorId = $authorsIds->fetch_assoc()) {
-    $currentBookAuthorsIds[] = $authorId['author_id'];
-}
-$authorsIds->close();
 
 //============================================= Выбираем авторов текущей книги ======================================
-$queryAuthors = query("
-    SELECT * 
-    FROM `books_author`
-    WHERE `id` IN (" . implode(",", $currentBookAuthorsIds) . ")
-    ORDER BY `author` ASC
-");
-if (!$queryAuthors->num_rows) {
-    $currentBookAuthorsName[] = 'Авторы не указаны';
-    exit();
+if (!empty($currentBookAuthorsIds)) {
+    $queryAuthors = query("
+        SELECT * 
+        FROM `books_author`
+        WHERE `id` IN (" . implode(",", $currentBookAuthorsIds) . ")
+        ORDER BY `author` ASC
+    ");
+    if ($queryAuthors->num_rows) {
+        while ($authors = $queryAuthors->fetch_assoc()) {
+            $currentBookAuthorIds[] = $authors['id'];
+        }
+        $queryAuthors->close();
+    }
 }
-while ($authors = $queryAuthors->fetch_assoc()) {
-    $currentBookAuthorsName[] = $authors['author'];
-}
-$queryAuthors->close();
 
 //============================================== Выбираем всех авторов ==============================================
 $authors = query("
@@ -152,16 +148,20 @@ $authors = query("
               FROM `books_author`
               ORDER BY `author` ASC
           ");
-while ($author = $authors->fetch_assoc()) {
-    $allAuthors[] = $author;
+if ($authors->num_rows) {
+    while ($selectedAuthorId = $authors->fetch_assoc()) {
+        $allAuthors[] = $selectedAuthorId;
+    }
 }
 
 $authors->close();
 
-if (empty($allAuthors)) {
-    $allAuthors[] = 'Нет авторов';
-}
 //===================================================================================================================
-
 $currentBook['title'] = $_POST['title'] ?? $currentBook['title'];
 $currentBook['description'] = $_POST['description'] ?? $currentBook['description'];
+
+if (isset($_GET['author'])) {
+    $selectedAuthorId = '?author=' . $_GET['author'];
+} else {
+    $selectedAuthorId = '';
+}

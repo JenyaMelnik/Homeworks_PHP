@@ -1,14 +1,15 @@
 <?php
 /**
- * @var $errors array
  * @var $currentBook array
- * @var $currentBookAuthorsName array
- * @var $allAuthors array
+ * @var $selectedAuthorId string
  */
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
     <div>
+        <p>
+            <b><a href="<?= createUrlChpu(['module' => 'books']) ?><?= htmlspecialchars($selectedAuthorId) ?>"> Вернутся к книгам </a></b>
+        </p>
         <table>
             <tr>
                 <td>Название книги:</td>
@@ -20,16 +21,21 @@
             <tr>
                 <td>Авторы:</td>
                 <td>
+                    <?php
+                    if (!empty($allAuthors) && !empty($currentBookAuthorIds)) { ?>
                     <select name="author[]" multiple="multiple" required size="10">
-                        <?php
-                        foreach ($allAuthors as $author) { ?>
+                        <?php foreach ($allAuthors as $author) { ?>
                             <option value="<?= $author['id'] ?>"
                                 <?php
-                                foreach ($currentBookAuthorsName as $currentBookAuthorName) {
-                                    if ($currentBookAuthorName == $author['author']) {
-                                        echo ' selected="selected"';
+                                foreach ($currentBookAuthorIds as $currentBookAuthorId) {
+                                    if ($currentBookAuthorId == $author['id']) {
+                                        echo 'selected="selected"';
                                     }
-                                } ?>><?= htmlspecialchars($author['author']) ?></option>
+                                } ?>><?= htmlspecialchars($author['author']) ?>
+                            </option>
+                        <?php }
+                        } else { ?>
+                            Нет авторов
                         <?php } ?>
                     </select>
                 </td>
@@ -57,4 +63,5 @@
         <br>
         <input type="submit" name="edit" value="Сохранить изменения">
     </div>
+
 </form>

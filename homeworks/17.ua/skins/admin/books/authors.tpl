@@ -1,7 +1,6 @@
 <?php
 /**
  * @var $queryAuthors mysqli
- * @var $notice string
  */
 ?>
 
@@ -18,7 +17,7 @@
         <table>
             <?php
             while ($authors = $queryAuthors->fetch_assoc()) {
-                if ($authors['author'] == '') {
+                if ($authors['id'] == 1) {
                     continue;
                 } ?>
                 <tr>
@@ -28,7 +27,7 @@
                     <td>
                         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'authors']) ?>?action=delete&id=<?= $authors['id'] ?>">УДАЛИТЬ</a>
                     </td>
-                   </tr>
+                </tr>
             <?php } ?>
         </table>
     </div>
