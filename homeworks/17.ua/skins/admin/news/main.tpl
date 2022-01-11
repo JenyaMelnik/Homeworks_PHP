@@ -21,15 +21,17 @@ if (isset($_SESSION['user'])) {
                 <p>
                     <a href="/admin/news"><b>Все категории</b></a>
                     <?php
-                    while ($categories = $newsCategories->fetch_assoc()) { ?>
-                        <a href="/admin/news?category=<?= htmlspecialchars($categories['category']) ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
-                    <?php } ?>
+                    if ($newsCategories->num_rows) {
+                        while ($categories = $newsCategories->fetch_assoc()) { ?>
+                            <a href="/admin/news?category=<?= htmlspecialchars($categories['category']) ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
+                        <?php }
+                    } ?>
                 </p>
                 <p><b><?= htmlspecialchars($category) ?>:</b></p>
                 <form action="" method="post">
                     <?php
-                    if (mysqli_num_rows($news)) {
-                        while ($newsRow = mysqli_fetch_assoc($news)) { ?>
+                    if ($news->num_rows) {
+                        while ($newsRow = $news->fetch_assoc()) { ?>
                             <div>
                                 <div>
                                     <label><input type="checkbox" name="ids[]" value="<?= $newsRow['id'] ?>"></label>

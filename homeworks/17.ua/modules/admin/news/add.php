@@ -25,23 +25,15 @@ if (isset($_POST['add'],
     }
 
     if (!$errors) {
-        $category = query("
-            SELECT `id`
-            FROM `news_category`
-            WHERE `id` = '" . escapeString($_POST['id']) . "'
-            LIMIT 1
-        ");
-        $categoryId = $category->fetch_assoc();
-        $category->close();
 
         query("
             INSERT INTO `news` 
             SET `title`       = '" . escapeString(trim($_POST['title'])) . "',
-                `category_id` = " . (int)($categoryId['id']) . ",
+                `category_id` =  " . (int)($_POST['category']) . ",
                 `text`        = '" . escapeString(trim($_POST['text'])) . "',
                 `date`        = NOW();
         ");
-        $_SESSION['info'] = 'Запись добавлена';
+        $_SESSION['info'] = 'Новость добавлена';
         redirectTo(['module' => 'news']);
     }
 }
@@ -52,12 +44,11 @@ $categories = query("
               FROM `news_category`
               ORDER BY `id`
           ");
-while ($category = $categories->fetch_assoc()) {
-    $allCategories[] = $category;
+
+if ($categories->num_rows) {
+    while ($category = $categories->fetch_assoc()) {
+        $allCategories[] = $category;
+    }
 }
 
 $categories->close();
-
-if (empty($allCategories)) {
-    $allCategories[] = 'Категории отсутствуют';
-}

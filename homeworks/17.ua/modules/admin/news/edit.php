@@ -2,7 +2,7 @@
 
 if (isset($_POST['edit'],
     $_POST['title'],
-    $_POST['category'],
+    $_POST['categoryId'],
     $_POST['text'])) {
 
     $errors = [];
@@ -12,7 +12,7 @@ if (isset($_POST['edit'],
     } elseif (mb_strlen($_POST['title']) < 10) {
         $errors['title'] = 'Заголовок должен быть не менее 10 символа';
     }
-    if (empty($_POST['category'])) {
+    if (empty($_POST['categoryId'])) {
         $errors['category'] = 'Вы не выбрали категорию';
     }
     if (empty($_POST['text'])) {
@@ -22,19 +22,11 @@ if (isset($_POST['edit'],
     }
 
     if (!$errors) {
-        $result = query("
-            SELECT `id`
-            FROM `news_category`
-            WHERE `id` = '" . escapeString($_POST['category']) . "'
-            LIMIT 1
-        ");
-        $categoryId = $result->fetch_assoc();
-        $result->close();
 
         query("
             UPDATE `news` 
             SET `title`       = '" . escapeString(trim($_POST['title'])) . "',
-                `category_id` = " . (int)($categoryId['id']) . ",
+                `category_id` = " . (int)($_POST['categoryId']) . ",
                 `text`        = '" . escapeString(trim($_POST['text'])) . "',
                 `date`        = NOW()
             WHERE `id`        = " . (int)$_GET['id'] . "
@@ -65,9 +57,7 @@ $category = query("
                 FROM `news_category`
                 WHERE `id` = '" . $currentNews['category_id'] . "'
             ");
-if (!$category->num_rows) {
-    $errors['category'] = 'У новости отсутствует категория';
-} else {
+if ($category->num_rows) {
     $currentCategory = $category->fetch_assoc();
 }
 
@@ -79,21 +69,15 @@ $categories = query("
               FROM `news_category`
               ORDER BY `id`
           ");
-while ($category = $categories->fetch_assoc()) {
-    $allCategories[] = $category;
+
+if ($categories->num_rows) {
+    while ($category = $categories->fetch_assoc()) {
+        $allCategories[] = $category;
+    }
 }
 
 $categories->close();
 
-if (empty($allCategories)) {
-    $allCategories[] = 'Категории отсутствуют';
-}
 //===================================================================================================================
-
 $currentNews['title'] = $_POST['title'] ?? $currentNews['title'];
 $currentNews['text'] = $_POST['text'] ?? $currentNews['text'];
-/*
-if (isset($currentCategory['category'])) {
-    $currentCategory['category'] = $_POST['category'] ?? $currentCategory['category'];
-}
-*/

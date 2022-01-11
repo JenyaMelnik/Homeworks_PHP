@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $queryCategories mysqli
+ * @var $categories mysqli
  */
 ?>
 
@@ -16,16 +16,24 @@
         <p><b>ВСЕ КАТЕГОРИИ:</b></p>
         <table>
             <?php
-            while ($category = $queryCategories->fetch_assoc()) { ?>
+
+            if ($categories->num_rows) {
+                while ($category = $categories->fetch_assoc()) { ?>
+                    <tr>
+                        <td>
+                            <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'categories']) ?>?id=<?= (int)$category['id'] ?>"> <?= htmlspecialchars($category['category']) ?></a>
+                        </td>
+                        <td>
+                            <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'categories']) ?>?action=delete&id=<?= (int)$category['id'] ?>">УДАЛИТЬ</a>
+                        </td>
+                    </tr>
+                <?php }
+            } else { ?>
                 <tr>
-                    <td>
-                        <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'categories']) ?>?id=<?= $category['id'] ?>"> <?= htmlspecialchars($category['category']) ?></a>
-                    </td>
-                    <td>
-                        <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'categories']) ?>?action=delete&id=<?= $category['id'] ?>">УДАЛИТЬ</a>
-                    </td>
+                    <td>Нет категорий</td>
                 </tr>
             <?php } ?>
+
         </table>
     </div>
     <div class="border floatleft">

@@ -17,15 +17,19 @@
             <tr>
                 <td>Выберите авторов:</td>
                 <td>
-                    <select name="author[]" multiple="multiple" required size="10">
-                        <?php
-                        foreach ($allAuthors as $author) { ?>
-                            <option value="<?= $author['id'] ?>"
-                                <?php if (isset($_POST['author']) && $_POST['author'] == $author['author']) {
-                                    echo ' selected="selected"';
-                                } ?>><?= htmlspecialchars($author['author']) ?></option>
-                        <?php } ?>
-                    </select>
+                    <?php
+                    if (!empty($allAuthors)) { ?>
+                        <select name="author[]" multiple="multiple" required size="10">
+                            <?php foreach ($allAuthors as $author) { ?>
+                                <option value="<?= $author['id'] ?>"
+                                    <?php if (isset($_POST['author']) && $_POST['author'] == $author['author']) {
+                                        echo ' selected="selected"';
+                                    } ?>><?= htmlspecialchars($author['author']) ?></option>
+                            <?php } ?>
+                        </select>
+                    <?php } else { ?>
+                        Нет авторов
+                    <? } ?>
                 </td>
                 <td><?= $errors['author'] ?? '' ?></td>
             </tr>

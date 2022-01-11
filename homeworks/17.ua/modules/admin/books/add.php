@@ -103,7 +103,6 @@ if ($authors->num_rows) {
     while ($authorId = $authors->fetch_assoc()) {
         $allAuthors[] = $authorId;
     }
-} else {
-    $allAuthors[] = 'Нет авторов';
 }
+
 $authors->close();

@@ -13,7 +13,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
 }
 
 // =================================================================================================================
-$queryCategories = query("
+$categories = query("
     SELECT * FROM `news_category`
 ");
 

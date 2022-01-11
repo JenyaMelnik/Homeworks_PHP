@@ -1,9 +1,3 @@
-<?php
-/**
- * @var $allCategories array
- */
-?>
-
 <div>
     <a href="<?= createUrlChpu(['module' => 'news']) ?>?category=<?= $_GET['category'] ?>"><b> Вернутся к новостям </b></a>
     <form action="" method="post">
@@ -17,15 +11,19 @@
             <tr>
                 <td>Категория новости:</td>
                 <td>
-                    <select name="category">
-                        <?php
-                        foreach ($allCategories as $category) { ?>
-                            <option value="<?= $category['id'] ?>"
-                                <?php if (isset($currentCategory['category']) && $currentCategory['category'] == $category['category']) {
-                                    echo 'selected="selected"';
-                                } ?>><?= htmlspecialchars($category['category']) ?></option>
-                        <?php } ?>
-                    </select>
+                    <?php
+                    if (!empty($allCategories)) { ?>
+                        <select name="categoryId">
+                            <?php foreach ($allCategories as $category) { ?>
+                                <option value="<?= $category['id'] ?>"
+                                    <?php if (isset($currentCategory['category']) && $currentCategory['category'] == $category['category']) {
+                                        echo 'selected="selected"';
+                                    } ?>><?= htmlspecialchars($category['category']) ?></option>
+                            <?php } ?>
+                        </select>
+                    <?php } else { ?>
+                        <b>Нет категорий</b>
+                    <?php } ?>
                 </td>
                 <td><?= $errors['category'] ?? '' ?></td>
             </tr>

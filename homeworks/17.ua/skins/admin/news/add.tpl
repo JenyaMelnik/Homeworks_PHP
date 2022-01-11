@@ -17,15 +17,22 @@
             <tr>
                 <td>Выберите категорию:</td>
                 <td>
-                    <select name="category">
-                        <?php
-                        foreach ($allCategories as $category) { ?>
-                            <option value="<?= $category['id'] ?>"
-                                <?php if (isset($_POST['category']) && $_POST['category'] == $category['category']) {
-                                    echo ' selected="selected"';
-                                } ?>><?= htmlspecialchars($category['category']) ?></option>
-                        <?php } ?>
-                    </select>
+                    <?php
+                    if (!empty($allCategories)) { ?>
+                        <select name="category">
+                            <?php
+                            foreach ($allCategories as $category) { ?>
+                                <option value="<?= $category['id'] ?>"
+                                    <?php if (isset($_POST['category']) && $_POST['category'] == $category['category']) {
+                                        echo ' selected="selected"';
+                                    } ?>><?= htmlspecialchars($category['category']) ?></option>
+                            <?php } ?>
+                        </select>
+                    <?php } else { ?>
+                        <b>Нет категорий</b>
+                    <?php }
+                    ?>
+
                 </td>
                 <td><?= $errors['category'] ?? '' ?></td>
             </tr>

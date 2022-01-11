@@ -34,22 +34,21 @@ if (isset($_POST['editAuthor'], $_POST['editAuthorName'])) {
             WHERE `author` = '" . escapeString(trim($_POST['editAuthorName'])) . "'
         ");
 
-            if ($query->num_rows && $_POST['editAuthorName'] != $author['author']) {
+            if (!$query->num_rows) {
+                query("
+                    UPDATE `books_author`
+                    SET `author` = '" . escapeString(trim($_POST['editAuthorName'])) . "'
+                    WHERE `id` = " . (int)$_GET['id'] . "
+                ");
+
+                $_SESSION['notice'] = 'Автор изменен';
+                redirectTo(['module' => 'books', 'page' => 'authors']);
+
+            } else {
                 $errorEdit = 'Такой автор уже есть';
             }
         }
 
-        if (!isset($errorEdit)) {
-            query("
-            UPDATE `books_author`
-            SET `author` = '" . escapeString(trim($_POST['editAuthorName'])) . "'
-            WHERE `id` = " . (int)$_GET['id'] . "
-        ");
-
-            $_SESSION['notice'] = 'Автор изменен';
-            redirectTo(['module' => 'books', 'page' => 'authors']);
-        }
-
-        $author['author'] = $_POST['editAuthorName'] ?? $author['author'];
+        $author['author'] = $_POST['editAuthorName'];
     }
 }
