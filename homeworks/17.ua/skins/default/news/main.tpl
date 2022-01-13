@@ -14,18 +14,18 @@ if (isset($_SESSION['user'])) { ?>
                 <a href="/news"><b>Все новости</b></a>
                 <?php
                 while ($categories = $newsCategories->fetch_assoc()) { ?>
-                    <a href="/news?category=<?= $categories['category'] ?>"><b><?= $categories['category'] ?></b></a>
+                    <a href="/news?category=<?= htmlspecialchars($categories['category']) ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
                 <?php } ?>
             </p>
-            <p><b><?= $category ?>:</b></p>
+            <p><b><?= htmlspecialchars($category) ?>:</b></p>
             <?php
             if ($news->num_rows) {
                 while ($newsRow = $news->fetch_assoc()) { ?>
                     <div>
                         <div><?= $newsRow['date']; ?></div>
-                        <div class="text"><?= $newsRow['title']; ?></div>
+                        <div class="text"><?= htmlspecialchars($newsRow['title']); ?></div>
                     </div>
-                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'currentItem']) ?>?category=<?= $category ?>&id=<?= (int)$newsRow['id'] ?>">Подробнее...</a>
+                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'currentItem']) ?>?category=<?= htmlspecialchars($category) ?>&id=<?= (int)$newsRow['id'] ?>">Подробнее...</a>
                     <hr>
                 <?php }
             } else { ?>
