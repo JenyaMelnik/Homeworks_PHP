@@ -37,7 +37,7 @@ if (isset($_SESSION['user'])) { ?>
                             </h2>
                         </div>
                         <div>
-                            <img src="<?= $book['img'] ?>" height="100">
+                            <img src="<?= $book['img'] ?>" alt="img" height="100">
                         </div>
                         <div>
                             <p> Авторы: <br>
@@ -64,17 +64,15 @@ if (isset($_SESSION['user'])) { ?>
         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=1"><b>Первая</b></a>
         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= ($paginator->previousPage()) ?>"><b>Назад</b></a>
         <?php
-        for ($i = $paginator->startPaginator();
-        $i < $paginator->endPaginator();
-        ++$i) {
-        if ($i == $paginator->currentPage()) { ?>
-        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?>
+        for ($i = $paginator->startPaginator(); $i < $paginator->endPaginator(); ++$i) {
+            if ($i == $paginator->currentPage()) { ?>
+                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?></a>
             <?php } else { ?>
-            <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= $i ?>
-                <?php }
-                } ?>
-                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= ($paginator->nextPage()) ?>"><b>Вперед</b></a>
-                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $paginator->numberOfPages() ?>"><b>Конец</b></a>
+                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= $i ?></a>
+            <?php }
+        } ?>
+        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= ($paginator->nextPage()) ?>"><b>Вперед</b></a>
+        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $paginator->numberOfPages() ?>"><b>Конец</b></a>
     </div>
 <?php } else {
     echo 'Авторизируйтесь что бы просматривать раздел книги';

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 14 2021 г., 12:07
+-- Время создания: Янв 13 2022 г., 14:52
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.4.5
 
@@ -51,7 +51,12 @@ INSERT INTO `books` (`id`, `title`, `description`, `img`, `meta_title`, `meta_ke
 (85, 'Гамлет', '«Траги́ческая исто́рия о Га́млете, при́нце да́тском» или просто «Га́млет» — трагедия Уильяма Шекспира в пяти актах, одна из самых известных его пьес и одна из самых знаменитых пьес в мировой драматургии. Написана в 1600—1601 годах. Это самая длинная пьеса Шекспира — в ней 4042 строки и 29 551 слово.', '/uploaded/books/100x100/20211214-120222img44386.jpg', 'meta title', 'meta keywords', 'meta description'),
 (86, 'Отелло', '«Отелло» (1606) – знаменитая трагедия Вильяма Шекспира (1564-1616), по праву считающаяся одним из высочайших его достижений в жанре драматургии. Предназначается для самой широкой читательской аудитории.', '/uploaded/books/100x100/20211214-120203img17840.jpg', 'meta title', 'meta keywords', 'meta description'),
 (87, 'Анна Каренина', '«А́нна Каре́нина» — роман Льва Толстого о трагической любви замужней дамы Анны Карениной и блестящего офицера Алексея Вронского на фоне счастливой семейной жизни дворян Константина Лёвина и Кити Щербацкой.', '/uploaded/books/100x100/20211214-120152img48375.jpg', 'meta title', 'meta keywords', 'meta description'),
-(88, 'Гайдамаки', 'Гайдамаки — историко-героическая поэма Т. Г. Шевченко, первый украинский исторический роман в стихах. Вступление в поэме «Гайдамаки», датировано 7 апреля 1841 года, поэт написал после завершения произведения. Автограф неизвестен.', '/uploaded/books/100x100/20211214-120140img88867.jpg', 'meta title', 'meta keywords', 'meta description');
+(88, 'Гайдамаки', 'Гайдамаки — историко-героическая поэма Т. Г. Шевченко, первый украинский исторический роман в стихах. Вступление в поэме «Гайдамаки», датировано 7 апреля 1841 года, поэт написал после завершения произведения. Автограф неизвестен.', '/uploaded/books/100x100/20211214-120140img88867.jpg', 'meta title', 'meta keywords', 'meta description'),
+(98, 'Книга 5', 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ', '/uploaded/books/original/no_foto.jpg', 'meta title', 'meta keywords', 'meta description'),
+(102, 'Книга 4', 'ырьвпобврбарьь', '/uploaded/books/original/no_foto.jpg', 'meta title', 'meta keywords', 'meta description'),
+(104, 'Книга 3', 'Здесь описание книги №3', '/uploaded/books/original/no_foto.jpg', 'meta title', 'meta keywords', 'meta description'),
+(105, 'Книга 2', 'Здесь описание книги №2', '/uploaded/books/original/no_foto.jpg', 'meta title', 'meta keywords', 'meta description'),
+(106, 'Книга 1', 'Здесь описание книги №1', '/uploaded/books/original/no_foto.jpg', 'meta title', 'meta keywords', 'meta description');
 
 -- --------------------------------------------------------
 
@@ -70,16 +75,28 @@ CREATE TABLE `books2books_author` (
 --
 
 INSERT INTO `books2books_author` (`id`, `book_id`, `author_id`) VALUES
-(44, 88, 5),
 (45, 87, 3),
 (46, 86, 2),
-(47, 85, 2),
 (48, 84, 4),
 (49, 83, 4),
 (50, 82, 4),
 (52, 81, 5),
 (53, 70, 2),
-(54, 69, 3);
+(67, 88, 5),
+(195, 105, 3),
+(196, 105, 5),
+(199, 104, 2),
+(200, 104, 13),
+(201, 104, 17),
+(202, 102, 3),
+(203, 102, 10),
+(204, 98, 2),
+(205, 98, 5),
+(207, 85, 2),
+(209, 69, 3),
+(210, 106, 3),
+(211, 106, 4),
+(212, 106, 17);
 
 -- --------------------------------------------------------
 
@@ -98,10 +115,16 @@ CREATE TABLE `books_author` (
 
 INSERT INTO `books_author` (`id`, `author`) VALUES
 (1, ''),
-(2, 'Шекспир'),
-(3, 'Толстой'),
-(4, 'Пушкин'),
-(5, 'Тарас Шевченко');
+(2, 'Уильям Шекспир'),
+(3, 'Лев Толстой'),
+(4, 'А. С. Пушкин'),
+(5, 'Тарас Шевченко'),
+(10, 'Чехов'),
+(12, '<b>sfgsfhj<b>aehrgh'),
+(13, '<script>afhahdghad</script>'),
+(14, '\'\'`\'\'`\'\''),
+(16, '<script>alert(\'Вас взломали\')</script>gjsfhjdtktdum\'\'``\'\'\''),
+(17, '<b>Hello</b>');
 
 -- --------------------------------------------------------
 
@@ -256,7 +279,10 @@ INSERT INTO `news` (`id`, `date`, `title`, `category_id`, `text`, `meta_title`, 
 (25, '2021-12-03 11:47:08', 'Украина выпустила новую модель ЗАЗ', 3, 'На автовыставке в Дубаи Украина представила новый автомобиль ЗАЗ nosens. Планировали сделать тестдрайв, но авто не смогли завести.', 'meta title', 'meta keywords', 'meta description'),
 (26, '2021-12-02 12:13:26', 'Усик - лучший боксер мира', 1, 'Александр Усик победил Энтони Джошуа, и стал обладателем 4-ох чемпионских поясов!!', 'meta title', 'meta keywords', 'meta description'),
 (27, '2021-12-06 10:33:38', 'Скоро начнется олимпиада 2022', 1, 'В 2022 году пройдет зимняя олимпиада. Сборная Украины планирует попасть в ТОП-10.', 'meta title', 'meta keywords', 'meta description'),
-(29, '2021-12-06 10:39:10', 'Украина показала рост ВВП', 4, 'В 2021 году Украина показывает рост ВВП на уровне 2,3 %.', 'meta title', 'meta keywords', 'meta description');
+(29, '2021-12-06 10:39:10', 'Украина показала рост ВВП', 4, 'В 2021 году Украина показывает рост ВВП на уровне 2,3 %.', 'meta title', 'meta keywords', 'meta description'),
+(30, '2022-01-10 18:56:18', '===================', 5, '+++++++++++++++++++++++++++', 'meta title', 'meta keywords', 'meta description'),
+(31, '2022-01-11 13:41:48', '<b>arhsryjsr<b>aethsrnshfnsfh', 2, 'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', 'meta title', 'meta keywords', 'meta description'),
+(32, '2022-01-11 14:26:12', '<script>alert(\'Hello\')</script>', 4, 'zvccccccccccccccccccccccccccccccccccccccccccccccccc', 'meta title', 'meta keywords', 'meta description');
 
 -- --------------------------------------------------------
 
@@ -277,7 +303,10 @@ INSERT INTO `news_category` (`id`, `category`) VALUES
 (1, 'Спорт'),
 (2, 'Политика'),
 (3, 'Авто'),
-(4, 'Экономика');
+(4, 'Экономика'),
+(5, 'Медицина'),
+(6, 'Наука'),
+(13, '<b>qwerty<b>qwrdfhmdhk//123\'\'\'\'\'\'`\'');
 
 -- --------------------------------------------------------
 
@@ -456,19 +485,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT для таблицы `books2books_author`
 --
 ALTER TABLE `books2books_author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
 
 --
 -- AUTO_INCREMENT для таблицы `books_author`
 --
 ALTER TABLE `books_author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `comments`
@@ -498,13 +527,13 @@ ALTER TABLE `goods_category`
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT для таблицы `news_category`
 --
 ALTER TABLE `news_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `pages`

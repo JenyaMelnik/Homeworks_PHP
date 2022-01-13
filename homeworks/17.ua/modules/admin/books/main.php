@@ -71,7 +71,6 @@ if (isset($_GET['author'])) {
         SELECT COUNT(id) AS cnt
         FROM `books` 
         WHERE `id` IN (" . implode(", ", $bookIds) . ")
-        ORDER BY `id` DESC 
     ")->fetch_object()->cnt;
 
     $paginator->numberOfItems = $numberOfItems;
@@ -80,7 +79,7 @@ if (isset($_GET['author'])) {
         SELECT * 
         FROM `books` 
         WHERE `id` IN (" . implode(", ", $bookIds) . ")
-        ORDER BY `id` DESC
+        ORDER BY `id` ASC
         " . $paginator->sqlQueryLimit()
     );
 
@@ -106,7 +105,6 @@ if (isset($_GET['author'])) {
     $numberOfItems = query("
         SELECT COUNT(id) AS cnt
         FROM `books` 
-        ORDER BY `id` DESC 
     ")->fetch_object()->cnt;
 
     $paginator->numberOfItems = $numberOfItems;
@@ -114,7 +112,7 @@ if (isset($_GET['author'])) {
     $queryBooks = query("
         SELECT * 
         FROM `books` 
-        ORDER BY `id` DESC
+        ORDER BY `id` ASC
         " . $paginator->sqlQueryLimit()
     );
 }
