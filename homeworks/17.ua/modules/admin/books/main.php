@@ -1,7 +1,7 @@
 <?php
 
 $paginator = new Paginator();
-$paginator->itemsOnPage = 2;
+$paginator->itemsOnPage = 5;
 
 //=========================================== Удаление нескольких записей ===========================================
 if (isset($_POST['delete'])) {
@@ -46,24 +46,24 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
 $shownBooks = 'Все книги';
 $author = '';
 
-//========================== Выбираем текущего автора и его книги, else - все книги =================================
+//============ Выбираем текущего автора и его книги id книг, else - все книги на странице и их id ===================
 if (isset($_GET['author'])) {
-    $queryBookId = query("
+    $queryBook = query("
         SELECT `book_id`
         FROM `books2books_author`
         WHERE `author_id` = '" . (int)$_GET['author'] . "'
     ");
 
-    if (!$queryBookId->num_rows) {
+    if (!$queryBook->num_rows) {
         $_SESSION['notice'] = 'У данного автора нет книг';
         redirectTo(['module' => 'books']);
     }
 
     $bookIds = [];
-    while ($bookId = $queryBookId->fetch_assoc()) {
+    while ($bookId = $queryBook->fetch_assoc()) {
         $bookIds[] = (int)$bookId['book_id'];
     }
-    $queryBookId->close();
+    $queryBook->close();
 
     $numberOfItems = query("
         SELECT COUNT(id) AS cnt
@@ -74,7 +74,7 @@ if (isset($_GET['author'])) {
 
     $paginator->numberOfItems = $numberOfItems;
 
-    $books = query("
+    $queryBooks = query("
         SELECT * 
         FROM `books` 
         WHERE `id` IN (" . implode(", ", $bookIds) . ")
@@ -104,15 +104,63 @@ if (isset($_GET['author'])) {
 
     $paginator->numberOfItems = $numberOfItems;
 
-    $books = query("
+    $queryBooks = query("
         SELECT * 
         FROM `books` 
         ORDER BY `id` DESC
         " . $paginator->sqlQueryLimit()
     );
 }
-//===================================================================================================================
 
+$booksIds = [];
+$books = [];
+
+if ($queryBooks->num_rows) {
+    while ($queryBook = $queryBooks->fetch_assoc()) {
+        $booksIds[] = $queryBook['id'];
+        $books[] = $queryBook;
+    }
+}
+
+//==================================== Выбираем ids авторов на странице ==============================================
+//========================== Выбираем связку book_ids to author_ids на странице =======================================
+$authorsIdOnPage = [];
+$booksIdToAuthorsIdOnPage = [];
+
+$queryBooksToAuthors = query("
+    SELECT * FROM `books2books_author`
+    WHERE `book_id` IN (" . implode(", ", $booksIds) . ")
+");
+
+if ($queryBooksToAuthors->num_rows) {
+    while ($bookToAuthor = $queryBooksToAuthors->fetch_assoc()) {
+        $booksIdToAuthorsIdOnPage[$bookToAuthor['book_id']][] = $bookToAuthor['author_id'];
+        if (!in_array($bookToAuthor['author_id'], $authorsIdOnPage)) {
+            $authorsIdOnPage[] = $bookToAuthor['author_id'];
+        }
+    }
+}
+
+$queryBooksToAuthors->close();
+
+//======================================== Выбираем авторов книг на странице ======================================
+$allAuthorsOnPage = [];
+
+$queryAllAuthorsOnPage = query("
+    SELECT * FROM `books_author`
+    WHERE `id` IN (" . implode(", ", $authorsIdOnPage) . ")
+");
+
+if ($queryAllAuthorsOnPage->num_rows) {
+    while ($authorOnPage = $queryAllAuthorsOnPage->fetch_assoc()) {
+        if ($authorOnPage['author'] == '') {
+            continue;
+        }
+        $allAuthorsOnPage[$authorOnPage['id']] = $authorOnPage['author'];
+    }
+}
+
+// ==================================================================================================================
 if (isset($_SESSION['notice'])) {
     $notice = $_SESSION['notice'];
     unset($_SESSION['notice']);

@@ -1570,3 +1570,53 @@ line: 58
 date:2022-01-11 11:16:50
 =============================================
 
+QUERY: 
+    SELECT * FROM `books2books_author`
+    WHERE `book_id` IN ()
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\main.php
+line: 146
+date:2022-01-12 13:29:16
+=============================================
+
+QUERY: 
+    SELECT * FROM `books2books_author`
+    WHERE `book_id` IN ()
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\main.php
+line: 146
+date:2022-01-12 13:32:38
+=============================================
+
+QUERY: 
+    SELECT * FROM `books2books_author`
+    WHERE `book_id` IN ()
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\main.php
+line: 146
+date:2022-01-12 13:54:00
+=============================================
+
+QUERY: 
+    SELECT * FROM `books_author`
+    WHERE 
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\main.php
+line: 128
+date:2022-01-12 15:50:32
+=============================================
+
+QUERY: 
+    SELECT * FROM `books2books_author`
+    BoWHERE `book_id` IN (106, 105, 104, 102, 98)
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`book_id` IN (106, 105, 104, 102, 98)' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\main.php
+line: 132
+date:2022-01-13 11:11:49
+=============================================
+

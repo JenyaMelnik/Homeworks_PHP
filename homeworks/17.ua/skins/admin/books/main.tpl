@@ -1,8 +1,10 @@
 <?php
 /**
- * @var $books mysqli
+ * @var $books array
  * @var $shownBooks string
  * @var $author string
+ * @var $booksIdToAuthorsIdOnPage array
+ * @var $allAuthorsOnPage array
  * @var $paginator Paginator
  */
 
@@ -23,8 +25,8 @@ if (isset($_SESSION['user'])) { ?>
         <div>
             <form action="" method="post">
                 <?php
-                if ($books->num_rows) {
-                    while ($book = $books->fetch_assoc()) { ?>
+                if (!empty($books)) {
+                    foreach ($books as $book) { ?>
                         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'edit']) ?>?<?= htmlspecialchars($author) ?>id=<?= (int)$book['id'] ?>">Редактировать</a>
                         <a href="<?= createUrlChpu(['module' => 'books']) ?>?action=delete&id=<?= (int)$book['id'] ?>">УДАЛИТЬ</a>
                         <div>
@@ -35,7 +37,17 @@ if (isset($_SESSION['user'])) { ?>
                             </h2>
                         </div>
                         <div>
-                            <img src="<?= $book['img'] ?>" height="100" >
+                            <img src="<?= $book['img'] ?>" height="100">
+                        </div>
+                        <div>
+                            <p> Авторы: <br>
+                                <?php
+                                foreach ($booksIdToAuthorsIdOnPage[$book['id']] as $booksAuthorId) { ?>
+                                    <a href="<?= createUrlChpu(['module' => 'books']) ?>?author=<?= (int)$booksAuthorId ?>">
+                                        - <?= htmlspecialchars($allAuthorsOnPage[$booksAuthorId]); ?><br>
+                                    </a>
+                                <?php } ?>
+                            </p>
                         </div>
                         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'currentBook']) ?>?<?= htmlspecialchars($author) ?>id=<?= (int)$book['id'] ?>">Подробнее...</a>
                         <hr>
@@ -51,23 +63,19 @@ if (isset($_SESSION['user'])) { ?>
     <div>
         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=1"><b>Первая</b></a>
         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= ($paginator->previousPage()) ?>"><b>Назад</b></a>
-    <?php
-        for ($i = $paginator->startPaginator(); $i < $paginator->endPaginator(); ++$i) {
-            if ($i == $paginator->currentPage()) { ?>
-                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?>
+        <?php
+        for ($i = $paginator->startPaginator();
+        $i < $paginator->endPaginator();
+        ++$i) {
+        if ($i == $paginator->currentPage()) { ?>
+        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?>
             <?php } else { ?>
-                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= $i ?>
-            <?php }
-        } ?>
-        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= ($paginator->nextPage()) ?>"><b>Вперед</b></a>
-        <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $paginator->numberOfPages() ?>"><b>Конец</b></a>
+            <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= $i ?>
+                <?php }
+                } ?>
+                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= ($paginator->nextPage()) ?>"><b>Вперед</b></a>
+                <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $paginator->numberOfPages() ?>"><b>Конец</b></a>
     </div>
 <?php } else {
     echo 'Авторизируйтесь что бы просматривать раздел книги';
 } ?>
-
-
-
-
-
-
