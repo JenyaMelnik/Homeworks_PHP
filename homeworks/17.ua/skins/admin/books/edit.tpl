@@ -22,12 +22,12 @@
                 <td>Авторы:</td>
                 <td>
                     <?php
-                    if (!empty($allAuthors) && !empty($currentBookAuthorIds)) { ?>
+                    if (!empty($allAuthors) && !empty($currentBookAuthorsIds)) { ?>
                     <select name="author[]" multiple="multiple" required size="10">
                         <?php foreach ($allAuthors as $author) { ?>
                             <option value="<?= $author['id'] ?>"
                                 <?php
-                                foreach ($currentBookAuthorIds as $currentBookAuthorId) {
+                                foreach ($currentBookAuthorsIds as $currentBookAuthorId) {
                                     if ($currentBookAuthorId == $author['id']) {
                                         echo 'selected="selected"';
                                     }

@@ -1,7 +1,7 @@
 <?php
 
 $paginator = new Paginator();
-$paginator->itemsOnPage = 5;
+$paginator->itemsOnPage = 2;
 
 //=========================================== Удаление нескольких записей ===========================================
 if (isset($_POST['delete'])) {
@@ -41,13 +41,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
     $_SESSION['notice'] = 'Книга удалена';
     redirectTo(['module' => 'books']);
 }
-//===================================================================================================================
 
+//===================================================================================================================
 $shownBooks = 'Все книги';
 $author = '';
 
-//============ Выбираем текущего автора и его книги id книг, else - все книги на странице и их id ===================
+//============ Выбираем текущего автора и его id книг, else - все книги на странице и их id =========================
 if (isset($_GET['author'])) {
+    $author = 'author=' . $_GET['author'] . '&';
+
     $queryBook = query("
         SELECT `book_id`
         FROM `books2books_author`
@@ -89,11 +91,16 @@ if (isset($_GET['author'])) {
         LIMIT 1
     ");
 
-    $currentAuthor = $queryAuthor->fetch_assoc();
+    if ($queryAuthor->num_rows) {
+        $currentAuthor = $queryAuthor->fetch_assoc();
+    }
+
     $queryAuthor->close();
 
-    $shownBooks = 'Книги автора: ' . $currentAuthor['author'];
-    $author = 'author=' . $_GET['author'] . '&';
+    if (isset($currentAuthor)) {
+        $shownBooks = 'Книги автора: ' . $currentAuthor['author'];
+    }
+
 } else {
 
     $numberOfItems = query("
@@ -122,8 +129,8 @@ if ($queryBooks->num_rows) {
     }
 }
 
-//==================================== Выбираем ids авторов на странице ==============================================
-//========================== Выбираем связку book_ids to author_ids на странице =======================================
+//==================================== Выбираем ids авторов на странице =============================================
+//========================== Выбираем связку book_ids to author_ids для книг на странице ============================
 $authorsIdOnPage = [];
 $booksIdToAuthorsIdOnPage = [];
 
@@ -143,7 +150,7 @@ if ($queryBooksToAuthors->num_rows) {
 
 $queryBooksToAuthors->close();
 
-//======================================== Выбираем авторов книг на странице ======================================
+//======================================== Выбираем авторов книг на странице ========================================
 $allAuthorsOnPage = [];
 
 $queryAllAuthorsOnPage = query("
