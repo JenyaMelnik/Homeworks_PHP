@@ -19,17 +19,20 @@ $currentBookAuthorsIds = [];
 
 $authorsIds = query("
     SELECT `author_id` FROM `books2books_author`
-    WHERE `book_id` = " . (int)$_GET['id'] . "
-");
+    WHERE `book_id` = " . (int)$_GET['id']
+);
 
 if ($authorsIds->num_rows) {
     while ($authorId = $authorsIds->fetch_assoc()) {
         $currentBookAuthorsIds[] = $authorId['author_id'];
     }
-    $authorsIds->close();
 }
 
+$authorsIds->close();
+
 //============================================= Выбираем авторов текущей книги ======================================
+$currentBookAuthors = [];
+
 if (!empty($currentBookAuthorsIds)) {
     $queryAuthors = query("
         SELECT * 
@@ -37,12 +40,14 @@ if (!empty($currentBookAuthorsIds)) {
         WHERE `id` IN (" . implode(",", $currentBookAuthorsIds) . ")
         ORDER BY `author` ASC
     ");
+
     if ($queryAuthors->num_rows) {
         while ($authors = $queryAuthors->fetch_assoc()) {
             $currentBookAuthors[] = $authors;
         }
-        $queryAuthors->close();
     }
+
+    $queryAuthors->close();
 }
 //===================================================================================================================
 

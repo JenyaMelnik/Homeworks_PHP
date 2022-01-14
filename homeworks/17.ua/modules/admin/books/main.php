@@ -15,6 +15,7 @@ if (isset($_POST['delete'])) {
             DELETE FROM `books`
             WHERE `id` IN (" . $booksToDelete . ")
         ");
+
         query("
             DELETE FROM `books2books_author`
             WHERE `book_id` IN (" . $booksToDelete . ")
@@ -33,6 +34,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
         DELETE FROM `books` 
         WHERE `id` = " . (int)$_GET['id']
     );
+
     query("
         DELETE FROM `books2books_author` 
         WHERE `book_id` = " . (int)$_GET['id']
@@ -50,22 +52,37 @@ $author = '';
 if (isset($_GET['author'])) {
     $author = 'author=' . $_GET['author'] . '&';
 
-    $queryBook = query("
-        SELECT `book_id`
-        FROM `books2books_author`
-        WHERE `author_id` = '" . (int)$_GET['author'] . "'
+    $queryAuthor = query("
+        SELECT `author` 
+        FROM `books_author`
+        WHERE `id` = " . (int)$_GET['author'] . "
+        LIMIT 1
     ");
 
-    if (!$queryBook->num_rows) {
-        $_SESSION['notice'] = 'У данного автора нет книг';
+    if ($queryAuthor->num_rows) {
+        $currentAuthor = $queryAuthor->fetch_assoc();
+        $shownBooks = 'Книги автора: ' . $currentAuthor['author'];
+    }
+
+    $queryAuthor->close();
+
+// ===================================================
+    $queryBookId = query("
+        SELECT `book_id`
+        FROM `books2books_author`
+        WHERE `author_id` = " . (int)$_GET['author']
+    );
+
+    if (!$queryBookId->num_rows) {
+        $_SESSION['notice'] = 'Нет такого автора';
         redirectTo(['module' => 'books']);
     }
 
     $bookIds = [];
-    while ($bookId = $queryBook->fetch_assoc()) {
+    while ($bookId = $queryBookId->fetch_assoc()) {
         $bookIds[] = (int)$bookId['book_id'];
     }
-    $queryBook->close();
+    $queryBookId->close();
 
     $numberOfItems = query("
         SELECT COUNT(id) AS cnt
@@ -82,23 +99,6 @@ if (isset($_GET['author'])) {
         ORDER BY `id` ASC
         " . $paginator->sqlQueryLimit()
     );
-
-    $queryAuthor = query("
-        SELECT `author` 
-        FROM `books_author`
-        WHERE `id` = " . (int)$_GET['author'] . "
-        LIMIT 1
-    ");
-
-    if ($queryAuthor->num_rows) {
-        $currentAuthor = $queryAuthor->fetch_assoc();
-    }
-
-    $queryAuthor->close();
-
-    if (isset($currentAuthor)) {
-        $shownBooks = 'Книги автора: ' . $currentAuthor['author'];
-    }
 
 } else {
 

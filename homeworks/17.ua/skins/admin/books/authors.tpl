@@ -5,6 +5,9 @@
 ?>
 
 <p><b><?= $notice ?? '' ?></b></p>
+<div>
+    <a href="<?= createUrlChpu(['module' => 'books']) ?>"><b>Вернутся к книгам</b></a>
+</div>
 <div class="border">
     <p>
         ДОБАВИТЬ АВТОРА

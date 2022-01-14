@@ -8,8 +8,8 @@ if (isset($_GET['id'])) {
 
     if ($queryAuthor->num_rows) {
         $author = $queryAuthor->fetch_assoc();
-        $queryAuthor->close();
     }
+    $queryAuthor->close();
 }
 
 if (isset($_POST['editAuthor'], $_POST['editAuthorName'])) {
@@ -29,17 +29,17 @@ if (isset($_POST['editAuthor'], $_POST['editAuthorName'])) {
 
 // =========================================== Проверка на дублирование автора ======================================
         if (!isset($errorEdit)) {
-            $query = query("
+            $queryAuthor = query("
             SELECT * FROM `books_author`
             WHERE `author` = '" . escapeString(trim($_POST['editAuthorName'])) . "'
         ");
 
-            if (!$query->num_rows) {
+            if (!$queryAuthor->num_rows) {
                 query("
                     UPDATE `books_author`
                     SET `author` = '" . escapeString(trim($_POST['editAuthorName'])) . "'
-                    WHERE `id` = " . (int)$_GET['id'] . "
-                ");
+                    WHERE `id` = " . (int)$_GET['id']
+                );
 
                 $_SESSION['notice'] = 'Автор изменен';
                 redirectTo(['module' => 'books', 'page' => 'authors']);
@@ -47,6 +47,7 @@ if (isset($_POST['editAuthor'], $_POST['editAuthorName'])) {
             } else {
                 $errorEdit = 'Такой автор уже есть';
             }
+            $queryAuthor->close();
         }
 
         $author['author'] = $_POST['editAuthorName'];

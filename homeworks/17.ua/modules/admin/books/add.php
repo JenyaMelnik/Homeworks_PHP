@@ -75,30 +75,32 @@ if (isset($_POST['add'],
                 query("
                     UPDATE `books` 
                     SET  `img` = '" . escapeString($imgResizedPath) . "'
-                    WHERE `id` = " . $id . "
-                ");
+                    WHERE `id` = " . $id
+                );
             }
 
             while ($selectedAuthor = $selectedAuthors->fetch_assoc()) {
                 query("
                     INSERT INTO `books2books_author`
                     SET `book_id` = " . $id . ",
-                    `author_id` = " . $selectedAuthor['id'] . "
-                ");
+                    `author_id` = " . $selectedAuthor['id']
+                );
             }
 
             $_SESSION['notice'] = 'Книга дабавлена';
         }
+        $selectedAuthors->close();
         redirectTo(['module' => 'books']);
     }
 }
 
 //============================================== Выбираем всех авторов ==============================================
 $authors = query("
-              SELECT *
-              FROM `books_author`
-              ORDER BY `author` ASC
-          ");
+    SELECT *
+    FROM `books_author`
+    ORDER BY `author` ASC
+");
+
 if ($authors->num_rows) {
     while ($authorId = $authors->fetch_assoc()) {
         $allAuthors[] = $authorId;

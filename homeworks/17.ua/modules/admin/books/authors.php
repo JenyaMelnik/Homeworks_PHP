@@ -5,6 +5,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     query("
         DELETE FROM `books_author`
         WHERE `id` = " . (int)$_GET['id'] . "
+        LIMIT 1
     ");
 
     $_SESSION['notice'] = 'Автор удален';

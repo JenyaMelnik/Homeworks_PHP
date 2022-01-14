@@ -49,12 +49,12 @@ if (isset($_POST['edit'],
             if ($selectedAuthorId == 1) {
                 continue;
             }
-            $currentAuthorsIds[] = $selectedAuthorId;
+            $currentAuthorsIds[] = (int)$selectedAuthorId;
         }
 
         $selectedAuthors = query("
             SELECT * FROM `books_author`
-            WHERE `id` IN (" . implode(',', escapeString($currentAuthorsIds)) . ")
+            WHERE `id` IN (" . implode(',', $currentAuthorsIds) . ")
             ORDER BY `id` ASC
         ");
 
@@ -67,6 +67,7 @@ if (isset($_POST['edit'],
             	SET       `title` = '" . escapeString(trim($_POST['title'])) . "',
              	    `description` = '" . escapeString(trim($_POST['description'])) . "'
              	WHERE       `id`  = " . (int)$_GET['id'] . "
+             	LIMIT 1
       		");
 
             if ($_FILES['img']['error'] == 0 && isset($imgResizedPath)) {
@@ -74,13 +75,14 @@ if (isset($_POST['edit'],
                     UPDATE `books` 
                     SET  `img`  = '" . escapeString($imgResizedPath) . "'
                     WHERE `id`  = " . (int)$_GET['id'] . "
+                    LIMIT 1
                 ");
             }
 
             query("
                 DELETE FROM `books2books_author`
-                WHERE `book_id` = " . (int)$_GET['id'] . "
-            ");
+                WHERE `book_id` = " . (int)$_GET['id']
+            );
 
             while ($selectedAuthor = $selectedAuthors->fetch_assoc()) {
                 query("
@@ -123,15 +125,17 @@ if ($authorsIds->num_rows) {
     while ($authorId = $authorsIds->fetch_assoc()) {
         $currentBookAuthorsIds[] = $authorId['author_id'];
     }
-    $authorsIds->close();
 }
+
+$authorsIds->close();
 
 //============================================== Выбираем всех авторов ==============================================
 $authors = query("
-              SELECT *
-              FROM `books_author`
-              ORDER BY `author` ASC
-          ");
+    SELECT *
+    FROM `books_author`
+    ORDER BY `author` ASC
+");
+
 if ($authors->num_rows) {
     while ($author = $authors->fetch_assoc()) {
         $allAuthors[] = $author;

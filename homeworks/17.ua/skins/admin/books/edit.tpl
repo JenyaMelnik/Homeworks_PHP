@@ -63,5 +63,4 @@
         <br>
         <input type="submit" name="edit" value="Сохранить изменения">
     </div>
-
 </form>

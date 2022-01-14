@@ -14,7 +14,7 @@
             </div>
             <p>
                 Авторы:
-                <?php if (isset($currentBookAuthors)) {
+                <?php if (!empty($currentBookAuthors)) {
                     foreach ($currentBookAuthors as $currentBookAuthor) { ?>
                         <a href="<?= createUrlChpu(['module' => 'books']) ?>?author=<?= $currentBookAuthor['id'] ?>"><?= htmlspecialchars($currentBookAuthor['author']); ?></a>
                     <?php }

@@ -25,4 +25,3 @@ if (isset($_POST['addAuthor'], $_POST['authorName'])) {
         }
     }
 }
-

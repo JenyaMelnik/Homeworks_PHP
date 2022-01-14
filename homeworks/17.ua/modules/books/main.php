@@ -9,7 +9,6 @@ $author = '';
 if (isset($_GET['author'])) {
     $author = 'author=' . $_GET['author'] . '&';
 
-                // =============================================================================
     $queryAuthor = query("
         SELECT `author` 
         FROM `books_author`
@@ -24,7 +23,7 @@ if (isset($_GET['author'])) {
 
     $queryAuthor->close();
 
-              // =================================================================================
+// ====================================================
     $queryBookId = query("
         SELECT `book_id`
         FROM `books2books_author`
