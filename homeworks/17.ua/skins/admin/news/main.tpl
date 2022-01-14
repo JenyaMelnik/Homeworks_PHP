@@ -1,13 +1,14 @@
 <?php
 /**
  * @var $news mysqli
- * @var $newsCategories mysqli
+ * @var $queryNewsCategories mysqli
+ * @var $shownCategory string
  */
 
 if (isset($_SESSION['user'])) {
     if ($_SESSION['user']['access'] == 5) {
 
-        $category = $_GET['category'] ?? 'Все новости'; ?>
+         ?>
 
         <div class="item">
             <?php
@@ -21,13 +22,13 @@ if (isset($_SESSION['user'])) {
                 <p>
                     <a href="/admin/news"><b>Все категории</b></a>
                     <?php
-                    if ($newsCategories->num_rows) {
-                        while ($categories = $newsCategories->fetch_assoc()) { ?>
-                            <a href="/admin/news?category=<?= htmlspecialchars($categories['category']) ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
+                    if ($queryNewsCategories->num_rows) {
+                        while ($categories = $queryNewsCategories->fetch_assoc()) { ?>
+                            <a href="/admin/news?category=<?= (int)$categories['id'] ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
                         <?php }
                     } ?>
                 </p>
-                <p><b><?= htmlspecialchars($category) ?>:</b></p>
+                <p><b><?= htmlspecialchars($shownCategory) ?></b></p>
                 <form action="" method="post">
                     <?php
                     if ($news->num_rows) {
@@ -35,7 +36,7 @@ if (isset($_SESSION['user'])) {
                             <div>
                                 <div>
                                     <label><input type="checkbox" name="ids[]" value="<?= $newsRow['id'] ?>"></label>
-                                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?category=<?= htmlspecialchars($category) ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
+                                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?<?= htmlspecialchars($currentCategoryId) ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
                                     <a href="<?= createUrlChpu(['module' => 'news']) ?>?action=delete&id=<?= $newsRow['id'] ?>">УДАЛИТЬ</a>
                                 </div>
                                 <div><?= $newsRow['date']; ?></div>

@@ -30,35 +30,47 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
 }
 
 //===================================  Выбираем все категории  ======================================================
-$newsCategories = query("
+$queryNewsCategories = query("
      SELECT *
      FROM `news_category`
      ORDER BY `id` ASC 
 ");
 
-//===================================  Выбираем новости по категории, else - все новости ============================
+$shownCategory = 'Все новости';
+$currentCategoryId = '';
+
+//=================================== Выбираем текущую категорию ====================================================
 if (isset($_GET['category'])) {
-    $result = query("
-        SELECT `id`
-        FROM `news_category`
-        WHERE `category` = '" . escapeString($_GET['category']) . "'
-        LIMIT 1
+    $currentCategoryId = 'category=' . $_GET['category'] . '&';
+
+    $queryCurrentCategory = query("
+        SELECT *  FROM `news_category`
+        WHERE `id` = " . (int)$_GET['category'] . "
     ");
 
-    if (!$result->num_rows) {
-        $_SESSION['info'] = 'Данной категории не существует';
-        redirectTo(['module' => 'news']);
+    if ($queryCurrentCategory->num_rows) {
+        $currentCategory = $queryCurrentCategory->fetch_assoc();
+        $shownCategory = 'Категория новостей: ' . $currentCategory['category'];
     }
 
-    $categoryId = $result->fetch_assoc();
-    $result->close();
+    $queryCurrentCategory->close();
 
+
+}
+//===================================  Выбираем новости по категории, else - все новости ============================
+if (isset($_GET['category'])) {
     $news = query("
         SELECT * 
         FROM `news` 
-        WHERE `category_id` = " . (int)$categoryId['id'] . "
+        WHERE `category_id` = " . (int)($_GET['category']) . "
         ORDER BY `id` DESC 
     ");
+
+    if (!$news->num_rows) {
+        $_SESSION['info'] = 'В данной категории нет новостей';
+        redirectTo(['module' => 'news']);
+    }
+
 } else {
     $news = query("
         SELECT * 

@@ -1620,3 +1620,13 @@ line: 132
 date:2022-01-13 11:11:49
 =============================================
 
+QUERY: 
+    SELECT *  FROM `news_category`
+    WHERE `id` = 
+
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\news\main.php
+line: 42
+date:2022-01-14 00:20:11
+=============================================
+
