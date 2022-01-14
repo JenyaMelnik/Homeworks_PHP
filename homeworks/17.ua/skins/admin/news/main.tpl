@@ -7,8 +7,7 @@
  */
 
 if (isset($_SESSION['user'])) {
-    if ($_SESSION['user']['access'] == 5) {        ?>
-
+    if ($_SESSION['user']['access'] == 5) { ?>
         <div class="item">
             <?php
             if (isset($info)) { ?>
@@ -19,11 +18,11 @@ if (isset($_SESSION['user'])) {
             <hr>
             <div>
                 <p>
-                    <a href="/admin/news"><b>Все категории</b></a>
+                    <a href="<?= createUrlChpu(['module' => 'news']) ?>"><b>Все категории</b></a>
                     <?php
                     if ($queryNewsCategories->num_rows) {
                         while ($categories = $queryNewsCategories->fetch_assoc()) { ?>
-                            <a href="/admin/news?category=<?= (int)$categories['id'] ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
+                            <a href="<?= createUrlChpu(['module' => 'news']) ?>?category=<?= (int)$categories['id'] ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
                         <?php }
                     } ?>
                 </p>
