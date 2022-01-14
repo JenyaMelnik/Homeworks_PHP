@@ -9,6 +9,22 @@ $author = '';
 if (isset($_GET['author'])) {
     $author = 'author=' . $_GET['author'] . '&';
 
+                // =============================================================================
+    $queryAuthor = query("
+        SELECT `author` 
+        FROM `books_author`
+        WHERE `id` = " . (int)$_GET['author'] . "
+        LIMIT 1
+    ");
+
+    if ($queryAuthor->num_rows) {
+        $currentAuthor = $queryAuthor->fetch_assoc();
+        $shownBooks = 'Книги автора: ' . $currentAuthor['author'];
+    }
+
+    $queryAuthor->close();
+
+              // =================================================================================
     $queryBookId = query("
         SELECT `book_id`
         FROM `books2books_author`
@@ -16,7 +32,7 @@ if (isset($_GET['author'])) {
     );
 
     if (!$queryBookId->num_rows) {
-        $_SESSION['notice'] = 'У данного автора нет книг';
+        $_SESSION['notice'] = 'Нет такого автора';
         redirectTo(['module' => 'books']);
     }
 
@@ -41,23 +57,6 @@ if (isset($_GET['author'])) {
         ORDER BY `id` ASC
         " . $paginator->sqlQueryLimit()
     );
-
-    $queryAuthor = query("
-        SELECT `author` 
-        FROM `books_author`
-        WHERE `id` = " . (int)$_GET['author'] . "
-        LIMIT 1
-    ");
-
-    if ($queryAuthor->num_rows) {
-        $currentAuthor = $queryAuthor->fetch_assoc();
-    }
-
-    $queryAuthor->close();
-
-    if (isset($currentAuthor)) {
-        $shownBooks = 'Книги автора: ' . $currentAuthor['author'];
-    }
 
 } else {
 
@@ -123,7 +122,6 @@ if ($queryAllAuthorsOnPage->num_rows) {
         $allAuthorsOnPage[$authorOnPage['id']] = $authorOnPage['author'];
     }
 }
-
 
 //===================================================================================================================
 if (isset($_SESSION['notice'])) {

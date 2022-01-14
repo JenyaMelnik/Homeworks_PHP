@@ -54,9 +54,7 @@ if (isset($_SESSION['user'])) { ?>
         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=1"><b>Первая</b></a>
         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= ($paginator->previousPage()) ?>"><b>Назад</b></a>
         <?php
-        for ($i = $paginator->startPaginator();
-             $i < $paginator->endPaginator();
-             ++$i) {
+        for ($i = $paginator->startPaginator(); $i < $paginator->endPaginator(); ++$i) {
             if ($i == $paginator->currentPage()) { ?>
                 <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'main']) ?>?<?= htmlspecialchars($author) ?>p=<?= $i ?>"><?= '<b>' . $i . '</b>' ?></a>
             <?php } else { ?>
