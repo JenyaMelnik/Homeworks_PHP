@@ -6,7 +6,8 @@
  */
 
 if (isset($_SESSION['user'])) {
-    if ($_SESSION['user']['access'] == 5) { ?>
+    if ($_SESSION['user']['access'] == 5) {        ?>
+
         <div class="item">
             <?php
             if (isset($info)) { ?>
@@ -33,7 +34,7 @@ if (isset($_SESSION['user'])) {
                             <div>
                                 <div>
                                     <label><input type="checkbox" name="ids[]" value="<?= $newsRow['id'] ?>"></label>
-                                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?<?= htmlspecialchars($currentCategoryId) ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
+                                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?<?= htmlspecialchars($category) ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
                                     <a href="<?= createUrlChpu(['module' => 'news']) ?>?action=delete&id=<?= $newsRow['id'] ?>">УДАЛИТЬ</a>
                                 </div>
                                 <div><?= $newsRow['date']; ?></div>
