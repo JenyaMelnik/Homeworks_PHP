@@ -32,6 +32,7 @@ if (isset($_GET['category'])) {
         WHERE `category_id` = " . (int)$_GET['category'] . "
         ORDER BY `id` DESC 
     ");
+
 } else {
     $news = query("
         SELECT * 
