@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $selectedNews array
+ * @var $category string
  */
 ?>
 
@@ -13,6 +14,5 @@
         </div>
         <hr>
     </div>
-    <a href="<?= createUrlChpu(['module' => 'news']) ?>?category=<?= $_GET['category'] ?>"> Вернутся к новостям </a>
+    <a href="<?= createUrlChpu(['module' => 'news']) ?><?= $category ?>"> Вернутся к новостям </a>
 </div>
-

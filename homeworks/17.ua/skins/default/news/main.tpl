@@ -2,10 +2,11 @@
 /**
  * @var $news mysqli
  * @var $newsCategories mysqli
+ * @var $shownCategory string
+ * @var $category string
  */
 
 echo $notice ?? '';
-$category = $_GET['category'] ?? 'Все новости';
 
 if (isset($_SESSION['user'])) { ?>
     <div class="item">
@@ -14,10 +15,10 @@ if (isset($_SESSION['user'])) { ?>
                 <a href="/news"><b>Все новости</b></a>
                 <?php
                 while ($categories = $newsCategories->fetch_assoc()) { ?>
-                    <a href="/news?category=<?= htmlspecialchars($categories['category']) ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
+                    <a href="/news?category=<?= (int)$categories['id'] ?>"><b><?= htmlspecialchars($categories['category']) ?></b></a>
                 <?php } ?>
             </p>
-            <p><b><?= htmlspecialchars($category) ?>:</b></p>
+            <p><b><?= htmlspecialchars($shownCategory) ?></b></p>
             <?php
             if ($news->num_rows) {
                 while ($newsRow = $news->fetch_assoc()) { ?>
@@ -25,7 +26,7 @@ if (isset($_SESSION['user'])) { ?>
                         <div><?= $newsRow['date']; ?></div>
                         <div class="text"><?= htmlspecialchars($newsRow['title']); ?></div>
                     </div>
-                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'currentItem']) ?>?category=<?= htmlspecialchars($category) ?>&id=<?= (int)$newsRow['id'] ?>">Подробнее...</a>
+                    <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'currentItem']) ?>?<?= htmlspecialchars($category) ?>id=<?= (int)$newsRow['id'] ?>">Подробнее...</a>
                     <hr>
                 <?php }
             } else { ?>

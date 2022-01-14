@@ -65,11 +65,6 @@ if (isset($_GET['category'])) {
         ORDER BY `id` DESC 
     ");
 
-    if (!$news->num_rows) {
-        $_SESSION['info'] = 'В данной категории нет новостей';
-        redirectTo(['module' => 'news']);
-    }
-
 } else {
     $news = query("
         SELECT * 

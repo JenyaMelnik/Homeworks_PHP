@@ -14,3 +14,9 @@ if (!$news->num_rows) {
 
 $selectedNews = $news->fetch_assoc();
 $news->close();
+
+if (isset($_GET['category'])) {
+    $category = '?category=' . $_GET['category'];
+} else {
+    $category= '';
+}
