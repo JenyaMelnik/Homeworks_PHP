@@ -16,6 +16,7 @@ if (isset($_GET['category'])) {
     $queryCurrentCategory = query("
         SELECT *  FROM `news_category`
         WHERE `id` = " . (int)$_GET['category'] . "
+        LIMIT 1
     ");
 
     if ($queryCurrentCategory->num_rows) {
