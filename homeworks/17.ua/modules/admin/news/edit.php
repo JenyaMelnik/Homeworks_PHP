@@ -52,32 +52,38 @@ $currentNews = $news->fetch_assoc();
 $news->close();
 
 //==========================================  Категория текущей новости  ============================================
-$category = query("
+$queryCurrentCategory = query("
                 SELECT `category`
                 FROM `news_category`
                 WHERE `id` = '" . $currentNews['category_id'] . "'
             ");
-if ($category->num_rows) {
-    $currentCategory = $category->fetch_assoc();
+if ($queryCurrentCategory->num_rows) {
+    $currentCategory = $queryCurrentCategory->fetch_assoc();
 }
 
-$category->close();
+$queryCurrentCategory->close();
 
 //===============================================  Все категории  ===================================================
-$categories = query("
+$queryAllCategories = query("
               SELECT *
               FROM `news_category`
               ORDER BY `id`
           ");
 
-if ($categories->num_rows) {
-    while ($category = $categories->fetch_assoc()) {
+if ($queryAllCategories->num_rows) {
+    while ($category = $queryAllCategories->fetch_assoc()) {
         $allCategories[] = $category;
     }
 }
 
-$categories->close();
+$queryAllCategories->close();
 
 //===================================================================================================================
 $currentNews['title'] = $_POST['title'] ?? $currentNews['title'];
 $currentNews['text'] = $_POST['text'] ?? $currentNews['text'];
+
+if (isset($_GET['category'])) {
+    $category = '?category=' . $_GET['category'];
+} else {
+    $category= '';
+}

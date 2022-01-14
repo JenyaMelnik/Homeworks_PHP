@@ -1,5 +1,11 @@
+<?php
+/**
+ * @var $category string
+ */
+?>
+
 <div>
-    <a href="<?= createUrlChpu(['module' => 'news']) ?>?category=<?= $_GET['category'] ?>"><b> Вернутся к новостям </b></a>
+    <a href="<?= createUrlChpu(['module' => 'news']) ?><?= $category ?>"><b> Вернутся к новостям </b></a>
     <form action="" method="post">
         <table>
             <tr>
