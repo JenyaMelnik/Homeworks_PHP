@@ -3,6 +3,7 @@
  * @var $news mysqli
  * @var $queryNewsCategories mysqli
  * @var $shownCategory string
+ * @var $category string
  */
 
 if (isset($_SESSION['user'])) {
