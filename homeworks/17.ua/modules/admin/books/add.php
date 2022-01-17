@@ -50,12 +50,12 @@ if (isset($_POST['add'],
             if ($authorId == 1) {
                 continue;
             }
-            $currentAuthorIds[] = $authorId;
+            $currentAuthorIds[] = (int)$authorId;
         }
 
         $selectedAuthors = query("
             SELECT * FROM `books_author`
-            WHERE `id` IN (" . implode(',', escapeString($currentAuthorIds)) . ")
+            WHERE `id` IN (" . implode(',', $currentAuthorIds) . ")
             ORDER BY `id` ASC
         ");
 
@@ -74,7 +74,7 @@ if (isset($_POST['add'],
             if ($_FILES['img']['error'] == 0 && isset($imgResizedPath)) {
                 query("
                     UPDATE `books` 
-                    SET  `img` = '" . escapeString($imgResizedPath) . "'
+                    SET  `img` = '" . $imgResizedPath . "'
                     WHERE `id` = " . $id
                 );
             }

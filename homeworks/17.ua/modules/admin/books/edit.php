@@ -73,7 +73,7 @@ if (isset($_POST['edit'],
             if ($_FILES['img']['error'] == 0 && isset($imgResizedPath)) {
                 query("
                     UPDATE `books` 
-                    SET  `img`  = '" . escapeString($imgResizedPath) . "'
+                    SET  `img`  = '" . $imgResizedPath . "'
                     WHERE `id`  = " . (int)$_GET['id'] . "
                     LIMIT 1
                 ");
@@ -88,8 +88,8 @@ if (isset($_POST['edit'],
                 query("
                     INSERT INTO `books2books_author`
                     SET `book_id` = " . (int)$_GET['id'] . ",
-                      `author_id` = " . (int)$selectedAuthor['id'] . "
-                ");
+                      `author_id` = " . $selectedAuthor['id']
+                );
             }
 
             $_SESSION['notice'] = 'Изменения сохранены';

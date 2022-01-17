@@ -1630,3 +1630,15 @@ line: 42
 date:2022-01-14 00:20:11
 =============================================
 
+QUERY: 
+            SELECT * FROM `books_author`
+            WHERE `id` IN ()
+            ORDER BY `id` ASC
+        
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+            ORDER BY `id` ASC' at line 2
+file: W:\domains\homeworks.ua\homeworks\17.ua\modules\admin\books\add.php
+line: 58
+date:2022-01-17 09:55:37
+=============================================
+
