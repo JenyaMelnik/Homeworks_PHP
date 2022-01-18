@@ -29,7 +29,7 @@
                         </select>
                     <?php } else { ?>
                         Нет авторов
-                    <? } ?>
+                    <?php } ?>
                 </td>
                 <td><?= $errors['author'] ?? '' ?></td>
             </tr>
