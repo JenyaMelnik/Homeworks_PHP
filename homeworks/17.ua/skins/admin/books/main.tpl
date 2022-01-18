@@ -28,7 +28,8 @@ if (isset($_SESSION['user'])) { ?>
                 if (!empty($books)) {
                     foreach ($books as $book) { ?>
                         <a href="<?= createUrlChpu(['module' => 'books', 'page' => 'edit']) ?>?<?= htmlspecialchars($author) ?>id=<?= (int)$book['id'] ?>">Редактировать</a>
-                        <a href="<?= createUrlChpu(['module' => 'books']) ?>?action=delete&id=<?= (int)$book['id'] ?>">УДАЛИТЬ</a>
+                        <a href="<?= createUrlChpu(['module' => 'books']) ?>?action=delete&id=<?= (int)$book['id'] ?>"
+                           onclick="return areYouSure();">УДАЛИТЬ</a>
                         <div>
                             <h2>
                                 <label><input type="checkbox" name="booksToDelete[]" value="<?= (int)$book['id'] ?>">
@@ -56,7 +57,7 @@ if (isset($_SESSION['user'])) { ?>
                     <span>Нет книг</span>
                     <br>
                 <?php } ?>
-                <input type="submit" name="delete" value="Удалить отмеченные записи">
+                <input type="submit" name="delete" onclick="areYouSure();" value="Удалить отмеченные записи">
             </form>
         </div>
     </div>

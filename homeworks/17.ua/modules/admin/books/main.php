@@ -1,4 +1,5 @@
 <?php
+Core::$JS[] = '<script src="/skins/admin/js/methods.js"></script>';
 
 $paginator = new Paginator();
 $paginator->itemsOnPage = 2;

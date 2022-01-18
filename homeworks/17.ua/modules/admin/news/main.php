@@ -1,7 +1,7 @@
 <?php
-/**
- * @var $dbc mysqli
- */
+
+Core::$JS[] = '<script src="/skins/admin/js/methods.js"></script>';
+
 //==================================  Удаление нескольких записей  ==================================================
 if (isset($_POST['delete'])) {
     foreach ($_POST['ids'] as $k => $v) {
