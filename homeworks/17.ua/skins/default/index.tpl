@@ -1,13 +1,9 @@
 <?php
 /**
- * @var $notice string
- * @var $isAuthUser bool
- * @var $isAuthAdmin bool
- * @var $isAdminIP bool
- * @var $module string
- * @var $page string
  * @var $content array
  */
+
+include Core::$CONTROLLER . "/cab/auth.php"
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -18,6 +14,7 @@
     <meta name="keywords" content="<?= Core::$META['keywords'] ?>">
     <link href="/css/normalize.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/methods_v1.js"></script>
     <?php if (count(Core::$CSS)) {
         echo implode('\n', Core::$CSS);
     } ?>
@@ -56,7 +53,7 @@
                     <a href="#">&#9825; &nbsp; MY WISHLIST o</a>
                     &nbsp; &nbsp; &nbsp;
                     <?php if (!isset($_SESSION['user'])) { ?>
-                        <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'auth']) ?>">AUTHORIZE </a> /
+                        <a id="authorize" onclick="showHide()">AUTHORIZE </a> /
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'registration']) ?>">REGISTER </a>
                     <?php } else { ?>
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'edit']) ?>">
@@ -73,6 +70,7 @@
             </div>
         </div>
     </div>
+    <?php include "./skins/" . Core::$SKIN . "/cab/auth.tpl" ?>
     <div class="search">
         <div class="container clearfix">
             <div class="col">

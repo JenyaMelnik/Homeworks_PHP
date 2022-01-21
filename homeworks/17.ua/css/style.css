@@ -254,6 +254,20 @@
 
   /* Блок: GOODS ---------Начало---------  */
 
+#auth {
+    width: 210px;
+    background-color: white;
+    margin-left: 1315px;
+    position: absolute;
+    display: none;
+}
+
+.congratulation {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .item {
     border: 2px solid;
     padding: 10px;
