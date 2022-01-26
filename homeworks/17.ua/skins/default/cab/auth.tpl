@@ -1,14 +1,17 @@
 <?php
-if (!isset($status) || $status != 'ok') {
-    echo $errors ?? ''; ?>
+if (!isset($status) || $status != 'ok') { ?>
     <div id="auth">
         <form action="" method="post" onsubmit="return checkLength('login', 'password')">
             <table>
                 <tr>
-                    <td><input type="text" id="login" name="login" placeholder="введите логин"></td>
+                    <td><input type="text" id="login" name="login" placeholder="введите логин">
+                        <div id="loginError" ></div>
+                    </td>
                 </tr>
                 <tr>
-                    <td><input type="password" id="password" name="pass" placeholder="введите пароль"></td>
+                    <td><input type="password" id="password" name="pass" placeholder="введите пароль">
+                        <div id="passwordError" ></div>
+                    </td>
                 </tr>
                 <tr>
                     <td><label><input type="checkbox" name="autoauth"> Запомнить меня</label></td>

@@ -15,6 +15,7 @@ include Core::$CONTROLLER . "/cab/auth.php"
     <link href="/css/normalize.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <script src="/js/methods_v1.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <?php if (count(Core::$CSS)) {
         echo implode('\n', Core::$CSS);
     } ?>
@@ -27,6 +28,9 @@ include Core::$CONTROLLER . "/cab/auth.php"
 <header>
     <div>
         <div class="container clearfix">
+            <div class="errors">
+                <?= $errors ?? '' ?>
+            </div>
             <div class="col-registration clearfix">
                 <div class="language">
                     <a href="#">ENGLISH &nbsp;</a>
@@ -53,7 +57,7 @@ include Core::$CONTROLLER . "/cab/auth.php"
                     <a href="#">&#9825; &nbsp; MY WISHLIST o</a>
                     &nbsp; &nbsp; &nbsp;
                     <?php if (!isset($_SESSION['user'])) { ?>
-                        <a id="authorize" onclick="showHide()">AUTHORIZE </a> /
+                        <a href="" id="authorize" onclick="showHide(); return false">AUTHORIZE </a> /
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'registration']) ?>">REGISTER </a>
                     <?php } else { ?>
                         <a href="<?= createUrlChpu(['module' => 'cab', 'page' => 'edit']) ?>">
@@ -73,7 +77,6 @@ include Core::$CONTROLLER . "/cab/auth.php"
             </div>
         </div>
     </div>
-
     <div class="search">
         <div class="container clearfix">
             <div class="col">

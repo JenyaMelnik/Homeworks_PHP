@@ -252,13 +252,26 @@
     border: 1px solid brown;
 }
 
-  /* Блок: GOODS ---------Начало---------  */
+/* Блок: GOODS ---------Начало---------  */
 
 #auth {
     background-color: white;
     margin: 35px 0 0 163px;
     position: absolute;
     display: none;
+}
+
+.errors {
+    text-align: center;
+    font-weight: bold;
+}
+
+#loginError {
+    color: red;
+}
+
+#passwordError {
+    color: red;
 }
 
 .congratulation {
