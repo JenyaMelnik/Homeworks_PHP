@@ -29,7 +29,7 @@ include Core::$CONTROLLER . "/cab/auth.php"
     <div>
         <div class="container clearfix">
             <div class="errors">
-                <?= $errors ?? '' ?>
+                <?= $authError ?? '' ?>
             </div>
             <div class="col-registration clearfix">
                 <div class="language">
