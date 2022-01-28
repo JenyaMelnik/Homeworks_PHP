@@ -1,7 +1,7 @@
 <?php
 if (!isset($status) || $status != 'ok') { ?>
     <div id="auth">
-        <form action="" method="post" onsubmit="return checkLength('login', 'password')">
+        <form action="" method="post" onsubmit="return checkLengthTwoField('login', 'loginError', 'password', 'passwordError')">
             <table>
                 <tr>
                     <td><input type="text" id="login" name="login" placeholder="введите логин">

@@ -13,6 +13,9 @@
     <meta name="keywords" content="<?= Core::$META['keywords'] ?>">
     <link href="/css/normalize.css" rel="stylesheet">
     <link href="/skins/admin/css/style.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/methods_v1.js"></script>
+
     <?php if (count(Core::$CSS)) {
         echo implode('\n', Core::$CSS);
     } ?>
@@ -41,6 +44,7 @@
         <?php
         if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 5) { ?>
             <a href="<?= createUrlChpu(['module' => 'news']) ?>">NEWS</a>
+            <a href="<?= createUrlChpu(['module' => 'comments']) ?>">COMMENTS</a>
             <a href="<?= createUrlChpu(['module' => 'goods']) ?>">GOODS</a>
             <a href="<?= createUrlChpu(['module' => 'users']) ?>">USERS</a>
             <a href="<?= createUrlChpu(['module' => 'books']) ?>">BOOKS</a>
