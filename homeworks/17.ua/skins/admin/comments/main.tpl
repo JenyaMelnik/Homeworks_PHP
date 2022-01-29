@@ -14,14 +14,13 @@ if (isset($_SESSION['user'])) { ?>
               onsubmit="myAjaxComments('<?= $_SESSION['user']['login'] ?>', '<?= $_SESSION['user']['email'] ?>'); return false">
             <table>
                 <tr>
-                    <td><label for="comment"><?= $_SESSION['user']['login'] ?>, ведите комментарий:</label></td>
+                    <td><?= $_SESSION['user']['login'] ?>, ведите комментарий:</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><label for="comment"><textarea rows="10" cols="42" id="comment"
-                                                                   name="comment"><?php echo htmlspecialchars(($_POST['comment']) ?? ''); ?></textarea></label>
+                    <td>
+                        <textarea rows="10" cols="42" id="comment" name="comment"></textarea>
                     </td>
                     <td id="commentError"></td>
-<!--                    <td>--><?// //= $errors['comment'] ?? ''; ?><!--</td>-->
                 </tr>
             </table>
             <input type="submit" id="submit" name="sendComment" value="Добавить комментарий">
@@ -53,9 +52,7 @@ if (isset($_SESSION['user'])) { ?>
             }
         } else { ?>
             <p>Нет записей</p>
-        <?php }
-        unset($_SESSION['addedComment']);
-        ?>
+        <?php } ?>
     </div>
 <?php } else { ?>
     <p>Авторизируйтесь чтобы войти в раздел комментариев</p>

@@ -6,7 +6,7 @@ $allCommentsQuery = mysqli_query($dbc, "SELECT * FROM `comments` ORDER BY `id` D
 
 // ============================================ Удаление комментария ===============================================
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
-    mysqli_query($dbc, "
+    $deleteQuery = mysqli_query($dbc, "
         DELETE FROM `comments`
         WHERE `id` = " . (int)$_GET['id']
     );
@@ -16,11 +16,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
 }
 
 // ======================================= Добавление комментария ==================================================
-if (isset($_POST['login'], $_POST['comment'])) {
+if (isset($_POST['login'], $_POST['comment'], $_POST['email'])) {
     $comment = [
         'login' => htmlspecialchars($_POST['login']),
         'email' => htmlspecialchars($_POST['email']),
-        'comment' => htmlspecialchars($_POST['comment']),
+        'comment' => nl2br(htmlspecialchars($_POST['comment'])),
         'date' => date("Y-m-d H:i:s")
     ];
 
@@ -35,6 +35,7 @@ if (isset($_POST['login'], $_POST['comment'])) {
         echo json_encode($comment);
     }
 }
+
 // =================================================================================================================
 if (isset($_SESSION['notice'])) {
     $notice = $_SESSION['notice'];

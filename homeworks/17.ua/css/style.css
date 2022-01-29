@@ -242,7 +242,7 @@
     clear: both;
 }
 
-/* Блок: SPRITES + CLEARFIX ----------Конец------------ */
+/* ======================================== SPRITES + CLEARFIX END ================================================ */
 
 .foto {
     margin: 10px 0;
@@ -251,8 +251,6 @@
     width: 120px;
     border: 1px solid brown;
 }
-
-/* Блок: GOODS ---------Начало---------  */
 
 #auth {
     background-color: white;
@@ -293,27 +291,48 @@
     padding-bottom: 20px;
 }
 
+/*===================================== MODULE COMMENTS BEGIN ======================================================*/
+#commentWasAdded {
+    font-weight: bold;
+    display: none;
+}
+
 .comment {
-    border-bottom: 1px solid;
+    border: 1px solid grey;
+    border-radius: 1%;
+    margin-top: 20px;
+}
+
+.comment > a {
+    color: red;
+    padding-left: 5px;
 }
 
 .nameComment {
+    border-bottom: 1px solid grey;
     padding-left: 3px;
     margin-bottom: 3px;
-    font-style: italic;
+    /*font-style: italic;*/
     padding-right: 10px;
 }
 
 .textComment {
     padding-left: 10px;
-    font-size: 18px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    font-size: 14px;
+}
+
+.textComment > a {
+    color: #de0505;
 }
 
 .allComments {
     margin-left: 3px;
-    border: 2px solid;
+    /*border: 2px solid;*/
     width: 600px;
 }
+/* ============================================= MODULE COMMENTS END ============================================= */
 
 main {
     width: 1320px;

@@ -13,8 +13,8 @@ function showHide() {
 
 function checkLength(id, errorId) {
     var length = document.getElementById(id).value.length;
-    if (length < 2) {
-        document.getElementById(errorId).innerHTML = 'минимум 2 символа. Вы ввели: ' + length;
+    if (length < 3) {
+        document.getElementById(errorId).innerHTML = 'минимум 3 символа. Вы ввели: ' + length;
         return false;
     } else {
         document.getElementById(errorId).innerHTML = '';
