@@ -48,7 +48,7 @@ function myAjaxComments(userLogin, userEmail) {
     if (checkLength('comment', 'commentError')) {
         var comment = document.getElementById('comment').value;
         $.ajax({
-            url: '/modules/admin/comments/main.php',
+            url: '',
             type: "POST",
             cache: false,
             data: {login: userLogin, email: userEmail, comment: comment},

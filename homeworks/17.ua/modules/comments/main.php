@@ -1,9 +1,4 @@
 <?php
-$dbc = mysqli_connect('localhost', 'jenyamelnik1986', 'Jrwq1_13jwqdnXX', 'jenyamelnik1986');
-mysqli_set_charset($dbc, 'utf8');
-
-$allCommentsQuery = mysqli_query($dbc, "SELECT * FROM `comments` ORDER BY `id` DESC ");
-
 // ======================================= Добавление комментария ==================================================
 if (isset($_POST['login'], $_POST['comment'], $_POST['email'])) {
     $comment = [
@@ -14,16 +9,20 @@ if (isset($_POST['login'], $_POST['comment'], $_POST['email'])) {
     ];
 
     $addCommentSqlQuery = " INSERT INTO `comments` SET
-            `login`   = '" . mysqli_real_escape_string($dbc, $_POST['login']) . "',
-            `email`   = '" . mysqli_real_escape_string($dbc, $_POST['email']) . "',
-            `comment` = '" . mysqli_real_escape_string($dbc, $_POST['comment']) . "',
+            `login`   = '" . escapeString($_POST['login']) . "',
+            `email`   = '" . escapeString($_POST['email']) . "',
+            `comment` = '" . escapeString($_POST['comment']) . "',
             `date`    = '" . $comment['date'] . "'";
 
-    if (mysqli_query($dbc, $addCommentSqlQuery)) {
-        $comment['id'] = mysqli_insert_id($dbc);
+    if (query($addCommentSqlQuery)) {
+        $comment['id'] = mysqli_insert_id(DBConnectAndClose::connect());
         echo json_encode($comment);
+        exit();
     }
 }
+
+// =========================================== Все комментарии =====================================================
+$allCommentsQuery = query( "SELECT * FROM `comments` ORDER BY `id` DESC ");
 
 // =================================================================================================================
 if (isset($_SESSION['notice'])) {
