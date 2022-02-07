@@ -11,7 +11,7 @@ function showHide() {
     }
 }
 
-function checkLength(id, errorId) {
+function validateLength(id, errorId) {
     var length = document.getElementById(id).value.length;
     if (length < 3) {
         document.getElementById(errorId).innerHTML = 'минимум 3 символа. Вы ввели: ' + length;
@@ -22,7 +22,7 @@ function checkLength(id, errorId) {
     }
 }
 
-function checkLengthTwoField(id, errorId, id2, errorId2) {
+function validateLengthTwoField(id, errorId, id2, errorId2) {
     var loginLength = document.getElementById(id).value.length;
     var passwordLength = document.getElementById(id2).value.length;
     if (loginLength < 2 && passwordLength < 2) {
@@ -45,7 +45,7 @@ function checkLengthTwoField(id, errorId, id2, errorId2) {
 }
 
 function myAjaxComments(userLogin, userEmail) {
-    if (checkLength('comment', 'commentError')) {
+    if (validateLength('comment', 'commentError')) {
         var comment = document.getElementById('comment').value;
         $.ajax({
             url: '',
