@@ -1,6 +1,6 @@
 <?php
 
-Core::$JS[] = '<script src="/skins/admin/js/methods.js"></script>';
+Core::$JS[] = '<script src="/skins/admin/js2/methods.js2"></script>';
 
 //==================================  Удаление нескольких записей  ==================================================
 if (isset($_POST['delete'])) {

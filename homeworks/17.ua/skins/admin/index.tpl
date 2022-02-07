@@ -11,10 +11,10 @@
     <title> <?= Core::$META['title'] ?> </title>
     <meta name="description" content="<?= Core::$META['description'] ?>">
     <meta name="keywords" content="<?= Core::$META['keywords'] ?>">
-    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/skins/default/css/normalize.css" rel="stylesheet">
     <link href="/skins/admin/css/style.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/js/methods_v1.js"></script>
+    <script src="/skins/default/js/methods_v1.js"></script>
 
     <?php if (count(Core::$CSS)) {
         echo implode('\n', Core::$CSS);

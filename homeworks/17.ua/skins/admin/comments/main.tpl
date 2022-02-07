@@ -45,7 +45,7 @@ if (isset($_SESSION['user'])) { ?>
                         <?= nl2br(htmlspecialchars($comment['comment'])) ?>
                         <hr>
                         <a href="<?= createUrlChpu(['module' => 'comments']) ?>?action=delete&id=<?= (int)$comment['id'] ?>"
-                           onclick="return areYouSure();">удалить</a>
+                           onclick="return deletionСonfirmation();">удалить</a>
                     </div>
                 </div>
                 <?php

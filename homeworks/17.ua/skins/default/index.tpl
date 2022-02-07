@@ -12,9 +12,9 @@ include Core::$CONTROLLER . "/cab/auth.php"
     <title> <?= Core::$META['title'] ?> </title>
     <meta name="description" content="<?= Core::$META['description'] ?>">
     <meta name="keywords" content="<?= Core::$META['keywords'] ?>">
-    <link href="/css/normalize.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <script src="/js/methods_v1.js"></script>
+    <link href="/skins/<?= Core::$SKIN ?>/css/normalize.css" rel="stylesheet">
+    <link href="/skins/<?= Core::$SKIN ?>/css/style.css" rel="stylesheet">
+    <script src="/skins/<?= Core::$SKIN ?>/js/methods_v1.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <?php if (count(Core::$CSS)) {
         echo implode('\n', Core::$CSS);

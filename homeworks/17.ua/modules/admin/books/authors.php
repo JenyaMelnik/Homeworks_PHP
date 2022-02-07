@@ -1,5 +1,5 @@
 <?php
-Core::$CSS[] = '<link type="text/css" rel=stylesheet href="/css/booksStyle.css"';
+Core::$CSS[] = '<link type="text/css2" rel=stylesheet href="/css2/booksStyle.css2"';
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     query("

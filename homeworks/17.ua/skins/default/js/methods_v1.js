@@ -1,4 +1,4 @@
-function areYouSure() {
+function deletionСonfirmation() {
     return confirm('Вы уверены что хотите удалить?');
 }
 
@@ -25,22 +25,25 @@ function validateLength(id, errorId) {
 function validateLengthTwoField(id, errorId, id2, errorId2) {
     var loginLength = document.getElementById(id).value.length;
     var passwordLength = document.getElementById(id2).value.length;
-    if (loginLength < 2 && passwordLength < 2) {
+    var errors = {};
 
-        document.getElementById(errorId).innerHTML = 'минимум 2 символа. Вы ввели ' + loginLength;
-        document.getElementById(errorId2).innerHTML = 'минимум 2 символа. Вы ввели ' + passwordLength;
+    if (loginLength < 2) {
+        errors.login = 'минимум 2 символа. Вы ввели ' + loginLength;
+    }
+    if (passwordLength < 2) {
+        errors.password = 'минимум 2 символа. Вы ввели ' + passwordLength;
+    }
+
+    if (Object.keys(errors).length !== 0) {
+        errors.hasOwnProperty('login')
+            ? document.getElementById(errorId).innerHTML = errors.login
+            : document.getElementById(errorId).innerHTML = '';
+
+        errors.hasOwnProperty('password')
+            ? document.getElementById(errorId2).innerHTML = errors.password
+            : document.getElementById(errorId2).innerHTML = '';
+
         return false;
-    } else if (loginLength < 2 && passwordLength >= 2) {
-        document.getElementById(errorId).innerHTML = 'минимум 2 символа. Вы ввели ' + loginLength;
-        document.getElementById(errorId2).innerHTML = '';
-        return false;
-    } else if (passwordLength < 2 && loginLength >= 2) {
-        document.getElementById(errorId2).innerHTML = 'минимум 2 символа. Вы ввели ' + passwordLength;
-        document.getElementById(errorId).innerHTML = '';
-        return false;
-    } else {
-        document.getElementById(errorId).innerHTML = '';
-        document.getElementById(errorId2).innerHTML = '';
     }
 }
 

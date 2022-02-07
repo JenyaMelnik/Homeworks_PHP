@@ -36,7 +36,7 @@ if (isset($_SESSION['user'])) {
                                     <label><input type="checkbox" name="ids[]" value="<?= $newsRow['id'] ?>"></label>
                                     <a href="<?= createUrlChpu(['module' => 'news', 'page' => 'edit']) ?>?<?= htmlspecialchars($category) ?>&id=<?= $newsRow['id'] ?>">СМОТРЕТЬ/РЕДАКТИРОВАТЬ</a>
                                     <a href="<?= createUrlChpu(['module' => 'news']) ?>?action=delete&id=<?= $newsRow['id'] ?>"
-                                       onclick="return areYouSure();">УДАЛИТЬ</a>
+                                       onclick="return deletionСonfirmation();">УДАЛИТЬ</a>
                                 </div>
                                 <div><?= $newsRow['date']; ?></div>
                                 <div class="text"><?= htmlspecialchars($newsRow['title']); ?></div>
@@ -46,7 +46,7 @@ if (isset($_SESSION['user'])) {
                     } else { ?>
                         <span>В данной категории нет новостей </span>
                     <?php } ?>
-                    <input type="submit" name="delete" onclick="return areYouSure();" value="Удалить отмеченные записи">
+                    <input type="submit" name="delete" onclick="return deletionСonfirmation();" value="Удалить отмеченные записи">
                 </form>
             </div>
         </div>

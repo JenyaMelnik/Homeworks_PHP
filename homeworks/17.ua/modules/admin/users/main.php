@@ -1,5 +1,5 @@
 <?php
-Core::$CSS[] = '<link type="text/css" rel=stylesheet href="/skins/admin/css/users.css"';
+Core::$CSS[] = '<link type="text/css2" rel=stylesheet href="/skins/admin/css2/users.css2"';
 
 include "./" . Core::$CONTROLLER . "/users/search.php";
 

@@ -1,5 +1,5 @@
 <?php
-Core::$CSS[] = '<link type="text/css" rel=stylesheet href="/css/newsStyle.css"';
+Core::$CSS[] = '<link type="text/css2" rel=stylesheet href="/css2/newsStyle.css2"';
 
 // ================================================ Удаление категории =============================================
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
