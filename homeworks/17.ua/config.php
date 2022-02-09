@@ -20,7 +20,7 @@ class Core
         'keywords' => 'k'
     ];
 
-    public static function isAdminController(): bool
+    static function isAdminController(): bool
     {
         return self::$CONTROLLER !== 'modules';
     }

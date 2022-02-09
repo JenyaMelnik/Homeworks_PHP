@@ -44,8 +44,7 @@ if (isset($module)) {
         LIMIT 1
     ");
     if (!$res->num_rows) {
-        header("Location:/404");
-        exit();
+        redirectTo(['page' => '404']);
     } else {
         $staticpage = $res->fetch_assoc();
         $res->close();
