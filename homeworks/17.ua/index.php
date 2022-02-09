@@ -18,11 +18,11 @@ include_once './variables.php';
 include_once './route.php';
 
 ob_start();
-include './' . Core::$CONTROLLER . '/allPages.php';
-
 if (!file_exists($modulePath) || !file_exists($skinPath)) {
     redirectTo(['page' => '404']);
 }
+
+include './' . Core::$CONTROLLER . '/allPages.php';
 
 include $modulePath;
 include $skinPath;
@@ -30,9 +30,9 @@ include $skinPath;
 $content = ob_get_contents();
 ob_end_clean();
 
-//if (isset($_POST['ajax'])) {
-//    echo $content;
-//    exit();
-//}
+if (isset($_POST['ajax'])) {
+    echo $content;
+    exit();
+}
 
 include './skins/' . Core::$SKIN . '/index.tpl';
