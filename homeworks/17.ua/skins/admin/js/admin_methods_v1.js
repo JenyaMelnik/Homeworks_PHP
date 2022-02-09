@@ -51,7 +51,7 @@ function myAjaxComments(userLogin, userEmail) {
     if (validateLength('comment', 'commentError')) {
         var comment = document.getElementById('comment').value;
         $.ajax({
-            url: '',
+            url: '/comments/ajaxAddComments',
             type: "POST",
             cache: false,
             data: {login: userLogin, email: userEmail, comment: comment},

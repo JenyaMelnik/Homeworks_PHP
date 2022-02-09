@@ -14,7 +14,7 @@
     <link href="/skins/default/css/normalize.css" rel="stylesheet">
     <link href="/skins/admin/css/style.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/skins/default/js/methods_v1.js"></script>
+    <script src="/skins/admin/js/admin_methods_v1.js"></script>
 
     <?php if (count(Core::$CSS)) {
         echo implode('\n', Core::$CSS);
