@@ -1,7 +1,7 @@
 <?php
-
-$dbc = mysqli_connect('localhost', 'jenyamelnik1986', 'Jrwq1_13jwqdnXX', 'jenyamelnik1986');
-mysqli_set_charset($dbc, 'utf8');
+/**
+ * @var $dbc mysqli
+ */
 
 if (isset($_POST['login'], $_POST['comment'], $_POST['email'])) {
     $comment = [
@@ -12,12 +12,12 @@ if (isset($_POST['login'], $_POST['comment'], $_POST['email'])) {
     ];
 
     $addCommentSqlQuery = " INSERT INTO `comments` SET
-            `login`   = '" . mysqli_real_escape_string($dbc, $_POST['login']) . "',
-            `email`   = '" . mysqli_real_escape_string($dbc, $_POST['email']) . "',
-            `comment` = '" . mysqli_real_escape_string($dbc, $_POST['comment']) . "',
+            `login`   = '" . escapeString($_POST['login']) . "',
+            `email`   = '" . escapeString($_POST['email']) . "',
+            `comment` = '" . escapeString($_POST['comment']) . "',
             `date`    = '" . $comment['date'] . "'";
 
-    if (mysqli_query($dbc, $addCommentSqlQuery)) {
+    if(query($addCommentSqlQuery)) {
         $comment['id'] = mysqli_insert_id($dbc);
         echo json_encode($comment);
         exit();

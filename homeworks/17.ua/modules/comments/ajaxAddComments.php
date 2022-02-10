@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var $dbc mysqli
+ */
+
 if (isset($_POST['login'], $_POST['comment'], $_POST['email'])) {
     $comment = [
         'login' => htmlspecialchars($_POST['login']),
@@ -13,8 +17,8 @@ if (isset($_POST['login'], $_POST['comment'], $_POST['email'])) {
             `comment` = '" . escapeString($_POST['comment']) . "',
             `date`    = '" . $comment['date'] . "'";
 
-    if (query($addCommentSqlQuery)) {
-        $comment['id'] = mysqli_insert_id(DBConnectAndClose::connect());
+    if(query($addCommentSqlQuery)) {
+        $comment['id'] = mysqli_insert_id($dbc);
         echo json_encode($comment);
         exit();
     }
